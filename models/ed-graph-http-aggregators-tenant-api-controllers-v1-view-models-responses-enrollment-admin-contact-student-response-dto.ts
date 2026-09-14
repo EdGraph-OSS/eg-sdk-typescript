@@ -15,6 +15,7 @@
 
 
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto {
+    'id'?: string | null;
     'studentId'?: string | null;
     'firstName'?: string | null;
     'middleName'?: string | null;

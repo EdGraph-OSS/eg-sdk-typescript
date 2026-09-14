@@ -1,4 +1,4 @@
-## @edgraph-oss/platform-client@0.0.54
+## @edgraph-oss/platform-client@0.0.55
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @edgraph-oss/platform-client@0.0.54 --save
+npm install @edgraph-oss/platform-client@0.0.55 --save
 ```
 
 _unPublished (not recommended):_
@@ -164,10 +164,27 @@ Class | Method | HTTP request | Description
 *EdFiSyncApi* | [**executeEdFiSyncJob**](docs/EdFiSyncApi.md#executeedfisyncjob) | **PUT** /tenants/{tenantId}/jobs/edfisync/execute | Executes an Ed-Fi Sync Job
 *EdFiSyncApi* | [**getEdFiSyncData**](docs/EdFiSyncApi.md#getedfisyncdata) | **GET** /tenants/{tenantId}/jobs/edfisync | Retrieves Ed-Fi Sync Connection Data for a given tenant
 *EdFiSyncApi* | [**updateEdFiSync**](docs/EdFiSyncApi.md#updateedfisync) | **PUT** /tenants/{tenantId}/jobs/edfisync | Updates an Ed-Fi Sync for a given tenant
-*EnrollmentAdminApplicationsApi* | [**getEnrollmentApplication**](docs/EnrollmentAdminApplicationsApi.md#getenrollmentapplication) | **GET** /tenants/{tenantId}/enrollmentadmin/applications/{applicationId} | Gets an Enrollment Application.
-*EnrollmentAdminApplicationsApi* | [**getEnrollmentApplications**](docs/EnrollmentAdminApplicationsApi.md#getenrollmentapplications) | **GET** /tenants/{tenantId}/enrollmentadmin/applications | Searches Enrollment Applications.
+*EnrollmentAdminCapacityApi* | [**getCapacity**](docs/EnrollmentAdminCapacityApi.md#getcapacity) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/{schoolCode}/capacity | Searches Capacity for one school - one row per program x grade x school year.
+*EnrollmentAdminContactsApi* | [**createEnrollmentContact**](docs/EnrollmentAdminContactsApi.md#createenrollmentcontact) | **POST** /tenants/{tenantId}/enrollmentadmin/contacts | Creates an Enrollment Contact.
 *EnrollmentAdminContactsApi* | [**getEnrollmentContactById**](docs/EnrollmentAdminContactsApi.md#getenrollmentcontactbyid) | **GET** /tenants/{tenantId}/enrollmentadmin/contacts/{id} | Gets an Enrollment Contact by its record id, with its linked students.
+*EnrollmentAdminContactsApi* | [**getEnrollmentContactOverrides**](docs/EnrollmentAdminContactsApi.md#getenrollmentcontactoverrides) | **GET** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/overrides | Reads a contact\&#39;s override history, newest first.
 *EnrollmentAdminContactsApi* | [**getEnrollmentContacts**](docs/EnrollmentAdminContactsApi.md#getenrollmentcontacts) | **GET** /tenants/{tenantId}/enrollmentadmin/contacts | Searches Enrollment Contacts.
+*EnrollmentAdminContactsApi* | [**overrideEnrollmentContactEmail**](docs/EnrollmentAdminContactsApi.md#overrideenrollmentcontactemail) | **PUT** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/email-override | Overrides a contact\&#39;s email address.
+*EnrollmentAdminContactsApi* | [**overrideEnrollmentContactPhone**](docs/EnrollmentAdminContactsApi.md#overrideenrollmentcontactphone) | **PUT** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/phone-override | Overrides a contact\&#39;s phone number.
+*EnrollmentAdminContactsApi* | [**removeEnrollmentContactEmailOverride**](docs/EnrollmentAdminContactsApi.md#removeenrollmentcontactemailoverride) | **DELETE** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/email-override | Removes a contact\&#39;s email override, letting the SIS value show through again.
+*EnrollmentAdminContactsApi* | [**removeEnrollmentContactPhoneOverride**](docs/EnrollmentAdminContactsApi.md#removeenrollmentcontactphoneoverride) | **DELETE** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/phone-override | Removes a contact\&#39;s phone override, letting the SIS value show through again.
+*EnrollmentAdminContactsApi* | [**unlockEnrollmentContactSignIn**](docs/EnrollmentAdminContactsApi.md#unlockenrollmentcontactsignin) | **POST** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/unlock | Unlocks a contact\&#39;s sign-in, resetting exhausted parent-verification tries.
+*EnrollmentAdminContactsApi* | [**updateEnrollmentContact**](docs/EnrollmentAdminContactsApi.md#updateenrollmentcontact) | **PUT** /tenants/{tenantId}/enrollmentadmin/contacts/{id} | Updates an Enrollment Contact name and its linked students.
+*EnrollmentAdminProgramsApi* | [**createProgramCatalogEntry**](docs/EnrollmentAdminProgramsApi.md#createprogramcatalogentry) | **POST** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries | Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.
+*EnrollmentAdminProgramsApi* | [**createSchoolProgram**](docs/EnrollmentAdminProgramsApi.md#createschoolprogram) | **POST** /tenants/{tenantId}/enrollmentadmin/programs/school-programs | Creates a school program - either adding an existing district catalog entry to a school  (a \&quot;school association\&quot;, when &#x60;programCatalogEntryId&#x60; is set) or creating a brand new  school-specific program (when it is not).
+*EnrollmentAdminProgramsApi* | [**deleteProgramCatalogEntry**](docs/EnrollmentAdminProgramsApi.md#deleteprogramcatalogentry) | **DELETE** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id} | Removes a district catalog entry.
+*EnrollmentAdminProgramsApi* | [**deleteSchoolProgram**](docs/EnrollmentAdminProgramsApi.md#deleteschoolprogram) | **DELETE** /tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id} | Removes a school program - the API equivalent of \&quot;remove a school association\&quot; when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.
+*EnrollmentAdminProgramsApi* | [**getProgramById**](docs/EnrollmentAdminProgramsApi.md#getprogrambyid) | **GET** /tenants/{tenantId}/enrollmentadmin/programs/{id} | Gets a Program by its record id - a district catalog entry or a school-specific program.
+*EnrollmentAdminProgramsApi* | [**getPrograms**](docs/EnrollmentAdminProgramsApi.md#getprograms) | **GET** /tenants/{tenantId}/enrollmentadmin/programs | Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\&#39;s Scope.
+*EnrollmentAdminProgramsApi* | [**updateProgramCatalogEntry**](docs/EnrollmentAdminProgramsApi.md#updateprogramcatalogentry) | **PUT** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id} | Updates a district catalog entry\&#39;s own fields.
+*EnrollmentAdminProgramsApi* | [**updateSchoolProgram**](docs/EnrollmentAdminProgramsApi.md#updateschoolprogram) | **PUT** /tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id} | Updates a school program\&#39;s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.
+*EnrollmentAdminResponsesApi* | [**getEnrollmentApplicationResponse**](docs/EnrollmentAdminResponsesApi.md#getenrollmentapplicationresponse) | **GET** /tenants/{tenantId}/enrollmentadmin/responses/{responseId} | Gets an Enrollment Application Response.
+*EnrollmentAdminResponsesApi* | [**getEnrollmentApplicationResponses**](docs/EnrollmentAdminResponsesApi.md#getenrollmentapplicationresponses) | **GET** /tenants/{tenantId}/enrollmentadmin/responses | Searches Enrollment Application Responses.
 *EnrollmentAdminSchoolsApi* | [**getEnrollmentSchool**](docs/EnrollmentAdminSchoolsApi.md#getenrollmentschool) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/code/{code} | Gets an Enrollment School by its school code, with the programs it runs.
 *EnrollmentAdminSchoolsApi* | [**getEnrollmentSchoolById**](docs/EnrollmentAdminSchoolsApi.md#getenrollmentschoolbyid) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/{id} | Gets an Enrollment School by its record id, with the programs it runs.
 *EnrollmentAdminSchoolsApi* | [**getEnrollmentSchools**](docs/EnrollmentAdminSchoolsApi.md#getenrollmentschools) | **GET** /tenants/{tenantId}/enrollmentadmin/schools | Searches Enrollment Schools.
@@ -270,8 +287,10 @@ Class | Method | HTTP request | Description
 *InstancesApi* | [**cloneInstanceAsync**](docs/InstancesApi.md#cloneinstanceasync) | **POST** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/clone | Clones an instance.
 *InstancesApi* | [**createInstance**](docs/InstancesApi.md#createinstance) | **POST** /tenants/{tenantId}/oneroster/instances | Creates a new Instance.
 *InstancesApi* | [**createInstanceAsync**](docs/InstancesApi.md#createinstanceasync) | **POST** /tenants/{tenantId}/edfiadmin/instances | Creates a new Instance.
+*InstancesApi* | [**createInstanceV2**](docs/InstancesApi.md#createinstancev2) | **POST** /v2/tenants/{tenantId}/instances | Creates a new instance.
 *InstancesApi* | [**deleteInstance**](docs/InstancesApi.md#deleteinstance) | **DELETE** /tenants/{tenantId}/oneroster/instances/{instanceId} | Deletes an Instance.
 *InstancesApi* | [**deleteInstanceAsync**](docs/InstancesApi.md#deleteinstanceasync) | **DELETE** /tenants/{tenantId}/edfiadmin/instances/{instanceId} | Deletes an Instance.
+*InstancesApi* | [**deleteInstanceV2**](docs/InstancesApi.md#deleteinstancev2) | **DELETE** /v2/tenants/{tenantId}/instances/{instanceId} | Deletes an instance.
 *InstancesApi* | [**deleteSchoolYearAsync**](docs/InstancesApi.md#deleteschoolyearasync) | **DELETE** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/years/{year} | Removes an ODS database from an Instance.
 *InstancesApi* | [**getEdFiAdminInstanceEndpoints**](docs/InstancesApi.md#getedfiadmininstanceendpoints) | **GET** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/endpoints | Retrieves the Ed-Fi API endpoint URLs of an Instance.
 *InstancesApi* | [**getEdFiAdminInstanceYearEndpoints**](docs/InstancesApi.md#getedfiadmininstanceyearendpoints) | **GET** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/years/{year}/endpoints | Retrieves the Ed-Fi API endpoint URLs of an Instance.
@@ -298,6 +317,7 @@ Class | Method | HTTP request | Description
 *InstancesApi* | [**truncateInstance**](docs/InstancesApi.md#truncateinstance) | **POST** /tenants/{tenantId}/oneroster/instances/{instanceId}/truncate | Truncates the Instance\&#39;s database
 *InstancesApi* | [**updateInstance**](docs/InstancesApi.md#updateinstance) | **PUT** /tenants/{tenantId}/oneroster/instances/{instanceId} | Updates an Instance.
 *InstancesApi* | [**updateInstanceAsync**](docs/InstancesApi.md#updateinstanceasync) | **PUT** /tenants/{tenantId}/edfiadmin/instances/{instanceId} | Updates an Instance.
+*InstancesApi* | [**updateInstanceV2**](docs/InstancesApi.md#updateinstancev2) | **PUT** /v2/tenants/{tenantId}/instances/{instanceId} | Updates an existing instance.
 *InstancesApi* | [**validateCustomIdAvailable**](docs/InstancesApi.md#validatecustomidavailable) | **GET** /tenants/{tenantId}/edfiadmin/instances/validatecustomidavailable/{customId} | Validate if instance is available
 *InstancesApplicationsApi* | [**createApplicationAsync**](docs/InstancesApplicationsApi.md#createapplicationasync) | **POST** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/applications | Creates an Application.
 *InstancesApplicationsApi* | [**createApplicationUserAccessAsync**](docs/InstancesApplicationsApi.md#createapplicationuseraccessasync) | **POST** /tenants/{tenantId}/edfiadmin/instances/{instanceId}/applications/{applicationId}/apiclients/{apiClientId}/access | Creates a new application access.
@@ -787,7 +807,15 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsCreateOnboardingStepRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsCreateOnboardingStepRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEducationOrganizationsAddEducationOrganizationRequest](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEducationOrganizationsAddEducationOrganizationRequest.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEducationOrganizationsUpdateEducationOrganizationRequest](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEducationOrganizationsUpdateEducationOrganizationRequest.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionValidationRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionValidationRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsUpdateQuestionRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsUpdateQuestionRequestDto.md)
@@ -818,9 +846,25 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsValidationsCreateValidationJobRequest](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsValidationsCreateValidationJobRequest.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactMutationResultDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactPhoneOverrideRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactPhoneOverrideRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactSignInUnlockedResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactSignInUnlockedResultDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramDetailDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramDetailDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDtoPaginatedItemsViewModel.md)
@@ -876,8 +920,10 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiServicesFormsV1FormGetPaginatedItemsResponse](docs/EdGraphHttpAggregatorsTenantApiServicesFormsV1FormGetPaginatedItemsResponse.md)
  - [EdGraphHttpAggregatorsTenantApiServicesFormsV1FormPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiServicesFormsV1FormPaginatedItemsViewModel.md)
  - [EdGraphHttpAggregatorsTenantApiServicesInstanceApplicationsUseCasesCreateTenantInstanceApplicationRequest](docs/EdGraphHttpAggregatorsTenantApiServicesInstanceApplicationsUseCasesCreateTenantInstanceApplicationRequest.md)
+ - [EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceCreatedResponse](docs/EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceCreatedResponse.md)
  - [EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponse](docs/EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponse.md)
  - [EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponsePaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponsePaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceUpdatedResponse](docs/EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceUpdatedResponse.md)
  - [EdGraphHttpAggregatorsTenantApiServicesObservationsAddAvailablePersonaRequest](docs/EdGraphHttpAggregatorsTenantApiServicesObservationsAddAvailablePersonaRequest.md)
  - [EdGraphHttpAggregatorsTenantApiServicesObservationsAddAvailablePersonaResponse](docs/EdGraphHttpAggregatorsTenantApiServicesObservationsAddAvailablePersonaResponse.md)
  - [EdGraphHttpAggregatorsTenantApiServicesObservationsCampusResponse](docs/EdGraphHttpAggregatorsTenantApiServicesObservationsCampusResponse.md)
@@ -1179,10 +1225,10 @@ Class | Method | HTTP request | Description
  - [EdfiAdminApiEdfiAdminV1VendorListResponsePaginatedItemsViewModel](docs/EdfiAdminApiEdfiAdminV1VendorListResponsePaginatedItemsViewModel.md)
  - [EdfiAdminApiEdfiAdminV1VendorProfileResponse](docs/EdfiAdminApiEdfiAdminV1VendorProfileResponse.md)
  - [EdfiAdminApiEdfiAdminV1VendorUpdatedResponse](docs/EdfiAdminApiEdfiAdminV1VendorUpdatedResponse.md)
- - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage.md)
+ - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage.md)
  - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage.md)
  - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseResponse](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseResponse.md)
- - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage.md)
+ - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage.md)
  - [EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponsesSearchResponse](docs/EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponsesSearchResponse.md)
  - [EnrollmentApiEnrollmentStudentsV1AllowedApplicationProfileIdMessage](docs/EnrollmentApiEnrollmentStudentsV1AllowedApplicationProfileIdMessage.md)
  - [EnrollmentApiEnrollmentStudentsV1StudentContactMessage](docs/EnrollmentApiEnrollmentStudentsV1StudentContactMessage.md)

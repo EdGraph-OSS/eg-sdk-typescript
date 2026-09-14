@@ -30,7 +30,14 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'studentCount'?: number;
     'isPhoneOverride'?: boolean | null;
     'isEmailOverride'?: boolean | null;
+    'sisEmail'?: string | null;
+    'sisPhone'?: string | null;
+    'emailOverriddenBy'?: string | null;
+    'emailOverriddenAt'?: string | null;
+    'phoneOverriddenBy'?: string | null;
+    'phoneOverriddenAt'?: string | null;
     'signInStatus'?: string | null;
+    'isLocked'?: boolean;
     'createdBy'?: string | null;
     'createdDateTime'?: string | null;
     'lastModifiedBy'?: string | null;

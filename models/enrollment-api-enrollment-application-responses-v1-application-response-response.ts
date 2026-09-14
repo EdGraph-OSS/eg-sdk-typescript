@@ -15,24 +15,27 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage } from './enrollment-api-enrollment-application-responses-v1-application-profile-message';
+import type { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage } from './enrollment-api-enrollment-application-responses-v1-application-pathway-message';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage } from './enrollment-api-enrollment-application-responses-v1-application-response-contact-message';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage } from './enrollment-api-enrollment-application-responses-v1-application-response-step-message';
+import type { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage } from './enrollment-api-enrollment-application-responses-v1-application-response-screen-message';
 
 export interface EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseResponse {
     'id'?: string | null;
     'tenantId'?: string | null;
-    'applicationProfile'?: EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage;
-    'currentStepCode'?: string | null;
-    'completedProgress'?: number;
+    'applicationPathway'?: EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage;
+    'currentScreenCode'?: string | null;
+    /**
+     * Decimal progress (0-100, 2dp) carried as an invariant-culture string,  mirroring the legacy enrollmentresults.proto completedProgress convention.
+     */
+    'progress'?: string | null;
     'studentId'?: string | null;
     'languageCode'?: string | null;
     'contacts'?: Array<EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage> | null;
-    'steps'?: Array<EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage> | null;
+    'screens'?: Array<EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage> | null;
     'createdBy'?: string | null;
     'createdDateTime'?: string | null;
     'lastModifiedBy'?: string | null;
@@ -40,5 +43,11 @@ export interface EnrollmentApiEnrollmentApplicationResponsesV1ApplicationRespons
     'deletedBy'?: string | null;
     'deletedDateTime'?: string | null;
     'isDeleted'?: boolean | null;
+    'status'?: string | null;
+    'studentFirstName'?: string | null;
+    'studentLastName'?: string | null;
+    'studentLocalId'?: string | null;
+    'nextSchoolCode'?: string | null;
+    'nextSchoolName'?: string | null;
 }
 

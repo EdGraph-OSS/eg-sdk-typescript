@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **string** |  | [optional] [default to undefined]
 **studentId** | **string** |  | [optional] [default to undefined]
 **firstName** | **string** |  | [optional] [default to undefined]
 **middleName** | **string** |  | [optional] [default to undefined]
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 import { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto } from '@edgraph-oss/platform-client';
 
 const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto = {
+    id,
     studentId,
     firstName,
     middleName,

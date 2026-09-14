@@ -1120,6 +1120,7 @@ let formId: string; // (optional) (default to '')
 let status: string; // (optional) (default to '')
 let from: string; // (optional) (default to '')
 let to: string; // (optional) (default to '')
+let observerId: string; // (optional) (default to '')
 
 const { status, data } = await apiInstance.getPaginatedObservations(
     tenantId,
@@ -1132,7 +1133,8 @@ const { status, data } = await apiInstance.getPaginatedObservations(
     formId,
     status,
     from,
-    to
+    to,
+    observerId
 );
 ```
 
@@ -1151,6 +1153,7 @@ const { status, data } = await apiInstance.getPaginatedObservations(
 | **status** | [**string**] |  | (optional) defaults to ''|
 | **from** | [**string**] |  | (optional) defaults to ''|
 | **to** | [**string**] |  | (optional) defaults to ''|
+| **observerId** | [**string**] |  | (optional) defaults to ''|
 
 
 ### Return type

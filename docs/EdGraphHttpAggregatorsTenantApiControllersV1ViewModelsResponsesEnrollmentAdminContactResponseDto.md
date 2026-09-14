@@ -17,7 +17,14 @@ Name | Type | Description | Notes
 **studentCount** | **number** |  | [optional] [default to undefined]
 **isPhoneOverride** | **boolean** |  | [optional] [default to undefined]
 **isEmailOverride** | **boolean** |  | [optional] [default to undefined]
+**sisEmail** | **string** |  | [optional] [default to undefined]
+**sisPhone** | **string** |  | [optional] [default to undefined]
+**emailOverriddenBy** | **string** |  | [optional] [default to undefined]
+**emailOverriddenAt** | **string** |  | [optional] [default to undefined]
+**phoneOverriddenBy** | **string** |  | [optional] [default to undefined]
+**phoneOverriddenAt** | **string** |  | [optional] [default to undefined]
 **signInStatus** | **string** |  | [optional] [default to undefined]
+**isLocked** | **boolean** |  | [optional] [default to undefined]
 **createdBy** | **string** |  | [optional] [default to undefined]
 **createdDateTime** | **string** |  | [optional] [default to undefined]
 **lastModifiedBy** | **string** |  | [optional] [default to undefined]
@@ -43,7 +50,14 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     studentCount,
     isPhoneOverride,
     isEmailOverride,
+    sisEmail,
+    sisPhone,
+    emailOverriddenBy,
+    emailOverriddenAt,
+    phoneOverriddenBy,
+    phoneOverriddenAt,
     signInStatus,
+    isLocked,
     createdBy,
     createdDateTime,
     lastModifiedBy,

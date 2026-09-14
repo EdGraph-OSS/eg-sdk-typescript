@@ -24,9 +24,13 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceCreatedResponse } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponse } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceResponsePaginatedItemsViewModel } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceUpdatedResponse } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesOnboardingStepsEdFiApiLoadEdFiApiMetadataResult } from '../models';
 // @ts-ignore
@@ -407,6 +411,47 @@ export const InstancesApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary Creates a new instance.
+         * @param {string} tenantId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createInstanceV2: async (tenantId: string, body?: any, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('createInstanceV2', 'tenantId', tenantId)
+            const localVarPath = `/v2/tenants/{tenantId}/instances`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Deletes an Instance.
          * @param {string} tenantId 
          * @param {string} instanceId 
@@ -461,6 +506,48 @@ export const InstancesApiAxiosParamCreator = function (configuration?: Configura
             // verify required parameter 'instanceId' is not null or undefined
             assertParamExists('deleteInstanceAsync', 'instanceId', instanceId)
             const localVarPath = `/tenants/{tenantId}/edfiadmin/instances/{instanceId}`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{instanceId}', encodeURIComponent(String(instanceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Deletes an instance.
+         * @param {string} tenantId 
+         * @param {string} instanceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteInstanceV2: async (tenantId: string, instanceId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('deleteInstanceV2', 'tenantId', tenantId)
+            // verify required parameter 'instanceId' is not null or undefined
+            assertParamExists('deleteInstanceV2', 'instanceId', instanceId)
+            const localVarPath = `/v2/tenants/{tenantId}/instances/{instanceId}`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{instanceId}', encodeURIComponent(String(instanceId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1677,6 +1764,51 @@ export const InstancesApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @summary Updates an existing instance.
+         * @param {string} tenantId 
+         * @param {string} instanceId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInstanceV2: async (tenantId: string, instanceId: string, body?: any, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('updateInstanceV2', 'tenantId', tenantId)
+            // verify required parameter 'instanceId' is not null or undefined
+            assertParamExists('updateInstanceV2', 'instanceId', instanceId)
+            const localVarPath = `/v2/tenants/{tenantId}/instances/{instanceId}`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{instanceId}', encodeURIComponent(String(instanceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Validate if instance is available
          * @param {string} tenantId 
          * @param {string} customId 
@@ -1832,6 +1964,20 @@ export const InstancesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Creates a new instance.
+         * @param {string} tenantId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createInstanceV2(tenantId: string, body?: any, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceCreatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createInstanceV2(tenantId, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InstancesApi.createInstanceV2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Deletes an Instance.
          * @param {string} tenantId 
          * @param {string} instanceId 
@@ -1856,6 +2002,20 @@ export const InstancesApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteInstanceAsync(tenantId, instanceId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['InstancesApi.deleteInstanceAsync']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Deletes an instance.
+         * @param {string} tenantId 
+         * @param {string} instanceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteInstanceV2(tenantId: string, instanceId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteInstanceV2(tenantId, instanceId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InstancesApi.deleteInstanceV2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2246,6 +2406,21 @@ export const InstancesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Updates an existing instance.
+         * @param {string} tenantId 
+         * @param {string} instanceId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateInstanceV2(tenantId: string, instanceId: string, body?: any, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceUpdatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateInstanceV2(tenantId, instanceId, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InstancesApi.updateInstanceV2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Validate if instance is available
          * @param {string} tenantId 
          * @param {string} customId 
@@ -2339,6 +2514,16 @@ export const InstancesApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary Creates a new instance.
+         * @param {InstancesApiCreateInstanceV2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createInstanceV2(requestParameters: InstancesApiCreateInstanceV2Request, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceCreatedResponse> {
+            return localVarFp.createInstanceV2(requestParameters.tenantId, requestParameters.body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Deletes an Instance.
          * @param {InstancesApiDeleteInstanceRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2356,6 +2541,16 @@ export const InstancesApiFactory = function (configuration?: Configuration, base
          */
         deleteInstanceAsync(requestParameters: InstancesApiDeleteInstanceAsyncRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteInstanceAsync(requestParameters.tenantId, requestParameters.instanceId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Deletes an instance.
+         * @param {InstancesApiDeleteInstanceV2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteInstanceV2(requestParameters: InstancesApiDeleteInstanceV2Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteInstanceV2(requestParameters.tenantId, requestParameters.instanceId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2619,6 +2814,16 @@ export const InstancesApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @summary Updates an existing instance.
+         * @param {InstancesApiUpdateInstanceV2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateInstanceV2(requestParameters: InstancesApiUpdateInstanceV2Request, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesInstancesInstanceUpdatedResponse> {
+            return localVarFp.updateInstanceV2(requestParameters.tenantId, requestParameters.instanceId, requestParameters.body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Validate if instance is available
          * @param {InstancesApiValidateCustomIdAvailableRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2766,6 +2971,21 @@ export interface InstancesApiCreateInstanceAsyncRequest {
 }
 
 /**
+ * Request parameters for createInstanceV2 operation in InstancesApi.
+ */
+export interface InstancesApiCreateInstanceV2Request {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly body?: any
+}
+
+/**
  * Request parameters for deleteInstance operation in InstancesApi.
  */
 export interface InstancesApiDeleteInstanceRequest {
@@ -2784,6 +3004,21 @@ export interface InstancesApiDeleteInstanceRequest {
  * Request parameters for deleteInstanceAsync operation in InstancesApi.
  */
 export interface InstancesApiDeleteInstanceAsyncRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly instanceId: string
+}
+
+/**
+ * Request parameters for deleteInstanceV2 operation in InstancesApi.
+ */
+export interface InstancesApiDeleteInstanceV2Request {
     /**
      * 
      */
@@ -3296,6 +3531,26 @@ export interface InstancesApiUpdateInstanceAsyncRequest {
 }
 
 /**
+ * Request parameters for updateInstanceV2 operation in InstancesApi.
+ */
+export interface InstancesApiUpdateInstanceV2Request {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly instanceId: string
+
+    /**
+     * 
+     */
+    readonly body?: any
+}
+
+/**
  * Request parameters for validateCustomIdAvailable operation in InstancesApi.
  */
 export interface InstancesApiValidateCustomIdAvailableRequest {
@@ -3393,6 +3648,17 @@ export class InstancesApi extends BaseAPI {
 
     /**
      * 
+     * @summary Creates a new instance.
+     * @param {InstancesApiCreateInstanceV2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public createInstanceV2(requestParameters: InstancesApiCreateInstanceV2Request, options?: RawAxiosRequestConfig) {
+        return InstancesApiFp(this.configuration).createInstanceV2(requestParameters.tenantId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Deletes an Instance.
      * @param {InstancesApiDeleteInstanceRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -3411,6 +3677,17 @@ export class InstancesApi extends BaseAPI {
      */
     public deleteInstanceAsync(requestParameters: InstancesApiDeleteInstanceAsyncRequest, options?: RawAxiosRequestConfig) {
         return InstancesApiFp(this.configuration).deleteInstanceAsync(requestParameters.tenantId, requestParameters.instanceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Deletes an instance.
+     * @param {InstancesApiDeleteInstanceV2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public deleteInstanceV2(requestParameters: InstancesApiDeleteInstanceV2Request, options?: RawAxiosRequestConfig) {
+        return InstancesApiFp(this.configuration).deleteInstanceV2(requestParameters.tenantId, requestParameters.instanceId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3697,6 +3974,17 @@ export class InstancesApi extends BaseAPI {
      */
     public updateInstanceAsync(requestParameters: InstancesApiUpdateInstanceAsyncRequest, options?: RawAxiosRequestConfig) {
         return InstancesApiFp(this.configuration).updateInstanceAsync(requestParameters.tenantId, requestParameters.instanceId, requestParameters.edfiAdminApiEdfiAdminV1UpdateInstanceRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates an existing instance.
+     * @param {InstancesApiUpdateInstanceV2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public updateInstanceV2(requestParameters: InstancesApiUpdateInstanceV2Request, options?: RawAxiosRequestConfig) {
+        return InstancesApiFp(this.configuration).updateInstanceV2(requestParameters.tenantId, requestParameters.instanceId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

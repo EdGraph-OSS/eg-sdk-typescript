@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional] [default to undefined]
 **tenantId** | **string** |  | [optional] [default to undefined]
-**applicationProfile** | [**EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage**](EnrollmentApiEnrollmentApplicationResponsesV1ApplicationProfileMessage.md) |  | [optional] [default to undefined]
-**currentStepCode** | **string** |  | [optional] [default to undefined]
-**completedProgress** | **number** |  | [optional] [default to undefined]
+**applicationPathway** | [**EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage**](EnrollmentApiEnrollmentApplicationResponsesV1ApplicationPathwayMessage.md) |  | [optional] [default to undefined]
+**currentScreenCode** | **string** |  | [optional] [default to undefined]
+**progress** | **string** | Decimal progress (0-100, 2dp) carried as an invariant-culture string,  mirroring the legacy enrollmentresults.proto completedProgress convention. | [optional] [default to undefined]
 **studentId** | **string** |  | [optional] [default to undefined]
 **languageCode** | **string** |  | [optional] [default to undefined]
 **contacts** | [**Array&lt;EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage&gt;**](EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseContactMessage.md) |  | [optional] [readonly] [default to undefined]
-**steps** | [**Array&lt;EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage&gt;**](EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseStepMessage.md) |  | [optional] [readonly] [default to undefined]
+**screens** | [**Array&lt;EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage&gt;**](EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseScreenMessage.md) |  | [optional] [readonly] [default to undefined]
 **createdBy** | **string** |  | [optional] [default to undefined]
 **createdDateTime** | **string** |  | [optional] [default to undefined]
 **lastModifiedBy** | **string** |  | [optional] [default to undefined]
@@ -21,6 +21,12 @@ Name | Type | Description | Notes
 **deletedBy** | **string** |  | [optional] [default to undefined]
 **deletedDateTime** | **string** |  | [optional] [default to undefined]
 **isDeleted** | **boolean** |  | [optional] [default to undefined]
+**status** | **string** |  | [optional] [default to undefined]
+**studentFirstName** | **string** |  | [optional] [default to undefined]
+**studentLastName** | **string** |  | [optional] [default to undefined]
+**studentLocalId** | **string** |  | [optional] [default to undefined]
+**nextSchoolCode** | **string** |  | [optional] [default to undefined]
+**nextSchoolName** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -30,13 +36,13 @@ import { EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseRespons
 const instance: EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponseResponse = {
     id,
     tenantId,
-    applicationProfile,
-    currentStepCode,
-    completedProgress,
+    applicationPathway,
+    currentScreenCode,
+    progress,
     studentId,
     languageCode,
     contacts,
-    steps,
+    screens,
     createdBy,
     createdDateTime,
     lastModifiedBy,
@@ -44,6 +50,12 @@ const instance: EnrollmentApiEnrollmentApplicationResponsesV1ApplicationResponse
     deletedBy,
     deletedDateTime,
     isDeleted,
+    status,
+    studentFirstName,
+    studentLastName,
+    studentLocalId,
+    nextSchoolCode,
+    nextSchoolName,
 };
 ```
 
