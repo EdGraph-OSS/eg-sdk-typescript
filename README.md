@@ -1,4 +1,4 @@
-## @edgraph-oss/platform-client@0.0.55
+## @edgraph-oss/platform-client@0.0.56
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @edgraph-oss/platform-client@0.0.55 --save
+npm install @edgraph-oss/platform-client@0.0.56 --save
 ```
 
 _unPublished (not recommended):_
@@ -487,6 +487,7 @@ Class | Method | HTTP request | Description
 *ObservationsApi* | [**getPaginatedCampusesWithEvaluees**](docs/ObservationsApi.md#getpaginatedcampuseswithevaluees) | **GET** /tenants/{tenantId}/observations/campuses-with-evaluees | Get a paginated list of the available campuses that have evaluees, each with its complete list of evaluees.
 *ObservationsApi* | [**getPaginatedEvaluees**](docs/ObservationsApi.md#getpaginatedevaluees) | **GET** /tenants/{tenantId}/observations/evaluees | Get paginated evaluees
 *ObservationsApi* | [**getPaginatedObservations**](docs/ObservationsApi.md#getpaginatedobservations) | **GET** /tenants/{tenantId}/observations | Get Paginated Observations for a given tenant
+*ObservationsApi* | [**getPaginatedObservers**](docs/ObservationsApi.md#getpaginatedobservers) | **GET** /tenants/{tenantId}/observations/observers | Get paginated observers
 *ObservationsApi* | [**getSubmittedObservationsCount**](docs/ObservationsApi.md#getsubmittedobservationscount) | **GET** /tenants/{tenantId}/submittedobservations | Get submitted Observations count
 *ObservationsApi* | [**saveDashboardPreferences**](docs/ObservationsApi.md#savedashboardpreferences) | **POST** /tenants/{tenantId}/observations/dashboards/{dashboardId}/preferences | Save user preferences for a given Dashboard
 *ObservationsApi* | [**searchPaginatedEvaluees**](docs/ObservationsApi.md#searchpaginatedevaluees) | **GET** /tenants/{tenantId}/observations/search/evaluees | Search paginated evaluees
@@ -871,6 +872,7 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolProgramResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolProgramResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponse.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserSearchStatus](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserSearchStatus.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraisersSearchedResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraisersSearchedResponse.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsStaffResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsStaffResponse.md)

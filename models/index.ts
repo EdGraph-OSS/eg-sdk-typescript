@@ -180,6 +180,7 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-school-program-response-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-school-response-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response-get-paginated-items-response';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-search-status';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraisers-searched-response';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-staff-response';

@@ -30,6 +30,8 @@ import type { AnalyticsApiReportsV1ReportResponse } from '../models';
 // @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesFormsQuestionResponseDtoPaginatedItemsViewModel } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesFormsV1FormGetPaginatedItemsResponse } from '../models';
@@ -1052,6 +1054,64 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Get paginated observers
+         * @param {string} tenantId 
+         * @param {number} [pageSize] 
+         * @param {number} [pageIndex] 
+         * @param {string} [orderBy] 
+         * @param {string} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaginatedObservers: async (tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getPaginatedObservers', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/observers`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get submitted Observations count
          * @param {string} tenantId 
          * @param {string} [evalueeId] 
@@ -1645,6 +1705,23 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get paginated observers
+         * @param {string} tenantId 
+         * @param {number} [pageSize] 
+         * @param {number} [pageIndex] 
+         * @param {string} [orderBy] 
+         * @param {string} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaginatedObservers(tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaginatedObservers(tenantId, pageSize, pageIndex, orderBy, filter, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getPaginatedObservers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get submitted Observations count
          * @param {string} tenantId 
          * @param {string} [evalueeId] 
@@ -1924,6 +2001,16 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         getPaginatedObservations(requestParameters: ObservationsApiGetPaginatedObservationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationProfileResponsePaginatedItemsViewModel> {
             return localVarFp.getPaginatedObservations(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.campus, requestParameters.evalueeName, requestParameters.evalueeId, requestParameters.formId, requestParameters.status, requestParameters.from, requestParameters.to, requestParameters.observerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get paginated observers
+         * @param {ObservationsApiGetPaginatedObserversRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaginatedObservers(requestParameters: ObservationsApiGetPaginatedObserversRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse> {
+            return localVarFp.getPaginatedObservers(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2461,6 +2548,36 @@ export interface ObservationsApiGetPaginatedObservationsRequest {
 }
 
 /**
+ * Request parameters for getPaginatedObservers operation in ObservationsApi.
+ */
+export interface ObservationsApiGetPaginatedObserversRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly pageSize?: number
+
+    /**
+     * 
+     */
+    readonly pageIndex?: number
+
+    /**
+     * 
+     */
+    readonly orderBy?: string
+
+    /**
+     * 
+     */
+    readonly filter?: string
+}
+
+/**
  * Request parameters for getSubmittedObservationsCount operation in ObservationsApi.
  */
 export interface ObservationsApiGetSubmittedObservationsCountRequest {
@@ -2795,6 +2912,17 @@ export class ObservationsApi extends BaseAPI {
      */
     public getPaginatedObservations(requestParameters: ObservationsApiGetPaginatedObservationsRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).getPaginatedObservations(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.campus, requestParameters.evalueeName, requestParameters.evalueeId, requestParameters.formId, requestParameters.status, requestParameters.from, requestParameters.to, requestParameters.observerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get paginated observers
+     * @param {ObservationsApiGetPaginatedObserversRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getPaginatedObservers(requestParameters: ObservationsApiGetPaginatedObserversRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getPaginatedObservers(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
