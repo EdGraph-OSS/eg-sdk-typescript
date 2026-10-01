@@ -1,6 +1,6 @@
 # EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto
 
-What a program catalog entry or school program create/update/delete reports back - just the  identity, not the row. Compare ContactMutationResultDto: a client that needs the saved state  re-reads the program.
+What a program create/update/delete reports back - just the identity, not the row. Compare  ContactMutationResultDto: a client that needs the saved state re-reads the program.
 
 ## Properties
 

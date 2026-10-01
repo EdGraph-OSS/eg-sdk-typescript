@@ -22,10 +22,7 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
      * The corrected detail. The DELETE route removes an override instead; this is never blank.
      */
     'value'?: string | null;
-    /**
-     * The student whose screen the edit was made from. Recorded on the history entry so it can be  filtered per student. It does NOT scope the override — every student linked to the contact shares  one corrected value.
-     */
-    'studentId'?: string | null;
+    'studentLocalCode'?: string | null;
     /**
      * The `lastUpdatedDateTime` the client read, round-tripped back. When it no longer matches the  write is refused with 412 rather than winning because it arrived second. Omit to skip the check.
      */

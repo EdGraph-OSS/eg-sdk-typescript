@@ -83,5 +83,6 @@ export interface EdfiAdminApiEdfiAdminV1InstanceListModel {
      */
     'enableAdminApi'?: boolean | null;
     'state'?: string | null;
+    'requiresSchoolYearSelection'?: boolean | null;
 }
 

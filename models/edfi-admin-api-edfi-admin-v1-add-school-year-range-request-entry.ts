@@ -18,5 +18,9 @@ export interface EdfiAdminApiEdfiAdminV1AddSchoolYearRangeRequestEntry {
     'year'?: number;
     'selectedTierId'?: string | null;
     'odsBackupCode'?: string | null;
+    /**
+     * Per-year pending grants are applied only after this ODS finishes provisioning.  Keep field 4 aligned in every source and consumer copy to preserve the wire contract.
+     */
+    'applicationIds'?: Array<number> | null;
 }
 

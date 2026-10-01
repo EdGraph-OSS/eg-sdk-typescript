@@ -7,16 +7,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional] [default to undefined]
 **tenantId** | **string** |  | [optional] [default to undefined]
-**code** | **string** |  | [optional] [default to undefined]
-**name** | **string** |  | [optional] [default to undefined]
-**scope** | **string** |  | [optional] [default to undefined]
-**offeredAtSchoolCount** | **number** |  | [optional] [default to undefined]
-**programType** | **string** |  | [optional] [default to undefined]
+**programCode** | **string** |  | [optional] [default to undefined]
+**programName** | **string** |  | [optional] [default to undefined]
 **eligibilityCriteria** | **string** |  | [optional] [default to undefined]
-**internalDisplayName** | **string** |  | [optional] [default to undefined]
+**programType** | [**EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramTypeRefDto**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramTypeRefDto.md) |  | [optional] [default to undefined]
+**requirements** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementRefDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementRefDto.md) |  | [optional] [default to undefined]
+**school** | [**EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolRefDto**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolRefDto.md) |  | [optional] [default to undefined]
 **grades** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**schools** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto.md) |  | [optional] [default to undefined]
-**requirements** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto.md) |  | [optional] [default to undefined]
+**capacityByGrade** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto.md) |  | [optional] [default to undefined]
+**seatStatus** | **string** |  | [optional] [default to undefined]
+**zone** | **string** |  | [optional] [default to undefined]
+**latitude** | **number** |  | [optional] [default to undefined]
+**longitude** | **number** |  | [optional] [default to undefined]
 **createdBy** | **string** |  | [optional] [default to undefined]
 **createdDateTime** | **string** |  | [optional] [default to undefined]
 **lastModifiedBy** | **string** |  | [optional] [default to undefined]
@@ -31,16 +33,18 @@ import { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollme
 const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramDetailDto = {
     id,
     tenantId,
-    code,
-    name,
-    scope,
-    offeredAtSchoolCount,
-    programType,
+    programCode,
+    programName,
     eligibilityCriteria,
-    internalDisplayName,
-    grades,
-    schools,
+    programType,
     requirements,
+    school,
+    grades,
+    capacityByGrade,
+    seatStatus,
+    zone,
+    latitude,
+    longitude,
     createdBy,
     createdDateTime,
     lastModifiedBy,

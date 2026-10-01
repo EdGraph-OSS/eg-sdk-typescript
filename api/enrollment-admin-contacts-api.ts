@@ -24,9 +24,13 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto } from '../models';
 // @ts-ignore
@@ -44,6 +48,16 @@ import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnr
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactSignInUnlockedResultDto } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentAssociatedResultDto } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentDetailDto } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto } from '../models';
+// @ts-ignore
+import type { EnrollmentApiEnrollmentRegistrationsV1RegistrationResponse } from '../models';
+// @ts-ignore
 import type { MicrosoftAspNetCoreMvcValidationProblemDetails } from '../models';
 /**
  * EnrollmentAdminContactsApi - axios parameter creator
@@ -51,8 +65,53 @@ import type { MicrosoftAspNetCoreMvcValidationProblemDetails } from '../models';
 export const EnrollmentAdminContactsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `email-override` and `phone-override` routes.
-         * @summary Creates an Enrollment Contact.
+         * Send `studentId` (the SIS code) to resolve or create the linked EnrollmentStudent  document server-side, or `id` (an existing student\'s own internal id, as returned by  this same route\'s GET) to link that exact student directly - `id` wins if both are  given, and never creates anything, 404ing instead if it does not exist. Set the association  attributes (priority, relationship, etc.) with a follow-up PUT to  `.../students/{studentId}`.
+         * @summary Links a student to a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addEnrollmentContactStudent: async (tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('addEnrollmentContactStudent', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('addEnrollmentContactStudent', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/students`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * <br>              Upsert semantics: unique per `contactId`. A first call creates the contact; a later call              for the same `contactId` overwrites the SIS-sourced fields where they differ, and no-ops              when they are identical. An existing email/phone override is never touched by this call - see              the `overrides/emails` and `overrides/phones` routes for that.                <br>    `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `overrides/emails` and `overrides/phones` routes.              
+         * @summary Creates or updates an Enrollment Contact by its source-system `contactId`.
          * @param {string} tenantId 
          * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto] 
          * @param {*} [options] Override http request option.
@@ -134,6 +193,63 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             };
         },
         /**
+         * <br>              Eventually consistent, on the same terms as M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken).                <br>    `EventType` on `GetAllChangesRequest` is a single optional string, so it cannot              express \"any of these event types\" on its own. The filter is built through `Filter`              instead - a raw Elasticsearch `query_string` - while `EntityType` and              `EntityId` stay the typed fields M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken) already uses.              The change log applies the typed fields as `filter` clauses and `Filter` as a              `must` clause on the same bool query, so the two combine as an AND: this call still never              leaves this contact\'s own entity scope.                <br>              The event types covered are EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.ContactEventTypes,              which tracks what the Enrollment outbox publishes against a contact.              
+         * @summary Reads every lifecycle event for a contact - create, update, delete, overrides and sign-in  unlocks - newest first.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {number} [pageSize] 
+         * @param {number} [pageIndex] 
+         * @param {string} [studentId] Narrows to changes affecting one linked student.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactChangelogs: async (tenantId: string, id: string, pageSize?: number, pageIndex?: number, studentId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getEnrollmentContactChangelogs', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getEnrollmentContactChangelogs', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/changelogs`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (studentId !== undefined) {
+                localVarQueryParameter['studentId'] = studentId;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * <br>              Eventually consistent. A change reaches the log through Enrollment\'s outbox, so an entry can              be a few seconds behind a write that has already succeeded. Render the current value from the              contact itself and use this for what preceded it.                <br>              One route for both details, unlike the writes: this is a single ordered log and each entry              names its own detail, so splitting it would mean two requests to render one contact\'s              timeline and two page counts to reconcile.              
          * @summary Reads a contact\'s override history, newest first.
          * @param {string} tenantId 
@@ -192,6 +308,90 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
+         * @summary Gets a contact\'s Registrations.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactRegistrations: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getEnrollmentContactRegistrations', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getEnrollmentContactRegistrations', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/registrations`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets a contact\'s linked students, with each link\'s association attributes.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactStudents: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getEnrollmentContactStudents', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getEnrollmentContactStudents', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/students`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Searches Enrollment Contacts.
          * @param {string} tenantId 
          * @param {number} [pageSize] 
@@ -199,12 +399,12 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
          * @param {string} [orderBy] 
          * @param {string} [filter] 
          * @param {string} [search] Free-text match on contact name, email, or phone.
-         * @param {string} [schoolCode] Narrows to contacts with at least one linked student at this school.
+         * @param {string} [nextSchoolStateShortCode] Narrows to contacts with at least one linked student whose next school has this state short code.
          * @param {boolean} [locked] Narrows to contacts by sign-in lock status. Unset returns every contact.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnrollmentContacts: async (tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, schoolCode?: string, locked?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEnrollmentContacts: async (tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, nextSchoolStateShortCode?: string, locked?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('getEnrollmentContacts', 'tenantId', tenantId)
             const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts`
@@ -244,8 +444,8 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
                 localVarQueryParameter['search'] = search;
             }
 
-            if (schoolCode !== undefined) {
-                localVarQueryParameter['schoolCode'] = schoolCode;
+            if (nextSchoolStateShortCode !== undefined) {
+                localVarQueryParameter['nextSchoolStateShortCode'] = nextSchoolStateShortCode;
             }
 
             if (locked !== undefined) {
@@ -277,7 +477,7 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             assertParamExists('overrideEnrollmentContactEmail', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('overrideEnrollmentContactEmail', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/email-override`
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/overrides/emails`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -322,7 +522,7 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             assertParamExists('overrideEnrollmentContactPhone', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('overrideEnrollmentContactPhone', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/phone-override`
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/overrides/phones`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -358,17 +558,17 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
          * @summary Removes a contact\'s email override, letting the SIS value show through again.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {string} [studentId] The student whose screen the removal was made from.
+         * @param {string} [studentLocalCode] The local code of the student whose screen the removal was made from.
          * @param {string} [expectedVersion] The &#x60;lastUpdatedDateTime&#x60; this edit started from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeEnrollmentContactEmailOverride: async (tenantId: string, id: string, studentId?: string, expectedVersion?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeEnrollmentContactEmailOverride: async (tenantId: string, id: string, studentLocalCode?: string, expectedVersion?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('removeEnrollmentContactEmailOverride', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('removeEnrollmentContactEmailOverride', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/email-override`
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/overrides/emails`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -386,8 +586,8 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
 
-            if (studentId !== undefined) {
-                localVarQueryParameter['studentId'] = studentId;
+            if (studentLocalCode !== undefined) {
+                localVarQueryParameter['studentLocalCode'] = studentLocalCode;
             }
 
             if (expectedVersion !== undefined) {
@@ -410,17 +610,17 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
          * @summary Removes a contact\'s phone override, letting the SIS value show through again.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {string} [studentId] The student whose screen the removal was made from.
+         * @param {string} [studentLocalCode] The local code of the student whose screen the removal was made from.
          * @param {string} [expectedVersion] The &#x60;lastUpdatedDateTime&#x60; this edit started from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        removeEnrollmentContactPhoneOverride: async (tenantId: string, id: string, studentId?: string, expectedVersion?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        removeEnrollmentContactPhoneOverride: async (tenantId: string, id: string, studentLocalCode?: string, expectedVersion?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('removeEnrollmentContactPhoneOverride', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('removeEnrollmentContactPhoneOverride', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/phone-override`
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/overrides/phones`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -438,13 +638,59 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
 
-            if (studentId !== undefined) {
-                localVarQueryParameter['studentId'] = studentId;
+            if (studentLocalCode !== undefined) {
+                localVarQueryParameter['studentLocalCode'] = studentLocalCode;
             }
 
             if (expectedVersion !== undefined) {
                 localVarQueryParameter['expectedVersion'] = expectedVersion;
             }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Removes a student\'s link to a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {string} studentId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeEnrollmentContactStudent: async (tenantId: string, id: string, studentId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('removeEnrollmentContactStudent', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('removeEnrollmentContactStudent', 'id', id)
+            // verify required parameter 'studentId' is not null or undefined
+            assertParamExists('removeEnrollmentContactStudent', 'studentId', studentId)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/students/{studentId}`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)))
+                .replace('{studentId}', encodeURIComponent(String(studentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -500,8 +746,8 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
             };
         },
         /**
-         * <br>              The student list is REPLACED, not merged: a student omitted from the body is unlinked from the              contact.                <br>              Email and phone cannot be changed here. Correcting either is an override, which records who              changed it and keeps the SIS value beside the correction; a body carrying `email` or              `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose              email is overridden keeps that override across this call - an update to the name leaves a              standing correction alone.              
-         * @summary Updates an Enrollment Contact name and its linked students.
+         * Email and phone cannot be changed here. Correcting either is an override, which records who  changed it and keeps the SIS value beside the correction; a body carrying `email` or  `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose  email is overridden keeps that override across this call - an update to the name leaves a  standing correction alone. Student association is managed exclusively through the  `/contacts/{id}/students` sub-resource, not through this call.
+         * @summary Updates an Enrollment Contact\'s name.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto] 
@@ -544,6 +790,97 @@ export const EnrollmentAdminContactsApiAxiosParamCreator = function (configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Updates a contact-student association\'s attributes.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {string} studentId 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateEnrollmentContactStudent: async (tenantId: string, id: string, studentId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('updateEnrollmentContactStudent', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateEnrollmentContactStudent', 'id', id)
+            // verify required parameter 'studentId' is not null or undefined
+            assertParamExists('updateEnrollmentContactStudent', 'studentId', studentId)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/students/{studentId}`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)))
+                .replace('{studentId}', encodeURIComponent(String(studentId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Verifies a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifyEnrollmentContact: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('verifyEnrollmentContact', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('verifyEnrollmentContact', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/contacts/{id}/verify`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -554,8 +891,23 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
     const localVarAxiosParamCreator = EnrollmentAdminContactsApiAxiosParamCreator(configuration)
     return {
         /**
-         * `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `email-override` and `phone-override` routes.
-         * @summary Creates an Enrollment Contact.
+         * Send `studentId` (the SIS code) to resolve or create the linked EnrollmentStudent  document server-side, or `id` (an existing student\'s own internal id, as returned by  this same route\'s GET) to link that exact student directly - `id` wins if both are  given, and never creates anything, 404ing instead if it does not exist. Set the association  attributes (priority, relationship, etc.) with a follow-up PUT to  `.../students/{studentId}`.
+         * @summary Links a student to a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addEnrollmentContactStudent(tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentAssociatedResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addEnrollmentContactStudent(tenantId, id, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.addEnrollmentContactStudent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * <br>              Upsert semantics: unique per `contactId`. A first call creates the contact; a later call              for the same `contactId` overwrites the SIS-sourced fields where they differ, and no-ops              when they are identical. An existing email/phone override is never touched by this call - see              the `overrides/emails` and `overrides/phones` routes for that.                <br>    `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `overrides/emails` and `overrides/phones` routes.              
+         * @summary Creates or updates an Enrollment Contact by its source-system `contactId`.
          * @param {string} tenantId 
          * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto] 
          * @param {*} [options] Override http request option.
@@ -582,6 +934,23 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * <br>              Eventually consistent, on the same terms as M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken).                <br>    `EventType` on `GetAllChangesRequest` is a single optional string, so it cannot              express \"any of these event types\" on its own. The filter is built through `Filter`              instead - a raw Elasticsearch `query_string` - while `EntityType` and              `EntityId` stay the typed fields M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken) already uses.              The change log applies the typed fields as `filter` clauses and `Filter` as a              `must` clause on the same bool query, so the two combine as an AND: this call still never              leaves this contact\'s own entity scope.                <br>              The event types covered are EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.ContactEventTypes,              which tracks what the Enrollment outbox publishes against a contact.              
+         * @summary Reads every lifecycle event for a contact - create, update, delete, overrides and sign-in  unlocks - newest first.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {number} [pageSize] 
+         * @param {number} [pageIndex] 
+         * @param {string} [studentId] Narrows to changes affecting one linked student.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEnrollmentContactChangelogs(tenantId: string, id: string, pageSize?: number, pageIndex?: number, studentId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDtoPaginatedItemsViewModel>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentContactChangelogs(tenantId, id, pageSize, pageIndex, studentId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.getEnrollmentContactChangelogs']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * <br>              Eventually consistent. A change reaches the log through Enrollment\'s outbox, so an entry can              be a few seconds behind a write that has already succeeded. Render the current value from the              contact itself and use this for what preceded it.                <br>              One route for both details, unlike the writes: this is a single ordered log and each entry              names its own detail, so splitting it would mean two requests to render one contact\'s              timeline and two page counts to reconcile.              
          * @summary Reads a contact\'s override history, newest first.
          * @param {string} tenantId 
@@ -600,6 +969,34 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
         },
         /**
          * 
+         * @summary Gets a contact\'s Registrations.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEnrollmentContactRegistrations(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnrollmentApiEnrollmentRegistrationsV1RegistrationResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentContactRegistrations(tenantId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.getEnrollmentContactRegistrations']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets a contact\'s linked students, with each link\'s association attributes.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEnrollmentContactStudents(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentDetailDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentContactStudents(tenantId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.getEnrollmentContactStudents']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Searches Enrollment Contacts.
          * @param {string} tenantId 
          * @param {number} [pageSize] 
@@ -607,13 +1004,13 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
          * @param {string} [orderBy] 
          * @param {string} [filter] 
          * @param {string} [search] Free-text match on contact name, email, or phone.
-         * @param {string} [schoolCode] Narrows to contacts with at least one linked student at this school.
+         * @param {string} [nextSchoolStateShortCode] Narrows to contacts with at least one linked student whose next school has this state short code.
          * @param {boolean} [locked] Narrows to contacts by sign-in lock status. Unset returns every contact.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEnrollmentContacts(tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, schoolCode?: string, locked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDtoPaginatedItemsViewModel>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentContacts(tenantId, pageSize, pageIndex, orderBy, filter, search, schoolCode, locked, options);
+        async getEnrollmentContacts(tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, nextSchoolStateShortCode?: string, locked?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDtoPaginatedItemsViewModel>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentContacts(tenantId, pageSize, pageIndex, orderBy, filter, search, nextSchoolStateShortCode, locked, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.getEnrollmentContacts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -653,13 +1050,13 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
          * @summary Removes a contact\'s email override, letting the SIS value show through again.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {string} [studentId] The student whose screen the removal was made from.
+         * @param {string} [studentLocalCode] The local code of the student whose screen the removal was made from.
          * @param {string} [expectedVersion] The &#x60;lastUpdatedDateTime&#x60; this edit started from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeEnrollmentContactEmailOverride(tenantId: string, id: string, studentId?: string, expectedVersion?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeEnrollmentContactEmailOverride(tenantId, id, studentId, expectedVersion, options);
+        async removeEnrollmentContactEmailOverride(tenantId: string, id: string, studentLocalCode?: string, expectedVersion?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeEnrollmentContactEmailOverride(tenantId, id, studentLocalCode, expectedVersion, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.removeEnrollmentContactEmailOverride']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -669,15 +1066,30 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
          * @summary Removes a contact\'s phone override, letting the SIS value show through again.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {string} [studentId] The student whose screen the removal was made from.
+         * @param {string} [studentLocalCode] The local code of the student whose screen the removal was made from.
          * @param {string} [expectedVersion] The &#x60;lastUpdatedDateTime&#x60; this edit started from.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async removeEnrollmentContactPhoneOverride(tenantId: string, id: string, studentId?: string, expectedVersion?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeEnrollmentContactPhoneOverride(tenantId, id, studentId, expectedVersion, options);
+        async removeEnrollmentContactPhoneOverride(tenantId: string, id: string, studentLocalCode?: string, expectedVersion?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeEnrollmentContactPhoneOverride(tenantId, id, studentLocalCode, expectedVersion, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.removeEnrollmentContactPhoneOverride']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Removes a student\'s link to a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {string} studentId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async removeEnrollmentContactStudent(tenantId: string, id: string, studentId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeEnrollmentContactStudent(tenantId, id, studentId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.removeEnrollmentContactStudent']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -695,8 +1107,8 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * <br>              The student list is REPLACED, not merged: a student omitted from the body is unlinked from the              contact.                <br>              Email and phone cannot be changed here. Correcting either is an override, which records who              changed it and keeps the SIS value beside the correction; a body carrying `email` or              `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose              email is overridden keeps that override across this call - an update to the name leaves a              standing correction alone.              
-         * @summary Updates an Enrollment Contact name and its linked students.
+         * Email and phone cannot be changed here. Correcting either is an override, which records who  changed it and keeps the SIS value beside the correction; a body carrying `email` or  `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose  email is overridden keeps that override across this call - an update to the name leaves a  standing correction alone. Student association is managed exclusively through the  `/contacts/{id}/students` sub-resource, not through this call.
+         * @summary Updates an Enrollment Contact\'s name.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto] 
@@ -709,6 +1121,36 @@ export const EnrollmentAdminContactsApiFp = function(configuration?: Configurati
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.updateEnrollmentContact']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Updates a contact-student association\'s attributes.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {string} studentId 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateEnrollmentContactStudent(tenantId: string, id: string, studentId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentAssociatedResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEnrollmentContactStudent(tenantId, id, studentId, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.updateEnrollmentContactStudent']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Verifies a contact.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async verifyEnrollmentContact(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.verifyEnrollmentContact(tenantId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminContactsApi.verifyEnrollmentContact']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -719,8 +1161,18 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
     const localVarFp = EnrollmentAdminContactsApiFp(configuration)
     return {
         /**
-         * `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `email-override` and `phone-override` routes.
-         * @summary Creates an Enrollment Contact.
+         * Send `studentId` (the SIS code) to resolve or create the linked EnrollmentStudent  document server-side, or `id` (an existing student\'s own internal id, as returned by  this same route\'s GET) to link that exact student directly - `id` wins if both are  given, and never creates anything, 404ing instead if it does not exist. Set the association  attributes (priority, relationship, etc.) with a follow-up PUT to  `.../students/{studentId}`.
+         * @summary Links a student to a contact.
+         * @param {EnrollmentAdminContactsApiAddEnrollmentContactStudentRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiAddEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentAssociatedResultDto> {
+            return localVarFp.addEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * <br>              Upsert semantics: unique per `contactId`. A first call creates the contact; a later call              for the same `contactId` overwrites the SIS-sourced fields where they differ, and no-ops              when they are identical. An existing email/phone override is never touched by this call - see              the `overrides/emails` and `overrides/phones` routes for that.                <br>    `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `overrides/emails` and `overrides/phones` routes.              
+         * @summary Creates or updates an Enrollment Contact by its source-system `contactId`.
          * @param {EnrollmentAdminContactsApiCreateEnrollmentContactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -739,6 +1191,16 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
             return localVarFp.getEnrollmentContactById(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * <br>              Eventually consistent, on the same terms as M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken).                <br>    `EventType` on `GetAllChangesRequest` is a single optional string, so it cannot              express \"any of these event types\" on its own. The filter is built through `Filter`              instead - a raw Elasticsearch `query_string` - while `EntityType` and              `EntityId` stay the typed fields M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken) already uses.              The change log applies the typed fields as `filter` clauses and `Filter` as a              `must` clause on the same bool query, so the two combine as an AND: this call still never              leaves this contact\'s own entity scope.                <br>              The event types covered are EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.ContactEventTypes,              which tracks what the Enrollment outbox publishes against a contact.              
+         * @summary Reads every lifecycle event for a contact - create, update, delete, overrides and sign-in  unlocks - newest first.
+         * @param {EnrollmentAdminContactsApiGetEnrollmentContactChangelogsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactChangelogs(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactChangelogsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideHistoryEntryDtoPaginatedItemsViewModel> {
+            return localVarFp.getEnrollmentContactChangelogs(requestParameters.tenantId, requestParameters.id, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.studentId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * <br>              Eventually consistent. A change reaches the log through Enrollment\'s outbox, so an entry can              be a few seconds behind a write that has already succeeded. Render the current value from the              contact itself and use this for what preceded it.                <br>              One route for both details, unlike the writes: this is a single ordered log and each entry              names its own detail, so splitting it would mean two requests to render one contact\'s              timeline and two page counts to reconcile.              
          * @summary Reads a contact\'s override history, newest first.
          * @param {EnrollmentAdminContactsApiGetEnrollmentContactOverridesRequest} requestParameters Request parameters.
@@ -750,13 +1212,33 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
         },
         /**
          * 
+         * @summary Gets a contact\'s Registrations.
+         * @param {EnrollmentAdminContactsApiGetEnrollmentContactRegistrationsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactRegistrations(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactRegistrationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<EnrollmentApiEnrollmentRegistrationsV1RegistrationResponse>> {
+            return localVarFp.getEnrollmentContactRegistrations(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets a contact\'s linked students, with each link\'s association attributes.
+         * @param {EnrollmentAdminContactsApiGetEnrollmentContactStudentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEnrollmentContactStudents(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactStudentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentDetailDto>> {
+            return localVarFp.getEnrollmentContactStudents(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Searches Enrollment Contacts.
          * @param {EnrollmentAdminContactsApiGetEnrollmentContactsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getEnrollmentContacts(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDtoPaginatedItemsViewModel> {
-            return localVarFp.getEnrollmentContacts(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.schoolCode, requestParameters.locked, options).then((request) => request(axios, basePath));
+            return localVarFp.getEnrollmentContacts(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.nextSchoolStateShortCode, requestParameters.locked, options).then((request) => request(axios, basePath));
         },
         /**
          * The override is an enrollment-local annotation over SIS data, not a writeback. The SIS value  is kept and returned alongside it, and the correction keeps winning over later SIS imports  until staff revisit it.  <br>  The corrected value is shared by every student linked to the contact. `studentId` in the  body only records whose screen the edit came from.  
@@ -786,7 +1268,7 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
          * @throws {RequiredError}
          */
         removeEnrollmentContactEmailOverride(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactEmailOverrideRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto> {
-            return localVarFp.removeEnrollmentContactEmailOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.expectedVersion, options).then((request) => request(axios, basePath));
+            return localVarFp.removeEnrollmentContactEmailOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentLocalCode, requestParameters.expectedVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * The removal is itself recorded in the history - the superseded value stays recoverable.
@@ -796,7 +1278,17 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
          * @throws {RequiredError}
          */
         removeEnrollmentContactPhoneOverride(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactPhoneOverrideRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactOverrideResultDto> {
-            return localVarFp.removeEnrollmentContactPhoneOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.expectedVersion, options).then((request) => request(axios, basePath));
+            return localVarFp.removeEnrollmentContactPhoneOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentLocalCode, requestParameters.expectedVersion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Removes a student\'s link to a contact.
+         * @param {EnrollmentAdminContactsApiRemoveEnrollmentContactStudentRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto> {
+            return localVarFp.removeEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, options).then((request) => request(axios, basePath));
         },
         /**
          * Idempotent: unlocking an already-unlocked contact, or one with no rows at all, is a 200 with  `resetCount: 0`, not an error.
@@ -809,8 +1301,8 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
             return localVarFp.unlockEnrollmentContactSignIn(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * <br>              The student list is REPLACED, not merged: a student omitted from the body is unlinked from the              contact.                <br>              Email and phone cannot be changed here. Correcting either is an override, which records who              changed it and keeps the SIS value beside the correction; a body carrying `email` or              `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose              email is overridden keeps that override across this call - an update to the name leaves a              standing correction alone.              
-         * @summary Updates an Enrollment Contact name and its linked students.
+         * Email and phone cannot be changed here. Correcting either is an override, which records who  changed it and keeps the SIS value beside the correction; a body carrying `email` or  `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose  email is overridden keeps that override across this call - an update to the name leaves a  standing correction alone. Student association is managed exclusively through the  `/contacts/{id}/students` sub-resource, not through this call.
+         * @summary Updates an Enrollment Contact\'s name.
          * @param {EnrollmentAdminContactsApiUpdateEnrollmentContactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -818,8 +1310,48 @@ export const EnrollmentAdminContactsApiFactory = function (configuration?: Confi
         updateEnrollmentContact(requestParameters: EnrollmentAdminContactsApiUpdateEnrollmentContactRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactMutationResultDto> {
             return localVarFp.updateEnrollmentContact(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Updates a contact-student association\'s attributes.
+         * @param {EnrollmentAdminContactsApiUpdateEnrollmentContactStudentRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiUpdateEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentAssociatedResultDto> {
+            return localVarFp.updateEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Verifies a contact.
+         * @param {EnrollmentAdminContactsApiVerifyEnrollmentContactRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        verifyEnrollmentContact(requestParameters: EnrollmentAdminContactsApiVerifyEnrollmentContactRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto> {
+            return localVarFp.verifyEnrollmentContact(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
     };
 };
+
+/**
+ * Request parameters for addEnrollmentContactStudent operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiAddEnrollmentContactStudentRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+
+    /**
+     * 
+     */
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto
+}
 
 /**
  * Request parameters for createEnrollmentContact operation in EnrollmentAdminContactsApi.
@@ -852,6 +1384,36 @@ export interface EnrollmentAdminContactsApiGetEnrollmentContactByIdRequest {
 }
 
 /**
+ * Request parameters for getEnrollmentContactChangelogs operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiGetEnrollmentContactChangelogsRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+
+    /**
+     * 
+     */
+    readonly pageSize?: number
+
+    /**
+     * 
+     */
+    readonly pageIndex?: number
+
+    /**
+     * Narrows to changes affecting one linked student.
+     */
+    readonly studentId?: string
+}
+
+/**
  * Request parameters for getEnrollmentContactOverrides operation in EnrollmentAdminContactsApi.
  */
 export interface EnrollmentAdminContactsApiGetEnrollmentContactOverridesRequest {
@@ -879,6 +1441,36 @@ export interface EnrollmentAdminContactsApiGetEnrollmentContactOverridesRequest 
      * Narrows to changes affecting one linked student.
      */
     readonly studentId?: string
+}
+
+/**
+ * Request parameters for getEnrollmentContactRegistrations operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiGetEnrollmentContactRegistrationsRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for getEnrollmentContactStudents operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiGetEnrollmentContactStudentsRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
 }
 
 /**
@@ -916,9 +1508,9 @@ export interface EnrollmentAdminContactsApiGetEnrollmentContactsRequest {
     readonly search?: string
 
     /**
-     * Narrows to contacts with at least one linked student at this school.
+     * Narrows to contacts with at least one linked student whose next school has this state short code.
      */
-    readonly schoolCode?: string
+    readonly nextSchoolStateShortCode?: string
 
     /**
      * Narrows to contacts by sign-in lock status. Unset returns every contact.
@@ -981,9 +1573,9 @@ export interface EnrollmentAdminContactsApiRemoveEnrollmentContactEmailOverrideR
     readonly id: string
 
     /**
-     * The student whose screen the removal was made from.
+     * The local code of the student whose screen the removal was made from.
      */
-    readonly studentId?: string
+    readonly studentLocalCode?: string
 
     /**
      * The &#x60;lastUpdatedDateTime&#x60; this edit started from.
@@ -1006,14 +1598,34 @@ export interface EnrollmentAdminContactsApiRemoveEnrollmentContactPhoneOverrideR
     readonly id: string
 
     /**
-     * The student whose screen the removal was made from.
+     * The local code of the student whose screen the removal was made from.
      */
-    readonly studentId?: string
+    readonly studentLocalCode?: string
 
     /**
      * The &#x60;lastUpdatedDateTime&#x60; this edit started from.
      */
     readonly expectedVersion?: string
+}
+
+/**
+ * Request parameters for removeEnrollmentContactStudent operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiRemoveEnrollmentContactStudentRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+
+    /**
+     * 
+     */
+    readonly studentId: string
 }
 
 /**
@@ -1052,12 +1664,63 @@ export interface EnrollmentAdminContactsApiUpdateEnrollmentContactRequest {
 }
 
 /**
+ * Request parameters for updateEnrollmentContactStudent operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiUpdateEnrollmentContactStudentRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+
+    /**
+     * 
+     */
+    readonly studentId: string
+
+    /**
+     * 
+     */
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto
+}
+
+/**
+ * Request parameters for verifyEnrollmentContact operation in EnrollmentAdminContactsApi.
+ */
+export interface EnrollmentAdminContactsApiVerifyEnrollmentContactRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+}
+
+/**
  * EnrollmentAdminContactsApi - object-oriented interface
  */
 export class EnrollmentAdminContactsApi extends BaseAPI {
     /**
-     * `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `email-override` and `phone-override` routes.
-     * @summary Creates an Enrollment Contact.
+     * Send `studentId` (the SIS code) to resolve or create the linked EnrollmentStudent  document server-side, or `id` (an existing student\'s own internal id, as returned by  this same route\'s GET) to link that exact student directly - `id` wins if both are  given, and never creates anything, 404ing instead if it does not exist. Set the association  attributes (priority, relationship, etc.) with a follow-up PUT to  `.../students/{studentId}`.
+     * @summary Links a student to a contact.
+     * @param {EnrollmentAdminContactsApiAddEnrollmentContactStudentRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public addEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiAddEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).addEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * <br>              Upsert semantics: unique per `contactId`. A first call creates the contact; a later call              for the same `contactId` overwrites the SIS-sourced fields where they differ, and no-ops              when they are identical. An existing email/phone override is never touched by this call - see              the `overrides/emails` and `overrides/phones` routes for that.                <br>    `email` and `phone` here are the SIS-sourced values, which is what a contact starts              with. Changing either afterwards is an override rather than an update - see the              `overrides/emails` and `overrides/phones` routes.              
+     * @summary Creates or updates an Enrollment Contact by its source-system `contactId`.
      * @param {EnrollmentAdminContactsApiCreateEnrollmentContactRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1078,6 +1741,17 @@ export class EnrollmentAdminContactsApi extends BaseAPI {
     }
 
     /**
+     * <br>              Eventually consistent, on the same terms as M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken).                <br>    `EventType` on `GetAllChangesRequest` is a single optional string, so it cannot              express \"any of these event types\" on its own. The filter is built through `Filter`              instead - a raw Elasticsearch `query_string` - while `EntityType` and              `EntityId` stay the typed fields M:EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.EnrollmentAdminController.GetEnrollmentContactOverrides(System.String,System.Guid,System.Int32,System.Int32,System.String,System.Threading.CancellationToken) already uses.              The change log applies the typed fields as `filter` clauses and `Filter` as a              `must` clause on the same bool query, so the two combine as an AND: this call still never              leaves this contact\'s own entity scope.                <br>              The event types covered are EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.ContactEventTypes,              which tracks what the Enrollment outbox publishes against a contact.              
+     * @summary Reads every lifecycle event for a contact - create, update, delete, overrides and sign-in  unlocks - newest first.
+     * @param {EnrollmentAdminContactsApiGetEnrollmentContactChangelogsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getEnrollmentContactChangelogs(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactChangelogsRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).getEnrollmentContactChangelogs(requestParameters.tenantId, requestParameters.id, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.studentId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * <br>              Eventually consistent. A change reaches the log through Enrollment\'s outbox, so an entry can              be a few seconds behind a write that has already succeeded. Render the current value from the              contact itself and use this for what preceded it.                <br>              One route for both details, unlike the writes: this is a single ordered log and each entry              names its own detail, so splitting it would mean two requests to render one contact\'s              timeline and two page counts to reconcile.              
      * @summary Reads a contact\'s override history, newest first.
      * @param {EnrollmentAdminContactsApiGetEnrollmentContactOverridesRequest} requestParameters Request parameters.
@@ -1090,13 +1764,35 @@ export class EnrollmentAdminContactsApi extends BaseAPI {
 
     /**
      * 
+     * @summary Gets a contact\'s Registrations.
+     * @param {EnrollmentAdminContactsApiGetEnrollmentContactRegistrationsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getEnrollmentContactRegistrations(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactRegistrationsRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).getEnrollmentContactRegistrations(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets a contact\'s linked students, with each link\'s association attributes.
+     * @param {EnrollmentAdminContactsApiGetEnrollmentContactStudentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getEnrollmentContactStudents(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactStudentsRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).getEnrollmentContactStudents(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Searches Enrollment Contacts.
      * @param {EnrollmentAdminContactsApiGetEnrollmentContactsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     public getEnrollmentContacts(requestParameters: EnrollmentAdminContactsApiGetEnrollmentContactsRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminContactsApiFp(this.configuration).getEnrollmentContacts(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.schoolCode, requestParameters.locked, options).then((request) => request(this.axios, this.basePath));
+        return EnrollmentAdminContactsApiFp(this.configuration).getEnrollmentContacts(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.nextSchoolStateShortCode, requestParameters.locked, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1129,7 +1825,7 @@ export class EnrollmentAdminContactsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public removeEnrollmentContactEmailOverride(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactEmailOverrideRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminContactsApiFp(this.configuration).removeEnrollmentContactEmailOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.expectedVersion, options).then((request) => request(this.axios, this.basePath));
+        return EnrollmentAdminContactsApiFp(this.configuration).removeEnrollmentContactEmailOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentLocalCode, requestParameters.expectedVersion, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1140,7 +1836,18 @@ export class EnrollmentAdminContactsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public removeEnrollmentContactPhoneOverride(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactPhoneOverrideRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminContactsApiFp(this.configuration).removeEnrollmentContactPhoneOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.expectedVersion, options).then((request) => request(this.axios, this.basePath));
+        return EnrollmentAdminContactsApiFp(this.configuration).removeEnrollmentContactPhoneOverride(requestParameters.tenantId, requestParameters.id, requestParameters.studentLocalCode, requestParameters.expectedVersion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Removes a student\'s link to a contact.
+     * @param {EnrollmentAdminContactsApiRemoveEnrollmentContactStudentRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public removeEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiRemoveEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).removeEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1155,14 +1862,36 @@ export class EnrollmentAdminContactsApi extends BaseAPI {
     }
 
     /**
-     * <br>              The student list is REPLACED, not merged: a student omitted from the body is unlinked from the              contact.                <br>              Email and phone cannot be changed here. Correcting either is an override, which records who              changed it and keeps the SIS value beside the correction; a body carrying `email` or              `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose              email is overridden keeps that override across this call - an update to the name leaves a              standing correction alone.              
-     * @summary Updates an Enrollment Contact name and its linked students.
+     * Email and phone cannot be changed here. Correcting either is an override, which records who  changed it and keeps the SIS value beside the correction; a body carrying `email` or  `phone` is rejected with a 400 naming the route to use instead. Note that a contact whose  email is overridden keeps that override across this call - an update to the name leaves a  standing correction alone. Student association is managed exclusively through the  `/contacts/{id}/students` sub-resource, not through this call.
+     * @summary Updates an Enrollment Contact\'s name.
      * @param {EnrollmentAdminContactsApiUpdateEnrollmentContactRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     public updateEnrollmentContact(requestParameters: EnrollmentAdminContactsApiUpdateEnrollmentContactRequest, options?: RawAxiosRequestConfig) {
         return EnrollmentAdminContactsApiFp(this.configuration).updateEnrollmentContact(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates a contact-student association\'s attributes.
+     * @param {EnrollmentAdminContactsApiUpdateEnrollmentContactStudentRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public updateEnrollmentContactStudent(requestParameters: EnrollmentAdminContactsApiUpdateEnrollmentContactStudentRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).updateEnrollmentContactStudent(requestParameters.tenantId, requestParameters.id, requestParameters.studentId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Verifies a contact.
+     * @param {EnrollmentAdminContactsApiVerifyEnrollmentContactRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public verifyEnrollmentContact(requestParameters: EnrollmentAdminContactsApiVerifyEnrollmentContactRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminContactsApiFp(this.configuration).verifyEnrollmentContact(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **tenantId** | **string** |  | [optional] [default to undefined]
 **firstName** | **string** |  | [optional] [default to undefined]
 **lastName** | **string** |  | [optional] [default to undefined]
-**students** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto.md) |  | [optional] [default to undefined]
 **email** | **string** |  | [optional] [default to undefined]
 **phone** | **string** |  | [optional] [default to undefined]
 
@@ -24,7 +23,6 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEn
     tenantId,
     firstName,
     lastName,
-    students,
     email,
     phone,
 };

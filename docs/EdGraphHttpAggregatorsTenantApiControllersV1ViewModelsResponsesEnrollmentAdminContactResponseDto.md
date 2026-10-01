@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [optional] [default to undefined]
 **tenantId** | **string** |  | [optional] [default to undefined]
-**contactId** | **string** |  | [optional] [default to undefined]
+**externalDataSourceContactId** | **string** |  | [optional] [default to undefined]
 **firstName** | **string** |  | [optional] [default to undefined]
 **lastName** | **string** |  | [optional] [default to undefined]
 **email** | **string** |  | [optional] [default to undefined]
@@ -15,14 +15,15 @@ Name | Type | Description | Notes
 **students** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto.md) |  | [optional] [default to undefined]
 **relationship** | **string** |  | [optional] [default to undefined]
 **studentCount** | **number** |  | [optional] [default to undefined]
+**studentLocalCodes** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **isPhoneOverride** | **boolean** |  | [optional] [default to undefined]
 **isEmailOverride** | **boolean** |  | [optional] [default to undefined]
 **sisEmail** | **string** |  | [optional] [default to undefined]
 **sisPhone** | **string** |  | [optional] [default to undefined]
-**emailOverriddenBy** | **string** |  | [optional] [default to undefined]
-**emailOverriddenAt** | **string** |  | [optional] [default to undefined]
-**phoneOverriddenBy** | **string** |  | [optional] [default to undefined]
-**phoneOverriddenAt** | **string** |  | [optional] [default to undefined]
+**emailLastOverriddenBy** | **string** |  | [optional] [default to undefined]
+**emailLastOverriddenDateTime** | **string** |  | [optional] [default to undefined]
+**phoneLastOverriddenBy** | **string** |  | [optional] [default to undefined]
+**phoneLastOverriddenDateTime** | **string** |  | [optional] [default to undefined]
 **signInStatus** | **string** |  | [optional] [default to undefined]
 **isLocked** | **boolean** |  | [optional] [default to undefined]
 **createdBy** | **string** |  | [optional] [default to undefined]
@@ -30,7 +31,10 @@ Name | Type | Description | Notes
 **lastModifiedBy** | **string** |  | [optional] [default to undefined]
 **lastModifiedDateTime** | **string** |  | [optional] [default to undefined]
 **lastUpdatedDateTime** | **string** |  | [optional] [default to undefined]
+**deletedBy** | **string** |  | [optional] [default to undefined]
+**deletedDateTime** | **string** |  | [optional] [default to undefined]
 **isDeleted** | **boolean** |  | [optional] [default to undefined]
+**verificationStatus** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -40,7 +44,7 @@ import { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollme
 const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDto = {
     id,
     tenantId,
-    contactId,
+    externalDataSourceContactId,
     firstName,
     lastName,
     email,
@@ -48,14 +52,15 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     students,
     relationship,
     studentCount,
+    studentLocalCodes,
     isPhoneOverride,
     isEmailOverride,
     sisEmail,
     sisPhone,
-    emailOverriddenBy,
-    emailOverriddenAt,
-    phoneOverriddenBy,
-    phoneOverriddenAt,
+    emailLastOverriddenBy,
+    emailLastOverriddenDateTime,
+    phoneLastOverriddenBy,
+    phoneLastOverriddenDateTime,
     signInStatus,
     isLocked,
     createdBy,
@@ -63,7 +68,10 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     lastModifiedBy,
     lastModifiedDateTime,
     lastUpdatedDateTime,
+    deletedBy,
+    deletedDateTime,
     isDeleted,
+    verificationStatus,
 };
 ```
 

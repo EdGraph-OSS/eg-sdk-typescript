@@ -15,24 +15,32 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-requirement-dto';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-grade-capacity-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-school-association-dto';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramTypeRefDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-program-type-ref-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementRefDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-requirement-ref-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolRefDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-school-ref-dto';
 
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramDetailDto {
     'id'?: string | null;
     'tenantId'?: string | null;
-    'code'?: string | null;
-    'name'?: string | null;
-    'scope'?: string | null;
-    'offeredAtSchoolCount'?: number;
-    'programType'?: string | null;
+    'programCode'?: string | null;
+    'programName'?: string | null;
     'eligibilityCriteria'?: string | null;
-    'internalDisplayName'?: string | null;
+    'programType'?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramTypeRefDto;
+    'requirements'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementRefDto> | null;
+    'school'?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolRefDto;
     'grades'?: Array<string> | null;
-    'schools'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolAssociationDto> | null;
-    'requirements'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminRequirementDto> | null;
+    'capacityByGrade'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminGradeCapacityDto> | null;
+    'seatStatus'?: string | null;
+    'zone'?: string | null;
+    'latitude'?: number | null;
+    'longitude'?: number | null;
     'createdBy'?: string | null;
     'createdDateTime'?: string | null;
     'lastModifiedBy'?: string | null;

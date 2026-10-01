@@ -25,5 +25,6 @@ export interface EdfiAdminApiEdfiAdminV1InstanceOdsDatabase {
     'year'?: number;
     'odsBackupCode'?: string | null;
     'odsBackupDescription'?: string | null;
+    'pendingApplicationAccessIds'?: Array<number> | null;
 }
 

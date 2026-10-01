@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **stateEducationAgencyId** | **number** |  | [optional] [default to undefined]
 **nameOfInstitution** | **string** |  | [optional] [default to undefined]
 **educationOrganizationCategoryDescriptors** | **Array&lt;string&gt;** |  | [optional] [readonly] [default to undefined]
+**year** | **number** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -22,6 +23,7 @@ const instance: EdfiAdminApiEdfiAdminV1CreateStateEducationAgencyRequest = {
     stateEducationAgencyId,
     nameOfInstitution,
     educationOrganizationCategoryDescriptors,
+    year,
 };
 ```
 

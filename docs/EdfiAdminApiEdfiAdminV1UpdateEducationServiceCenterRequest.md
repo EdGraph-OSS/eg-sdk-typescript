@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **educationServiceCenterId** | **number** |  | [optional] [default to undefined]
 **nameOfInstitution** | **string** |  | [optional] [default to undefined]
 **educationOrganizationCategoryDescriptors** | **Array&lt;string&gt;** |  | [optional] [readonly] [default to undefined]
+**year** | **number** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -24,6 +25,7 @@ const instance: EdfiAdminApiEdfiAdminV1UpdateEducationServiceCenterRequest = {
     educationServiceCenterId,
     nameOfInstitution,
     educationOrganizationCategoryDescriptors,
+    year,
 };
 ```
 

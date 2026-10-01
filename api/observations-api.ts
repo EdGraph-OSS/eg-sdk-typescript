@@ -28,6 +28,8 @@ import type { AnalyticsApiReportsV1ReportPreferencesSavedResponse } from '../mod
 // @ts-ignore
 import type { AnalyticsApiReportsV1ReportResponse } from '../models';
 // @ts-ignore
+import type { DataSyncApiJobV1JobExecutionRequestedResponse } from '../models';
+// @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse } from '../models';
@@ -52,11 +54,29 @@ import type { EdGraphHttpAggregatorsTenantApiServicesObservationsEvalueeResponse
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsEvalueeResponsePaginatedItemsViewModel } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetAcademicSubjectsCountResponse } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetAvailableCampusesTotalEvalueesResponse } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetCampusesWithEvalueesResponse } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetCoursesCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetEducationOrganizationsCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetGradeLevelsCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetSectionsCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetSeoaasTotalResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetSessionsCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetStaffSectionAssociationsCountResponse } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetSubmittedObservationsCountResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsGetTermsCountResponse } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsObservationDraftResponse } from '../models';
 // @ts-ignore
@@ -66,9 +86,17 @@ import type { EdGraphHttpAggregatorsTenantApiServicesObservationsObservationProf
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsObservationSubmissionResponse } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsObservationsOnboardingResponse } from '../models';
+// @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationResponse } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepResponse } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUpsertDashboardPreferencesRequest } from '../models';
 // @ts-ignore
@@ -80,9 +108,15 @@ import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUseCasesCommand
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUseCasesCommandsDashboardAccessResponse } from '../models';
 // @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiServicesObservationsUserSyncJobResponse } from '../models';
+// @ts-ignore
+import type { EdfiAdminApiEdfiAdminV1Instance } from '../models';
+// @ts-ignore
 import type { FormApiSectionsV1SectionResponsePaginatedItemsViewModel } from '../models';
 // @ts-ignore
 import type { IdentityApiUserV1SectionResponseGetPaginatedItemsResponse } from '../models';
+// @ts-ignore
+import type { MicrosoftAspNetCoreMvcNoContentResult } from '../models';
 // @ts-ignore
 import type { MicrosoftAspNetCoreMvcValidationProblemDetails } from '../models';
 // @ts-ignore
@@ -226,6 +260,82 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Executes the User Sync job for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        executeUserSyncJob: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('executeUserSyncJob', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/usersync/execute`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of academic subjects for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAcademicSubjectsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getAcademicSubjectsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/academicsubjectscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get the total number of evaluees across all available campuses
          * @param {string} tenantId 
          * @param {*} [options] Override http request option.
@@ -235,6 +345,44 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('getAvailableCampusesTotalEvaluees', 'tenantId', tenantId)
             const localVarPath = `/tenants/{tenantId}/observations/total-evaluees`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of courses for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCoursesCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getCoursesCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/coursescount`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -339,6 +487,87 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
             // authentication oauth2 required
             // oauth required
             await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the default Ed-Fi instance for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDefaultEdFiInstance: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getDefaultEdFiInstance', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/defaultinstance`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of education organizations for a given tenant, filtered by discriminator
+         * @param {string} tenantId 
+         * @param {string} [discriminator] Either \&quot;LocalEducationAgency\&quot; or \&quot;School\&quot;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEducationOrganizationsCount: async (tenantId: string, discriminator?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getEducationOrganizationsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/educationorganizationscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            if (discriminator !== undefined) {
+                localVarQueryParameter['discriminator'] = discriminator;
+            }
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -523,6 +752,44 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Gets the total count of grade levels for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGradeLevelsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getGradeLevelsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/gradelevelscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get an Observation for a given tenant
          * @param {string} tenantId 
          * @param {string} observationId 
@@ -629,6 +896,44 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{observationId}', encodeURIComponent(String(observationId)))
                 .replace('{formId}', encodeURIComponent(String(formId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the Instructional Insights onboarding progress for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOnboarding: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getOnboarding', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/onboarding`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -961,6 +1266,64 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Get paginated users for a given tenant, including their SEOAAs and Observation Access.
+         * @param {string} tenantId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {string} [orderBy] 
+         * @param {string} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaginatedObservationUsers: async (tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getPaginatedObservationUsers', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/users`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['pageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['pageSize'] = pageSize;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get Paginated Observations for a given tenant
          * @param {string} tenantId 
          * @param {number} [pageSize] 
@@ -1112,6 +1475,158 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Gets the total count of sections for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSectionsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getSectionsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/sectionscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get the total number of SEOAAs across all users for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSeoaasTotal: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getSeoaasTotal', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/seoaastotals`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of sessions for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSessionsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getSessionsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/sessionscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of staff-section associations across all users for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStaffSectionAssociationsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getStaffSectionAssociationsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/staffsectionassociationscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get submitted Observations count
          * @param {string} tenantId 
          * @param {string} [evalueeId] 
@@ -1146,6 +1661,82 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
             if (campus !== undefined) {
                 localVarQueryParameter['campus'] = campus;
             }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the total count of terms for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTermsCount: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getTermsCount', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/termscount`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Gets the User Sync job for a given tenant, including its job executions
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserSyncJob: async (tenantId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('getUserSyncJob', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/usersync`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -1313,6 +1904,92 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
+         * @summary Updates a step of the Instructional Insights onboarding for a given tenant
+         * @param {string} tenantId 
+         * @param {number} stepNumber 
+         * @param {EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest} [edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateObservationsOnboardingStep: async (tenantId: string, stepNumber: number, edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest?: EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('updateObservationsOnboardingStep', 'tenantId', tenantId)
+            // verify required parameter 'stepNumber' is not null or undefined
+            assertParamExists('updateObservationsOnboardingStep', 'stepNumber', stepNumber)
+            const localVarPath = `/tenants/{tenantId}/observations/onboarding/{stepNumber}`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{stepNumber}', encodeURIComponent(String(stepNumber)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Updates the User Sync job for a given tenant
+         * @param {string} tenantId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserSyncJob: async (tenantId: string, body?: any, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('updateUserSyncJob', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/observations/usersync`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Creates a draft for an observation forms
          * @param {string} tenantId 
          * @param {string} observationId 
@@ -1456,6 +2133,32 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Executes the User Sync job for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async executeUserSyncJob(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DataSyncApiJobV1JobExecutionRequestedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.executeUserSyncJob(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.executeUserSyncJob']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of academic subjects for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAcademicSubjectsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetAcademicSubjectsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAcademicSubjectsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getAcademicSubjectsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get the total number of evaluees across all available campuses
          * @param {string} tenantId 
          * @param {*} [options] Override http request option.
@@ -1465,6 +2168,19 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAvailableCampusesTotalEvaluees(tenantId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getAvailableCampusesTotalEvaluees']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of courses for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCoursesCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetCoursesCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCoursesCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getCoursesCount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1494,6 +2210,33 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDashboardPreferences(tenantId, dashboardId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getDashboardPreferences']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the default Ed-Fi instance for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getDefaultEdFiInstance(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdfiAdminApiEdfiAdminV1Instance>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaultEdFiInstance(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getDefaultEdFiInstance']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of education organizations for a given tenant, filtered by discriminator
+         * @param {string} tenantId 
+         * @param {string} [discriminator] Either \&quot;LocalEducationAgency\&quot; or \&quot;School\&quot;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getEducationOrganizationsCount(tenantId: string, discriminator?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetEducationOrganizationsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEducationOrganizationsCount(tenantId, discriminator, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getEducationOrganizationsCount']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1549,6 +2292,19 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Gets the total count of grade levels for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGradeLevelsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetGradeLevelsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGradeLevelsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getGradeLevelsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get an Observation for a given tenant
          * @param {string} tenantId 
          * @param {string} observationId 
@@ -1589,6 +2345,19 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getObservationSubmission(tenantId, observationId, formId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getObservationSubmission']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the Instructional Insights onboarding progress for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOnboarding(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationsOnboardingResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOnboarding(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getOnboarding']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1681,6 +2450,23 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get paginated users for a given tenant, including their SEOAAs and Observation Access.
+         * @param {string} tenantId 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {string} [orderBy] 
+         * @param {string} [filter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaginatedObservationUsers(tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaginatedObservationUsers(tenantId, pageIndex, pageSize, orderBy, filter, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getPaginatedObservationUsers']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get Paginated Observations for a given tenant
          * @param {string} tenantId 
          * @param {number} [pageSize] 
@@ -1722,6 +2508,58 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Gets the total count of sections for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSectionsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSectionsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSectionsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getSectionsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get the total number of SEOAAs across all users for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSeoaasTotal(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSeoaasTotalResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSeoaasTotal(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getSeoaasTotal']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of sessions for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSessionsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSessionsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSessionsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getSessionsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of staff-section associations across all users for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getStaffSectionAssociationsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetStaffSectionAssociationsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStaffSectionAssociationsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getStaffSectionAssociationsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get submitted Observations count
          * @param {string} tenantId 
          * @param {string} [evalueeId] 
@@ -1733,6 +2571,32 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubmittedObservationsCount(tenantId, evalueeId, campus, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getSubmittedObservationsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the total count of terms for a given tenant
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTermsCount(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetTermsCountResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTermsCount(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getTermsCount']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Gets the User Sync job for a given tenant, including its job executions
+         * @param {string} tenantId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserSyncJob(tenantId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsUserSyncJobResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserSyncJob(tenantId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getUserSyncJob']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1781,6 +2645,35 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateObservation(tenantId, observationId, edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.updateObservation']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Updates a step of the Instructional Insights onboarding for a given tenant
+         * @param {string} tenantId 
+         * @param {number} stepNumber 
+         * @param {EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest} [edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateObservationsOnboardingStep(tenantId: string, stepNumber: number, edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest?: EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateObservationsOnboardingStep(tenantId, stepNumber, edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.updateObservationsOnboardingStep']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Updates the User Sync job for a given tenant
+         * @param {string} tenantId 
+         * @param {any} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUserSyncJob(tenantId: string, body?: any, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MicrosoftAspNetCoreMvcNoContentResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserSyncJob(tenantId, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ObservationsApi.updateUserSyncJob']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1854,6 +2747,26 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary Executes the User Sync job for a given tenant
+         * @param {ObservationsApiExecuteUserSyncJobRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        executeUserSyncJob(requestParameters: ObservationsApiExecuteUserSyncJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<DataSyncApiJobV1JobExecutionRequestedResponse> {
+            return localVarFp.executeUserSyncJob(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of academic subjects for a given tenant
+         * @param {ObservationsApiGetAcademicSubjectsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAcademicSubjectsCount(requestParameters: ObservationsApiGetAcademicSubjectsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetAcademicSubjectsCountResponse> {
+            return localVarFp.getAcademicSubjectsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get the total number of evaluees across all available campuses
          * @param {ObservationsApiGetAvailableCampusesTotalEvalueesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1861,6 +2774,16 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         getAvailableCampusesTotalEvaluees(requestParameters: ObservationsApiGetAvailableCampusesTotalEvalueesRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetAvailableCampusesTotalEvalueesResponse> {
             return localVarFp.getAvailableCampusesTotalEvaluees(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of courses for a given tenant
+         * @param {ObservationsApiGetCoursesCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCoursesCount(requestParameters: ObservationsApiGetCoursesCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetCoursesCountResponse> {
+            return localVarFp.getCoursesCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1881,6 +2804,26 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         getDashboardPreferences(requestParameters: ObservationsApiGetDashboardPreferencesRequest, options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsApiReportsV1ReportPreferencesResponse> {
             return localVarFp.getDashboardPreferences(requestParameters.tenantId, requestParameters.dashboardId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the default Ed-Fi instance for a given tenant
+         * @param {ObservationsApiGetDefaultEdFiInstanceRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getDefaultEdFiInstance(requestParameters: ObservationsApiGetDefaultEdFiInstanceRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdfiAdminApiEdfiAdminV1Instance> {
+            return localVarFp.getDefaultEdFiInstance(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of education organizations for a given tenant, filtered by discriminator
+         * @param {ObservationsApiGetEducationOrganizationsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getEducationOrganizationsCount(requestParameters: ObservationsApiGetEducationOrganizationsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetEducationOrganizationsCountResponse> {
+            return localVarFp.getEducationOrganizationsCount(requestParameters.tenantId, requestParameters.discriminator, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1914,6 +2857,16 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary Gets the total count of grade levels for a given tenant
+         * @param {ObservationsApiGetGradeLevelsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGradeLevelsCount(requestParameters: ObservationsApiGetGradeLevelsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetGradeLevelsCountResponse> {
+            return localVarFp.getGradeLevelsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get an Observation for a given tenant
          * @param {ObservationsApiGetObservationByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1941,6 +2894,16 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         getObservationSubmission(requestParameters: ObservationsApiGetObservationSubmissionRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationSubmissionResponse> {
             return localVarFp.getObservationSubmission(requestParameters.tenantId, requestParameters.observationId, requestParameters.formId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the Instructional Insights onboarding progress for a given tenant
+         * @param {ObservationsApiGetOnboardingRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOnboarding(requestParameters: ObservationsApiGetOnboardingRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationsOnboardingResponse> {
+            return localVarFp.getOnboarding(requestParameters.tenantId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1994,6 +2957,16 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary Get paginated users for a given tenant, including their SEOAAs and Observation Access.
+         * @param {ObservationsApiGetPaginatedObservationUsersRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaginatedObservationUsers(requestParameters: ObservationsApiGetPaginatedObservationUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse> {
+            return localVarFp.getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get Paginated Observations for a given tenant
          * @param {ObservationsApiGetPaginatedObservationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2014,6 +2987,46 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary Gets the total count of sections for a given tenant
+         * @param {ObservationsApiGetSectionsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSectionsCount(requestParameters: ObservationsApiGetSectionsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSectionsCountResponse> {
+            return localVarFp.getSectionsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get the total number of SEOAAs across all users for a given tenant
+         * @param {ObservationsApiGetSeoaasTotalRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSeoaasTotal(requestParameters: ObservationsApiGetSeoaasTotalRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSeoaasTotalResponse> {
+            return localVarFp.getSeoaasTotal(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of sessions for a given tenant
+         * @param {ObservationsApiGetSessionsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSessionsCount(requestParameters: ObservationsApiGetSessionsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSessionsCountResponse> {
+            return localVarFp.getSessionsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of staff-section associations across all users for a given tenant
+         * @param {ObservationsApiGetStaffSectionAssociationsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getStaffSectionAssociationsCount(requestParameters: ObservationsApiGetStaffSectionAssociationsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetStaffSectionAssociationsCountResponse> {
+            return localVarFp.getStaffSectionAssociationsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Get submitted Observations count
          * @param {ObservationsApiGetSubmittedObservationsCountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2021,6 +3034,26 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         getSubmittedObservationsCount(requestParameters: ObservationsApiGetSubmittedObservationsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetSubmittedObservationsCountResponse> {
             return localVarFp.getSubmittedObservationsCount(requestParameters.tenantId, requestParameters.evalueeId, requestParameters.campus, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the total count of terms for a given tenant
+         * @param {ObservationsApiGetTermsCountRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTermsCount(requestParameters: ObservationsApiGetTermsCountRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsGetTermsCountResponse> {
+            return localVarFp.getTermsCount(requestParameters.tenantId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Gets the User Sync job for a given tenant, including its job executions
+         * @param {ObservationsApiGetUserSyncJobRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserSyncJob(requestParameters: ObservationsApiGetUserSyncJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsUserSyncJobResponse> {
+            return localVarFp.getUserSyncJob(requestParameters.tenantId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2051,6 +3084,26 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          */
         updateObservation(requestParameters: ObservationsApiUpdateObservationRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationResponse> {
             return localVarFp.updateObservation(requestParameters.tenantId, requestParameters.observationId, requestParameters.edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Updates a step of the Instructional Insights onboarding for a given tenant
+         * @param {ObservationsApiUpdateObservationsOnboardingStepRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateObservationsOnboardingStep(requestParameters: ObservationsApiUpdateObservationsOnboardingStepRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepResponse> {
+            return localVarFp.updateObservationsOnboardingStep(requestParameters.tenantId, requestParameters.stepNumber, requestParameters.edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Updates the User Sync job for a given tenant
+         * @param {ObservationsApiUpdateUserSyncJobRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserSyncJob(requestParameters: ObservationsApiUpdateUserSyncJobRequest, options?: RawAxiosRequestConfig): AxiosPromise<MicrosoftAspNetCoreMvcNoContentResult> {
+            return localVarFp.updateUserSyncJob(requestParameters.tenantId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2128,9 +3181,39 @@ export interface ObservationsApiDeleteObservationRequest {
 }
 
 /**
+ * Request parameters for executeUserSyncJob operation in ObservationsApi.
+ */
+export interface ObservationsApiExecuteUserSyncJobRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getAcademicSubjectsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetAcademicSubjectsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
  * Request parameters for getAvailableCampusesTotalEvaluees operation in ObservationsApi.
  */
 export interface ObservationsApiGetAvailableCampusesTotalEvalueesRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getCoursesCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetCoursesCountRequest {
     /**
      * 
      */
@@ -2170,6 +3253,31 @@ export interface ObservationsApiGetDashboardPreferencesRequest {
      * 
      */
     readonly dashboardId: string
+}
+
+/**
+ * Request parameters for getDefaultEdFiInstance operation in ObservationsApi.
+ */
+export interface ObservationsApiGetDefaultEdFiInstanceRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getEducationOrganizationsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetEducationOrganizationsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * Either \&quot;LocalEducationAgency\&quot; or \&quot;School\&quot;
+     */
+    readonly discriminator?: string
 }
 
 /**
@@ -2263,6 +3371,16 @@ export interface ObservationsApiGetFormSectionsRequest {
 }
 
 /**
+ * Request parameters for getGradeLevelsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetGradeLevelsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
  * Request parameters for getObservationById operation in ObservationsApi.
  */
 export interface ObservationsApiGetObservationByIdRequest {
@@ -2315,6 +3433,16 @@ export interface ObservationsApiGetObservationSubmissionRequest {
      * 
      */
     readonly formId: string
+}
+
+/**
+ * Request parameters for getOnboarding operation in ObservationsApi.
+ */
+export interface ObservationsApiGetOnboardingRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
 }
 
 /**
@@ -2483,6 +3611,36 @@ export interface ObservationsApiGetPaginatedEvalueesRequest {
 }
 
 /**
+ * Request parameters for getPaginatedObservationUsers operation in ObservationsApi.
+ */
+export interface ObservationsApiGetPaginatedObservationUsersRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly pageIndex?: number
+
+    /**
+     * 
+     */
+    readonly pageSize?: number
+
+    /**
+     * 
+     */
+    readonly orderBy?: string
+
+    /**
+     * 
+     */
+    readonly filter?: string
+}
+
+/**
  * Request parameters for getPaginatedObservations operation in ObservationsApi.
  */
 export interface ObservationsApiGetPaginatedObservationsRequest {
@@ -2578,6 +3736,46 @@ export interface ObservationsApiGetPaginatedObserversRequest {
 }
 
 /**
+ * Request parameters for getSectionsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetSectionsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getSeoaasTotal operation in ObservationsApi.
+ */
+export interface ObservationsApiGetSeoaasTotalRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getSessionsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetSessionsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getStaffSectionAssociationsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetStaffSectionAssociationsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
  * Request parameters for getSubmittedObservationsCount operation in ObservationsApi.
  */
 export interface ObservationsApiGetSubmittedObservationsCountRequest {
@@ -2595,6 +3793,26 @@ export interface ObservationsApiGetSubmittedObservationsCountRequest {
      * 
      */
     readonly campus?: string
+}
+
+/**
+ * Request parameters for getTermsCount operation in ObservationsApi.
+ */
+export interface ObservationsApiGetTermsCountRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+}
+
+/**
+ * Request parameters for getUserSyncJob operation in ObservationsApi.
+ */
+export interface ObservationsApiGetUserSyncJobRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
 }
 
 /**
@@ -2670,6 +3888,41 @@ export interface ObservationsApiUpdateObservationRequest {
      * 
      */
     readonly edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest?: EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest
+}
+
+/**
+ * Request parameters for updateObservationsOnboardingStep operation in ObservationsApi.
+ */
+export interface ObservationsApiUpdateObservationsOnboardingStepRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly stepNumber: number
+
+    /**
+     * 
+     */
+    readonly edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest?: EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest
+}
+
+/**
+ * Request parameters for updateUserSyncJob operation in ObservationsApi.
+ */
+export interface ObservationsApiUpdateUserSyncJobRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly body?: any
 }
 
 /**
@@ -2751,6 +4004,28 @@ export class ObservationsApi extends BaseAPI {
 
     /**
      * 
+     * @summary Executes the User Sync job for a given tenant
+     * @param {ObservationsApiExecuteUserSyncJobRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public executeUserSyncJob(requestParameters: ObservationsApiExecuteUserSyncJobRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).executeUserSyncJob(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of academic subjects for a given tenant
+     * @param {ObservationsApiGetAcademicSubjectsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getAcademicSubjectsCount(requestParameters: ObservationsApiGetAcademicSubjectsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getAcademicSubjectsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get the total number of evaluees across all available campuses
      * @param {ObservationsApiGetAvailableCampusesTotalEvalueesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2758,6 +4033,17 @@ export class ObservationsApi extends BaseAPI {
      */
     public getAvailableCampusesTotalEvaluees(requestParameters: ObservationsApiGetAvailableCampusesTotalEvalueesRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).getAvailableCampusesTotalEvaluees(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of courses for a given tenant
+     * @param {ObservationsApiGetCoursesCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getCoursesCount(requestParameters: ObservationsApiGetCoursesCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getCoursesCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2780,6 +4066,28 @@ export class ObservationsApi extends BaseAPI {
      */
     public getDashboardPreferences(requestParameters: ObservationsApiGetDashboardPreferencesRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).getDashboardPreferences(requestParameters.tenantId, requestParameters.dashboardId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the default Ed-Fi instance for a given tenant
+     * @param {ObservationsApiGetDefaultEdFiInstanceRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getDefaultEdFiInstance(requestParameters: ObservationsApiGetDefaultEdFiInstanceRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getDefaultEdFiInstance(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of education organizations for a given tenant, filtered by discriminator
+     * @param {ObservationsApiGetEducationOrganizationsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getEducationOrganizationsCount(requestParameters: ObservationsApiGetEducationOrganizationsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getEducationOrganizationsCount(requestParameters.tenantId, requestParameters.discriminator, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2817,6 +4125,17 @@ export class ObservationsApi extends BaseAPI {
 
     /**
      * 
+     * @summary Gets the total count of grade levels for a given tenant
+     * @param {ObservationsApiGetGradeLevelsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getGradeLevelsCount(requestParameters: ObservationsApiGetGradeLevelsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getGradeLevelsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get an Observation for a given tenant
      * @param {ObservationsApiGetObservationByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2846,6 +4165,17 @@ export class ObservationsApi extends BaseAPI {
      */
     public getObservationSubmission(requestParameters: ObservationsApiGetObservationSubmissionRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).getObservationSubmission(requestParameters.tenantId, requestParameters.observationId, requestParameters.formId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the Instructional Insights onboarding progress for a given tenant
+     * @param {ObservationsApiGetOnboardingRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getOnboarding(requestParameters: ObservationsApiGetOnboardingRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getOnboarding(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2905,6 +4235,17 @@ export class ObservationsApi extends BaseAPI {
 
     /**
      * 
+     * @summary Get paginated users for a given tenant, including their SEOAAs and Observation Access.
+     * @param {ObservationsApiGetPaginatedObservationUsersRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getPaginatedObservationUsers(requestParameters: ObservationsApiGetPaginatedObservationUsersRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get Paginated Observations for a given tenant
      * @param {ObservationsApiGetPaginatedObservationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2927,6 +4268,50 @@ export class ObservationsApi extends BaseAPI {
 
     /**
      * 
+     * @summary Gets the total count of sections for a given tenant
+     * @param {ObservationsApiGetSectionsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getSectionsCount(requestParameters: ObservationsApiGetSectionsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getSectionsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get the total number of SEOAAs across all users for a given tenant
+     * @param {ObservationsApiGetSeoaasTotalRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getSeoaasTotal(requestParameters: ObservationsApiGetSeoaasTotalRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getSeoaasTotal(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of sessions for a given tenant
+     * @param {ObservationsApiGetSessionsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getSessionsCount(requestParameters: ObservationsApiGetSessionsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getSessionsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of staff-section associations across all users for a given tenant
+     * @param {ObservationsApiGetStaffSectionAssociationsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getStaffSectionAssociationsCount(requestParameters: ObservationsApiGetStaffSectionAssociationsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getStaffSectionAssociationsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Get submitted Observations count
      * @param {ObservationsApiGetSubmittedObservationsCountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2934,6 +4319,28 @@ export class ObservationsApi extends BaseAPI {
      */
     public getSubmittedObservationsCount(requestParameters: ObservationsApiGetSubmittedObservationsCountRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).getSubmittedObservationsCount(requestParameters.tenantId, requestParameters.evalueeId, requestParameters.campus, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the total count of terms for a given tenant
+     * @param {ObservationsApiGetTermsCountRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getTermsCount(requestParameters: ObservationsApiGetTermsCountRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getTermsCount(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Gets the User Sync job for a given tenant, including its job executions
+     * @param {ObservationsApiGetUserSyncJobRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getUserSyncJob(requestParameters: ObservationsApiGetUserSyncJobRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).getUserSyncJob(requestParameters.tenantId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2967,6 +4374,28 @@ export class ObservationsApi extends BaseAPI {
      */
     public updateObservation(requestParameters: ObservationsApiUpdateObservationRequest, options?: RawAxiosRequestConfig) {
         return ObservationsApiFp(this.configuration).updateObservation(requestParameters.tenantId, requestParameters.observationId, requestParameters.edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates a step of the Instructional Insights onboarding for a given tenant
+     * @param {ObservationsApiUpdateObservationsOnboardingStepRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public updateObservationsOnboardingStep(requestParameters: ObservationsApiUpdateObservationsOnboardingStepRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).updateObservationsOnboardingStep(requestParameters.tenantId, requestParameters.stepNumber, requestParameters.edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Updates the User Sync job for a given tenant
+     * @param {ObservationsApiUpdateUserSyncJobRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public updateUserSyncJob(requestParameters: ObservationsApiUpdateUserSyncJobRequest, options?: RawAxiosRequestConfig) {
+        return ObservationsApiFp(this.configuration).updateUserSyncJob(requestParameters.tenantId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

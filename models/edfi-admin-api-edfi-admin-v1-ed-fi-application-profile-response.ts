@@ -33,5 +33,6 @@ export interface EdfiAdminApiEdfiAdminV1EdFiApplicationProfileResponse {
      */
     'educationOrganizations'?: Array<EdfiAdminApiEdfiAdminV1EducationOrganization> | null;
     'operationalContextUri'?: string | null;
+    'years'?: Array<number> | null;
 }
 

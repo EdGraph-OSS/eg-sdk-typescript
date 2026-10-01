@@ -17,11 +17,15 @@
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDto {
     'id'?: string | null;
     'tenantId'?: string | null;
-    'code'?: string | null;
-    'name'?: string | null;
-    'district'?: string | null;
-    'campusId'?: string | null;
-    'teaIdNumber'?: string | null;
+    'externalDataSourceSchoolId'?: string | null;
+    'schoolStateShortCode'?: string | null;
+    'schoolName'?: string | null;
+    'districtStateShortCode'?: string | null;
+    'schoolStateLongCode'?: string | null;
+    'schoolLocalCode'?: string | null;
+    'districtLocalCode'?: string | null;
+    'districtStateCode'?: string | null;
+    'districtName'?: string | null;
     'gradesServed'?: Array<string> | null;
     'address'?: string | null;
     'lat'?: number | null;
@@ -33,6 +37,5 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'createdDateTime'?: string | null;
     'lastModifiedBy'?: string | null;
     'lastModifiedDateTime'?: string | null;
-    'lastUpdatedDateTime'?: string | null;
 }
 

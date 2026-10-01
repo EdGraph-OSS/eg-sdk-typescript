@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **year** | **number** |  | [optional] [default to undefined]
 **odsBackupCode** | **string** |  | [optional] [default to undefined]
 **odsBackupDescription** | **string** |  | [optional] [default to undefined]
+**pendingApplicationAccessIds** | **Array&lt;number&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -26,6 +27,7 @@ const instance: EdfiAdminApiEdfiAdminV1InstanceOdsDatabase = {
     year,
     odsBackupCode,
     odsBackupDescription,
+    pendingApplicationAccessIds,
 };
 ```
 

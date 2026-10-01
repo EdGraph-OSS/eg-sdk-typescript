@@ -14,9 +14,15 @@
 
 
 
+/**
+ * One grade\'s seats. EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Requests.EnrollmentAdmin.GradeCapacityRequestDto.SeatsAvailable, EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Requests.EnrollmentAdmin.GradeCapacityRequestDto.LotteryEligible and  EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Requests.EnrollmentAdmin.GradeCapacityRequestDto.SchoolYear are what the lottery reads; the Salesforce sync normally supplies  them, and an admin edit may leave them null to keep whatever the row already has unset.
+ */
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto {
     'grade'?: string | null;
     'capacity'?: number | null;
     'enrolled'?: number | null;
+    'seatsAvailable'?: number | null;
+    'lotteryEligible'?: boolean | null;
+    'schoolYear'?: string | null;
 }
 

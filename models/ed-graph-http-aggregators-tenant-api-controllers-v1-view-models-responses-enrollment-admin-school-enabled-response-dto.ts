@@ -16,7 +16,7 @@
 
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto {
     'tenantId'?: string | null;
-    'code'?: string | null;
+    'id'?: string | null;
     'isEnabled'?: boolean;
 }
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://api.dev.edgraph.com/tenant*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getCapacity**](#getcapacity) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/{schoolCode}/capacity | Searches Capacity for one school - one row per program x grade x school year.|
+|[**getCapacity**](#getcapacity) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/{schoolLocalCode}/capacity | Searches Capacity for one school - one row per program x grade x school year.|
 
 # **getCapacity**
 > EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel getCapacity()
@@ -22,7 +22,7 @@ const configuration = new Configuration();
 const apiInstance = new EnrollmentAdminCapacityApi(configuration);
 
 let tenantId: string; // (default to undefined)
-let schoolCode: string; //Required - a seat count is meaningless without a school. (default to undefined)
+let schoolLocalCode: string; //Required - a seat count is meaningless without a school. (default to undefined)
 let pageSize: number; // (optional) (default to 50)
 let pageIndex: number; // (optional) (default to 0)
 let orderBy: string; // (optional) (default to '')
@@ -32,7 +32,7 @@ let search: string; //Free-text match on program name/code. (optional) (default 
 
 const { status, data } = await apiInstance.getCapacity(
     tenantId,
-    schoolCode,
+    schoolLocalCode,
     pageSize,
     pageIndex,
     orderBy,
@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.getCapacity(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | [**string**] |  | defaults to undefined|
-| **schoolCode** | [**string**] | Required - a seat count is meaningless without a school. | defaults to undefined|
+| **schoolLocalCode** | [**string**] | Required - a seat count is meaningless without a school. | defaults to undefined|
 | **pageSize** | [**number**] |  | (optional) defaults to 50|
 | **pageIndex** | [**number**] |  | (optional) defaults to 0|
 | **orderBy** | [**string**] |  | (optional) defaults to ''|

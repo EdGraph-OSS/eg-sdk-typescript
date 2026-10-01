@@ -27,5 +27,6 @@ export interface EdfiAdminApiEdfiAdminV1UpdateDescriptorMappingRequest {
     'etag'?: string | null;
     'instanceId'?: string | null;
     'year'?: number;
+    'tenantId'?: string | null;
 }
 

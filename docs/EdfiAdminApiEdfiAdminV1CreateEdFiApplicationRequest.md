@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **vendorId** | **number** |  | [optional] [default to undefined]
 **educationOrganizations** | [**Array&lt;EdfiAdminApiEdfiAdminV1EducationOrganization&gt;**](EdfiAdminApiEdfiAdminV1EducationOrganization.md) |  | [optional] [readonly] [default to undefined]
 **operationalContextUri** | **string** |  | [optional] [default to undefined]
+**years** | **Array&lt;number&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -28,6 +29,7 @@ const instance: EdfiAdminApiEdfiAdminV1CreateEdFiApplicationRequest = {
     vendorId,
     educationOrganizations,
     operationalContextUri,
+    years,
 };
 ```
 

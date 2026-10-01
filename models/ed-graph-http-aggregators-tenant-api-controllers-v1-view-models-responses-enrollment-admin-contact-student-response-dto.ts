@@ -14,11 +14,16 @@
 
 
 
+/**
+ * One student linked to a contact. `_id` is the link entry\'s own id, NOT the student: read  `studentId` for the student record id and `studentLocalCode` for the SIS code.
+ */
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto {
     'id'?: string | null;
     'studentId'?: string | null;
-    'firstName'?: string | null;
-    'middleName'?: string | null;
-    'lastName'?: string | null;
+    'studentLocalCode'?: string | null;
+    'studentStateCode'?: string | null;
+    'studentFirstName'?: string | null;
+    'studentMiddleName'?: string | null;
+    'studentLastName'?: string | null;
 }
 

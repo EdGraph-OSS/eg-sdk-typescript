@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **deletedBy** | **string** |  | [optional] [default to undefined]
 **deletedDateTime** | **string** |  | [optional] [default to undefined]
 **isDeleted** | **boolean** |  | [optional] [default to undefined]
+**roleMappings** | [**Array&lt;TenantApiPartnershipV1RoleMappingDTO&gt;**](TenantApiPartnershipV1RoleMappingDTO.md) |  | [optional] [readonly] [default to undefined]
+**scope** | [**TenantApiPartnershipV1PartnershipScope**](TenantApiPartnershipV1PartnershipScope.md) |  | [optional] [default to undefined]
+**optedOutTenantIds** | **Array&lt;string&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -36,6 +39,9 @@ const instance: TenantApiPartnershipV1PartnershipByIdResponse = {
     deletedBy,
     deletedDateTime,
     isDeleted,
+    roleMappings,
+    scope,
+    optedOutTenantIds,
 };
 ```
 

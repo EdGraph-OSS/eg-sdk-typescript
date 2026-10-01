@@ -7,26 +7,42 @@ All URIs are relative to *https://api.dev.edgraph.com/tenant*
 |[**createObservation**](#createobservation) | **POST** /tenants/{tenantId}/observations | Creates a new Observation for a given tenant|
 |[**createObservationSubmission**](#createobservationsubmission) | **POST** /tenants/{tenantId}/observations/{observationId}/available-forms/{formId}/submit | Creates a submission for an available form referencing an existing observation|
 |[**deleteObservation**](#deleteobservation) | **DELETE** /tenants/{tenantId}/observations/{observationId} | Deletes an Observation for a given tenant|
+|[**executeUserSyncJob**](#executeusersyncjob) | **POST** /tenants/{tenantId}/observations/usersync/execute | Executes the User Sync job for a given tenant|
+|[**getAcademicSubjectsCount**](#getacademicsubjectscount) | **GET** /tenants/{tenantId}/observations/academicsubjectscount | Gets the total count of academic subjects for a given tenant|
 |[**getAvailableCampusesTotalEvaluees**](#getavailablecampusestotalevaluees) | **GET** /tenants/{tenantId}/observations/total-evaluees | Get the total number of evaluees across all available campuses|
+|[**getCoursesCount**](#getcoursescount) | **GET** /tenants/{tenantId}/observations/coursescount | Gets the total count of courses for a given tenant|
 |[**getDashboard**](#getdashboard) | **GET** /tenants/{tenantId}/observations/dashboards/{dashboardId} | Get Observation Dashboard|
 |[**getDashboardPreferences**](#getdashboardpreferences) | **GET** /tenants/{tenantId}/observations/dashboards/{dashboardId}/preferences | Save user preferences for a given Dashboard|
+|[**getDefaultEdFiInstance**](#getdefaultedfiinstance) | **GET** /tenants/{tenantId}/observations/defaultinstance | Gets the default Ed-Fi instance for a given tenant|
+|[**getEducationOrganizationsCount**](#geteducationorganizationscount) | **GET** /tenants/{tenantId}/observations/educationorganizationscount | Gets the total count of education organizations for a given tenant, filtered by discriminator|
 |[**getEvalueeSections**](#getevalueesections) | **GET** /tenants/{tenantId}/observations/evaluees/{evalueeId}/sections | Gets the Sections of an evaluee.|
 |[**getFormQuestions**](#getformquestions) | **GET** /tenants/{tenantId}/observations/available-forms/{formId}/sections/{sectionId}/questions | Search Questions|
 |[**getFormSections**](#getformsections) | **GET** /tenants/{tenantId}/observations/available-forms/{formId}/sections | Search Observation Form Sections|
+|[**getGradeLevelsCount**](#getgradelevelscount) | **GET** /tenants/{tenantId}/observations/gradelevelscount | Gets the total count of grade levels for a given tenant|
 |[**getObservationById**](#getobservationbyid) | **GET** /tenants/{tenantId}/observations/{observationId} | Get an Observation for a given tenant|
 |[**getObservationDraft**](#getobservationdraft) | **GET** /tenants/{tenantId}/observations/{observationId}/available-forms/{formId}/draft | Get an observation form\&#39;s draft|
 |[**getObservationSubmission**](#getobservationsubmission) | **GET** /tenants/{tenantId}/observations/{observationId}/available-forms/{formId}/submission | Gets a submission for a specific observation|
+|[**getOnboarding**](#getonboarding) | **GET** /tenants/{tenantId}/observations/onboarding | Gets the Instructional Insights onboarding progress for a given tenant|
 |[**getPaginatedAvailableCampuses**](#getpaginatedavailablecampuses) | **GET** /tenants/{tenantId}/observations/campuses | Get Available Campuses|
 |[**getPaginatedAvailableForms**](#getpaginatedavailableforms) | **GET** /tenants/{tenantId}/observations/available-forms | Get Paginated Available Forms|
 |[**getPaginatedCampusSections**](#getpaginatedcampussections) | **GET** /tenants/{tenantId}/observations/campuses/{campusId}/sections | Retrieves a list of Sections for a given available campus.|
 |[**getPaginatedCampusesWithEvaluees**](#getpaginatedcampuseswithevaluees) | **GET** /tenants/{tenantId}/observations/campuses-with-evaluees | Get a paginated list of the available campuses that have evaluees, each with its complete list of evaluees.|
 |[**getPaginatedEvaluees**](#getpaginatedevaluees) | **GET** /tenants/{tenantId}/observations/evaluees | Get paginated evaluees|
+|[**getPaginatedObservationUsers**](#getpaginatedobservationusers) | **GET** /tenants/{tenantId}/observations/users | Get paginated users for a given tenant, including their SEOAAs and Observation Access.|
 |[**getPaginatedObservations**](#getpaginatedobservations) | **GET** /tenants/{tenantId}/observations | Get Paginated Observations for a given tenant|
 |[**getPaginatedObservers**](#getpaginatedobservers) | **GET** /tenants/{tenantId}/observations/observers | Get paginated observers|
+|[**getSectionsCount**](#getsectionscount) | **GET** /tenants/{tenantId}/observations/sectionscount | Gets the total count of sections for a given tenant|
+|[**getSeoaasTotal**](#getseoaastotal) | **GET** /tenants/{tenantId}/observations/seoaastotals | Get the total number of SEOAAs across all users for a given tenant|
+|[**getSessionsCount**](#getsessionscount) | **GET** /tenants/{tenantId}/observations/sessionscount | Gets the total count of sessions for a given tenant|
+|[**getStaffSectionAssociationsCount**](#getstaffsectionassociationscount) | **GET** /tenants/{tenantId}/observations/staffsectionassociationscount | Gets the total count of staff-section associations across all users for a given tenant|
 |[**getSubmittedObservationsCount**](#getsubmittedobservationscount) | **GET** /tenants/{tenantId}/submittedobservations | Get submitted Observations count|
+|[**getTermsCount**](#gettermscount) | **GET** /tenants/{tenantId}/observations/termscount | Gets the total count of terms for a given tenant|
+|[**getUserSyncJob**](#getusersyncjob) | **GET** /tenants/{tenantId}/observations/usersync | Gets the User Sync job for a given tenant, including its job executions|
 |[**saveDashboardPreferences**](#savedashboardpreferences) | **POST** /tenants/{tenantId}/observations/dashboards/{dashboardId}/preferences | Save user preferences for a given Dashboard|
 |[**searchPaginatedEvaluees**](#searchpaginatedevaluees) | **GET** /tenants/{tenantId}/observations/search/evaluees | Search paginated evaluees|
 |[**updateObservation**](#updateobservation) | **PUT** /tenants/{tenantId}/observations/{observationId} | Update an Observation for a given tenant|
+|[**updateObservationsOnboardingStep**](#updateobservationsonboardingstep) | **PUT** /tenants/{tenantId}/observations/onboarding/{stepNumber} | Updates a step of the Instructional Insights onboarding for a given tenant|
+|[**updateUserSyncJob**](#updateusersyncjob) | **PUT** /tenants/{tenantId}/observations/usersync | Updates the User Sync job for a given tenant|
 |[**upsertObservationDraft**](#upsertobservationdraft) | **POST** /tenants/{tenantId}/observations/{observationId}/available-forms/{formId}/draft | Creates a draft for an observation forms|
 |[**verifyDashboardAccess**](#verifydashboardaccess) | **POST** /tenants/{tenantId}/observations/dashboards/access | Verify user access to dashboards|
 
@@ -209,6 +225,115 @@ const { status, data } = await apiInstance.deleteObservation(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **executeUserSyncJob**
+> DataSyncApiJobV1JobExecutionRequestedResponse executeUserSyncJob()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.executeUserSyncJob(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**DataSyncApiJobV1JobExecutionRequestedResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**202** | The request has been accepted for processing, but the processing is not yet complete. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getAcademicSubjectsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetAcademicSubjectsCountResponse getAcademicSubjectsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getAcademicSubjectsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetAcademicSubjectsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getAvailableCampusesTotalEvaluees**
 > EdGraphHttpAggregatorsTenantApiServicesObservationsGetAvailableCampusesTotalEvalueesResponse getAvailableCampusesTotalEvaluees()
 
@@ -241,6 +366,60 @@ const { status, data } = await apiInstance.getAvailableCampusesTotalEvaluees(
 ### Return type
 
 **EdGraphHttpAggregatorsTenantApiServicesObservationsGetAvailableCampusesTotalEvalueesResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getCoursesCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetCoursesCountResponse getCoursesCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getCoursesCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetCoursesCountResponse**
 
 ### Authorization
 
@@ -358,6 +537,118 @@ const { status, data } = await apiInstance.getDashboardPreferences(
 ### Return type
 
 **AnalyticsApiReportsV1ReportPreferencesResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getDefaultEdFiInstance**
+> EdfiAdminApiEdfiAdminV1Instance getDefaultEdFiInstance()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getDefaultEdFiInstance(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdfiAdminApiEdfiAdminV1Instance**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getEducationOrganizationsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetEducationOrganizationsCountResponse getEducationOrganizationsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+let discriminator: string; //Either \"LocalEducationAgency\" or \"School\" (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getEducationOrganizationsCount(
+    tenantId,
+    discriminator
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+| **discriminator** | [**string**] | Either \&quot;LocalEducationAgency\&quot; or \&quot;School\&quot; | (optional) defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetEducationOrganizationsCountResponse**
 
 ### Authorization
 
@@ -579,6 +870,60 @@ const { status, data } = await apiInstance.getFormSections(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getGradeLevelsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetGradeLevelsCountResponse getGradeLevelsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getGradeLevelsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetGradeLevelsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getObservationById**
 > EdGraphHttpAggregatorsTenantApiServicesObservationsObservationProfileResponse getObservationById()
 
@@ -753,6 +1098,61 @@ const { status, data } = await apiInstance.getObservationSubmission(
 |**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
 |**200** | The requested resource was successfully retrieved. |  -  |
 |**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getOnboarding**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsObservationsOnboardingResponse getOnboarding()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getOnboarding(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsObservationsOnboardingResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1095,6 +1495,72 @@ const { status, data } = await apiInstance.getPaginatedEvaluees(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getPaginatedObservationUsers**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse getPaginatedObservationUsers()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+let pageIndex: number; // (optional) (default to 0)
+let pageSize: number; // (optional) (default to 10)
+let orderBy: string; // (optional) (default to '')
+let filter: string; // (optional) (default to '')
+
+const { status, data } = await apiInstance.getPaginatedObservationUsers(
+    tenantId,
+    pageIndex,
+    pageSize,
+    orderBy,
+    filter
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+| **pageIndex** | [**number**] |  | (optional) defaults to 0|
+| **pageSize** | [**number**] |  | (optional) defaults to 10|
+| **orderBy** | [**string**] |  | (optional) defaults to ''|
+| **filter** | [**string**] |  | (optional) defaults to ''|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getPaginatedObservations**
 > EdGraphHttpAggregatorsTenantApiServicesObservationsObservationProfileResponsePaginatedItemsViewModel getPaginatedObservations()
 
@@ -1248,6 +1714,222 @@ const { status, data } = await apiInstance.getPaginatedObservers(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getSectionsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetSectionsCountResponse getSectionsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getSectionsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetSectionsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSeoaasTotal**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetSeoaasTotalResponse getSeoaasTotal()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getSeoaasTotal(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetSeoaasTotalResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getSessionsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetSessionsCountResponse getSessionsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getSessionsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetSessionsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getStaffSectionAssociationsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetStaffSectionAssociationsCountResponse getStaffSectionAssociationsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getStaffSectionAssociationsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetStaffSectionAssociationsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getSubmittedObservationsCount**
 > EdGraphHttpAggregatorsTenantApiServicesObservationsGetSubmittedObservationsCountResponse getSubmittedObservationsCount()
 
@@ -1305,6 +1987,115 @@ const { status, data } = await apiInstance.getSubmittedObservationsCount(
 |**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
 |**200** | The requested resource was successfully retrieved. |  -  |
 |**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getTermsCount**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsGetTermsCountResponse getTermsCount()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getTermsCount(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsGetTermsCountResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getUserSyncJob**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsUserSyncJobResponse getUserSyncJob()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+
+const { status, data } = await apiInstance.getUserSyncJob(
+    tenantId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsUserSyncJobResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1496,6 +2287,126 @@ const { status, data } = await apiInstance.updateObservation(
 |**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
 |**200** | The requested resource was successfully retrieved. |  -  |
 |**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateObservationsOnboardingStep**
+> EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepResponse updateObservationsOnboardingStep()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration,
+    EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+let stepNumber: number; // (default to undefined)
+let edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest: EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest; // (optional)
+
+const { status, data } = await apiInstance.updateObservationsOnboardingStep(
+    tenantId,
+    stepNumber,
+    edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **edGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest** | **EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepRequest**|  | |
+| **tenantId** | [**string**] |  | defaults to undefined|
+| **stepNumber** | [**number**] |  | defaults to undefined|
+
+
+### Return type
+
+**EdGraphHttpAggregatorsTenantApiServicesObservationsUpdateObservationsOnboardingStepResponse**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **updateUserSyncJob**
+> MicrosoftAspNetCoreMvcNoContentResult updateUserSyncJob()
+
+
+### Example
+
+```typescript
+import {
+    ObservationsApi,
+    Configuration
+} from '@edgraph-oss/platform-client';
+
+const configuration = new Configuration();
+const apiInstance = new ObservationsApi(configuration);
+
+let tenantId: string; // (default to undefined)
+let body: any; // (optional)
+
+const { status, data } = await apiInstance.updateUserSyncJob(
+    tenantId,
+    body
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **body** | **any**|  | |
+| **tenantId** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**MicrosoftAspNetCoreMvcNoContentResult**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**401** | Unauthorized. The request requires authentication. The OAuth bearer token was either not provided or is invalid. The operation may succeed once authentication has been successfully completed. |  -  |
+|**403** | Forbidden. The request cannot be completed in the current authorization context. Contact your administrator if you believe this operation should be allowed. |  -  |
+|**500** | An unhandled error occurred on the server.See the response body for details. |  -  |
+|**204** | The resource was successfully updated. |  -  |
+|**400** | Bad Request. The request was invalid and cannot be completed. See the response body for specific validation errors. This will typically be an issue with the query parameters or the request body values. |  -  |
+|**404** | The resource could not be found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

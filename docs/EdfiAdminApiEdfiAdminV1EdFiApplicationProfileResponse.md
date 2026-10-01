@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **vendor** | [**EdfiAdminApiEdfiAdminV1Vendor**](EdfiAdminApiEdfiAdminV1Vendor.md) |  | [optional] [default to undefined]
 **educationOrganizations** | [**Array&lt;EdfiAdminApiEdfiAdminV1EducationOrganization&gt;**](EdfiAdminApiEdfiAdminV1EducationOrganization.md) | TODO Is adding Vendor object which also has application object correct ? | [optional] [readonly] [default to undefined]
 **operationalContextUri** | **string** |  | [optional] [default to undefined]
+**years** | **Array&lt;number&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -30,6 +31,7 @@ const instance: EdfiAdminApiEdfiAdminV1EdFiApplicationProfileResponse = {
     vendor,
     educationOrganizations,
     operationalContextUri,
+    years,
 };
 ```
 

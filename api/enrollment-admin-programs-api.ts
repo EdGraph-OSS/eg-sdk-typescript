@@ -24,13 +24,11 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto } from '../models';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto } from '../models';
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto } from '../models';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto } from '../models';
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto } from '../models';
-// @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto } from '../models';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramApplicationDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramDetailDto } from '../models';
 // @ts-ignore
@@ -46,16 +44,16 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
     return {
         /**
          * 
-         * @summary Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.
+         * @summary Creates a Program at a school. The body names the school, the program type and the  requirements by id; the service copies their display fields onto the row.
          * @param {string} tenantId 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto] 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createProgramCatalogEntry: async (tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createProgram: async (tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('createProgramCatalogEntry', 'tenantId', tenantId)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/catalog-entries`
+            assertParamExists('createProgram', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -78,7 +76,7 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -87,59 +85,18 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @summary Creates a school program - either adding an existing district catalog entry to a school  (a \"school association\", when `programCatalogEntryId` is set) or creating a brand new  school-specific program (when it is not).
-         * @param {string} tenantId 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSchoolProgram: async (tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('createSchoolProgram', 'tenantId', tenantId)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/school-programs`
-                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oauth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Removes a district catalog entry.
+         * @summary Removes a Program (soft delete).
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProgramCatalogEntry: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteProgram: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('deleteProgramCatalogEntry', 'tenantId', tenantId)
+            assertParamExists('deleteProgram', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteProgramCatalogEntry', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id}`
+            assertParamExists('deleteProgram', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/{id}`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -170,18 +127,18 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @summary Removes a school program - the API equivalent of \"remove a school association\" when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.
+         * @summary Gets the Registration Applications referencing a Program.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSchoolProgram: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProgramApplications: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('deleteSchoolProgram', 'tenantId', tenantId)
+            assertParamExists('getProgramApplications', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteSchoolProgram', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id}`
+            assertParamExists('getProgramApplications', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/{id}/applications`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -191,7 +148,7 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -212,7 +169,7 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @summary Gets a Program by its record id - a district catalog entry or a school-specific program.
+         * @summary Gets a Program by its record id.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -254,20 +211,19 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @summary Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\'s Scope.
+         * @summary Searches Programs. Every row is one school\'s offering of a program: the school, the program  type and the requirements are embedded on it, each with its own `_id` beside the id of  the row it was copied from.
          * @param {string} tenantId 
          * @param {number} [pageSize] 
          * @param {number} [pageIndex] 
          * @param {string} [orderBy] 
          * @param {string} [filter] 
          * @param {string} [search] Free-text match on program name/code.
-         * @param {string} [scope] \&quot;DistrictCatalog\&quot;, \&quot;SchoolSpecific\&quot;, or omitted for all.
-         * @param {string} [schoolCode] Narrows to programs offered at this school. Not a security boundary.
-         * @param {string} [programType] 
+         * @param {string} [schoolLocalCode] Narrows to programs offered at this school. Not a security boundary.
+         * @param {string} [programTypeId] Narrows to programs of this program type (its record id).
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPrograms: async (tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, scope?: string, schoolCode?: string, programType?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPrograms: async (tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, schoolLocalCode?: string, programTypeId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('getPrograms', 'tenantId', tenantId)
             const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs`
@@ -307,16 +263,12 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
                 localVarQueryParameter['search'] = search;
             }
 
-            if (scope !== undefined) {
-                localVarQueryParameter['scope'] = scope;
+            if (schoolLocalCode !== undefined) {
+                localVarQueryParameter['schoolLocalCode'] = schoolLocalCode;
             }
 
-            if (schoolCode !== undefined) {
-                localVarQueryParameter['schoolCode'] = schoolCode;
-            }
-
-            if (programType !== undefined) {
-                localVarQueryParameter['programType'] = programType;
+            if (programTypeId !== undefined) {
+                localVarQueryParameter['programTypeId'] = programTypeId;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -332,19 +284,19 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
         },
         /**
          * 
-         * @summary Updates a district catalog entry\'s own fields.
+         * @summary Updates a Program. The school a program runs at never changes; everything else, including  the program type and the requirement set, is replaced from the body.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto] 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProgramCatalogEntry: async (tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateProgram: async (tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('updateProgramCatalogEntry', 'tenantId', tenantId)
+            assertParamExists('updateProgram', 'tenantId', tenantId)
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateProgramCatalogEntry', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id}`
+            assertParamExists('updateProgram', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/{id}`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
                 .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -368,52 +320,7 @@ export const EnrollmentAdminProgramsApiAxiosParamCreator = function (configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Updates a school program\'s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.
-         * @param {string} tenantId 
-         * @param {string} id 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSchoolProgram: async (tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('updateSchoolProgram', 'tenantId', tenantId)
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateSchoolProgram', 'id', id)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id}`
-                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
-                .replace('{id}', encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oauth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -431,63 +338,49 @@ export const EnrollmentAdminProgramsApiFp = function(configuration?: Configurati
     return {
         /**
          * 
-         * @summary Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.
+         * @summary Creates a Program at a school. The body names the school, the program type and the  requirements by id; the service copies their display fields onto the row.
          * @param {string} tenantId 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto] 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createProgramCatalogEntry(tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createProgramCatalogEntry(tenantId, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, options);
+        async createProgram(tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createProgram(tenantId, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.createProgramCatalogEntry']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.createProgram']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Creates a school program - either adding an existing district catalog entry to a school  (a \"school association\", when `programCatalogEntryId` is set) or creating a brand new  school-specific program (when it is not).
-         * @param {string} tenantId 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSchoolProgram(tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSchoolProgram(tenantId, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.createSchoolProgram']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Removes a district catalog entry.
+         * @summary Removes a Program (soft delete).
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteProgramCatalogEntry(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteProgramCatalogEntry(tenantId, id, options);
+        async deleteProgram(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteProgram(tenantId, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.deleteProgramCatalogEntry']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.deleteProgram']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Removes a school program - the API equivalent of \"remove a school association\" when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.
+         * @summary Gets the Registration Applications referencing a Program.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSchoolProgram(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSchoolProgram(tenantId, id, options);
+        async getProgramApplications(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramApplicationDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProgramApplications(tenantId, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.deleteSchoolProgram']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.getProgramApplications']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Gets a Program by its record id - a district catalog entry or a school-specific program.
+         * @summary Gets a Program by its record id.
          * @param {string} tenantId 
          * @param {string} id 
          * @param {*} [options] Override http request option.
@@ -501,53 +394,37 @@ export const EnrollmentAdminProgramsApiFp = function(configuration?: Configurati
         },
         /**
          * 
-         * @summary Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\'s Scope.
+         * @summary Searches Programs. Every row is one school\'s offering of a program: the school, the program  type and the requirements are embedded on it, each with its own `_id` beside the id of  the row it was copied from.
          * @param {string} tenantId 
          * @param {number} [pageSize] 
          * @param {number} [pageIndex] 
          * @param {string} [orderBy] 
          * @param {string} [filter] 
          * @param {string} [search] Free-text match on program name/code.
-         * @param {string} [scope] \&quot;DistrictCatalog\&quot;, \&quot;SchoolSpecific\&quot;, or omitted for all.
-         * @param {string} [schoolCode] Narrows to programs offered at this school. Not a security boundary.
-         * @param {string} [programType] 
+         * @param {string} [schoolLocalCode] Narrows to programs offered at this school. Not a security boundary.
+         * @param {string} [programTypeId] Narrows to programs of this program type (its record id).
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPrograms(tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, scope?: string, schoolCode?: string, programType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDtoPaginatedItemsViewModel>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrograms(tenantId, pageSize, pageIndex, orderBy, filter, search, scope, schoolCode, programType, options);
+        async getPrograms(tenantId: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, search?: string, schoolLocalCode?: string, programTypeId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDtoPaginatedItemsViewModel>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrograms(tenantId, pageSize, pageIndex, orderBy, filter, search, schoolLocalCode, programTypeId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.getPrograms']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary Updates a district catalog entry\'s own fields.
+         * @summary Updates a Program. The school a program runs at never changes; everything else, including  the program type and the requirement set, is replaced from the body.
          * @param {string} tenantId 
          * @param {string} id 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto] 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProgramCatalogEntry(tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateProgramCatalogEntry(tenantId, id, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, options);
+        async updateProgram(tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateProgram(tenantId, id, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.updateProgramCatalogEntry']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Updates a school program\'s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.
-         * @param {string} tenantId 
-         * @param {string} id 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateSchoolProgram(tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSchoolProgram(tenantId, id, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.updateSchoolProgram']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminProgramsApi.updateProgram']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -561,47 +438,37 @@ export const EnrollmentAdminProgramsApiFactory = function (configuration?: Confi
     return {
         /**
          * 
-         * @summary Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.
-         * @param {EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest} requestParameters Request parameters.
+         * @summary Creates a Program at a school. The body names the school, the program type and the  requirements by id; the service copies their display fields onto the row.
+         * @param {EnrollmentAdminProgramsApiCreateProgramRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
-            return localVarFp.createProgramCatalogEntry(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, options).then((request) => request(axios, basePath));
+        createProgram(requestParameters: EnrollmentAdminProgramsApiCreateProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
+            return localVarFp.createProgram(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Creates a school program - either adding an existing district catalog entry to a school  (a \"school association\", when `programCatalogEntryId` is set) or creating a brand new  school-specific program (when it is not).
-         * @param {EnrollmentAdminProgramsApiCreateSchoolProgramRequest} requestParameters Request parameters.
+         * @summary Removes a Program (soft delete).
+         * @param {EnrollmentAdminProgramsApiDeleteProgramRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSchoolProgram(requestParameters: EnrollmentAdminProgramsApiCreateSchoolProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
-            return localVarFp.createSchoolProgram(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, options).then((request) => request(axios, basePath));
+        deleteProgram(requestParameters: EnrollmentAdminProgramsApiDeleteProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteProgram(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Removes a district catalog entry.
-         * @param {EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest} requestParameters Request parameters.
+         * @summary Gets the Registration Applications referencing a Program.
+         * @param {EnrollmentAdminProgramsApiGetProgramApplicationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteProgramCatalogEntry(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        getProgramApplications(requestParameters: EnrollmentAdminProgramsApiGetProgramApplicationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramApplicationDto>> {
+            return localVarFp.getProgramApplications(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Removes a school program - the API equivalent of \"remove a school association\" when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.
-         * @param {EnrollmentAdminProgramsApiDeleteSchoolProgramRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteSchoolProgram(requestParameters: EnrollmentAdminProgramsApiDeleteSchoolProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteSchoolProgram(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Gets a Program by its record id - a district catalog entry or a school-specific program.
+         * @summary Gets a Program by its record id.
          * @param {EnrollmentAdminProgramsApiGetProgramByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -611,41 +478,31 @@ export const EnrollmentAdminProgramsApiFactory = function (configuration?: Confi
         },
         /**
          * 
-         * @summary Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\'s Scope.
+         * @summary Searches Programs. Every row is one school\'s offering of a program: the school, the program  type and the requirements are embedded on it, each with its own `_id` beside the id of  the row it was copied from.
          * @param {EnrollmentAdminProgramsApiGetProgramsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getPrograms(requestParameters: EnrollmentAdminProgramsApiGetProgramsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramListItemDtoPaginatedItemsViewModel> {
-            return localVarFp.getPrograms(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.scope, requestParameters.schoolCode, requestParameters.programType, options).then((request) => request(axios, basePath));
+            return localVarFp.getPrograms(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.schoolLocalCode, requestParameters.programTypeId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Updates a district catalog entry\'s own fields.
-         * @param {EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest} requestParameters Request parameters.
+         * @summary Updates a Program. The school a program runs at never changes; everything else, including  the program type and the requirement set, is replaced from the body.
+         * @param {EnrollmentAdminProgramsApiUpdateProgramRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
-            return localVarFp.updateProgramCatalogEntry(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Updates a school program\'s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.
-         * @param {EnrollmentAdminProgramsApiUpdateSchoolProgramRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateSchoolProgram(requestParameters: EnrollmentAdminProgramsApiUpdateSchoolProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
-            return localVarFp.updateSchoolProgram(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, options).then((request) => request(axios, basePath));
+        updateProgram(requestParameters: EnrollmentAdminProgramsApiUpdateProgramRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto> {
+            return localVarFp.updateProgram(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for createProgramCatalogEntry operation in EnrollmentAdminProgramsApi.
+ * Request parameters for createProgram operation in EnrollmentAdminProgramsApi.
  */
-export interface EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest {
+export interface EnrollmentAdminProgramsApiCreateProgramRequest {
     /**
      * 
      */
@@ -654,28 +511,13 @@ export interface EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest {
     /**
      * 
      */
-    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto
 }
 
 /**
- * Request parameters for createSchoolProgram operation in EnrollmentAdminProgramsApi.
+ * Request parameters for deleteProgram operation in EnrollmentAdminProgramsApi.
  */
-export interface EnrollmentAdminProgramsApiCreateSchoolProgramRequest {
-    /**
-     * 
-     */
-    readonly tenantId: string
-
-    /**
-     * 
-     */
-    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto
-}
-
-/**
- * Request parameters for deleteProgramCatalogEntry operation in EnrollmentAdminProgramsApi.
- */
-export interface EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest {
+export interface EnrollmentAdminProgramsApiDeleteProgramRequest {
     /**
      * 
      */
@@ -688,9 +530,9 @@ export interface EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest {
 }
 
 /**
- * Request parameters for deleteSchoolProgram operation in EnrollmentAdminProgramsApi.
+ * Request parameters for getProgramApplications operation in EnrollmentAdminProgramsApi.
  */
-export interface EnrollmentAdminProgramsApiDeleteSchoolProgramRequest {
+export interface EnrollmentAdminProgramsApiGetProgramApplicationsRequest {
     /**
      * 
      */
@@ -752,25 +594,20 @@ export interface EnrollmentAdminProgramsApiGetProgramsRequest {
     readonly search?: string
 
     /**
-     * \&quot;DistrictCatalog\&quot;, \&quot;SchoolSpecific\&quot;, or omitted for all.
-     */
-    readonly scope?: string
-
-    /**
      * Narrows to programs offered at this school. Not a security boundary.
      */
-    readonly schoolCode?: string
+    readonly schoolLocalCode?: string
 
     /**
-     * 
+     * Narrows to programs of this program type (its record id).
      */
-    readonly programType?: string
+    readonly programTypeId?: string
 }
 
 /**
- * Request parameters for updateProgramCatalogEntry operation in EnrollmentAdminProgramsApi.
+ * Request parameters for updateProgram operation in EnrollmentAdminProgramsApi.
  */
-export interface EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest {
+export interface EnrollmentAdminProgramsApiUpdateProgramRequest {
     /**
      * 
      */
@@ -784,27 +621,7 @@ export interface EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest {
     /**
      * 
      */
-    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto
-}
-
-/**
- * Request parameters for updateSchoolProgram operation in EnrollmentAdminProgramsApi.
- */
-export interface EnrollmentAdminProgramsApiUpdateSchoolProgramRequest {
-    /**
-     * 
-     */
-    readonly tenantId: string
-
-    /**
-     * 
-     */
-    readonly id: string
-
-    /**
-     * 
-     */
-    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto
 }
 
 /**
@@ -813,51 +630,40 @@ export interface EnrollmentAdminProgramsApiUpdateSchoolProgramRequest {
 export class EnrollmentAdminProgramsApi extends BaseAPI {
     /**
      * 
-     * @summary Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.
-     * @param {EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest} requestParameters Request parameters.
+     * @summary Creates a Program at a school. The body names the school, the program type and the  requirements by id; the service copies their display fields onto the row.
+     * @param {EnrollmentAdminProgramsApiCreateProgramRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public createProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiCreateProgramCatalogEntryRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).createProgramCatalogEntry(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public createProgram(requestParameters: EnrollmentAdminProgramsApiCreateProgramRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminProgramsApiFp(this.configuration).createProgram(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Creates a school program - either adding an existing district catalog entry to a school  (a \"school association\", when `programCatalogEntryId` is set) or creating a brand new  school-specific program (when it is not).
-     * @param {EnrollmentAdminProgramsApiCreateSchoolProgramRequest} requestParameters Request parameters.
+     * @summary Removes a Program (soft delete).
+     * @param {EnrollmentAdminProgramsApiDeleteProgramRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public createSchoolProgram(requestParameters: EnrollmentAdminProgramsApiCreateSchoolProgramRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).createSchoolProgram(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteProgram(requestParameters: EnrollmentAdminProgramsApiDeleteProgramRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminProgramsApiFp(this.configuration).deleteProgram(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Removes a district catalog entry.
-     * @param {EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest} requestParameters Request parameters.
+     * @summary Gets the Registration Applications referencing a Program.
+     * @param {EnrollmentAdminProgramsApiGetProgramApplicationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public deleteProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiDeleteProgramCatalogEntryRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).deleteProgramCatalogEntry(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public getProgramApplications(requestParameters: EnrollmentAdminProgramsApiGetProgramApplicationsRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminProgramsApiFp(this.configuration).getProgramApplications(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Removes a school program - the API equivalent of \"remove a school association\" when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.
-     * @param {EnrollmentAdminProgramsApiDeleteSchoolProgramRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public deleteSchoolProgram(requestParameters: EnrollmentAdminProgramsApiDeleteSchoolProgramRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).deleteSchoolProgram(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Gets a Program by its record id - a district catalog entry or a school-specific program.
+     * @summary Gets a Program by its record id.
      * @param {EnrollmentAdminProgramsApiGetProgramByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -868,35 +674,24 @@ export class EnrollmentAdminProgramsApi extends BaseAPI {
 
     /**
      * 
-     * @summary Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\'s Scope.
+     * @summary Searches Programs. Every row is one school\'s offering of a program: the school, the program  type and the requirements are embedded on it, each with its own `_id` beside the id of  the row it was copied from.
      * @param {EnrollmentAdminProgramsApiGetProgramsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     public getPrograms(requestParameters: EnrollmentAdminProgramsApiGetProgramsRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).getPrograms(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.scope, requestParameters.schoolCode, requestParameters.programType, options).then((request) => request(this.axios, this.basePath));
+        return EnrollmentAdminProgramsApiFp(this.configuration).getPrograms(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, requestParameters.schoolLocalCode, requestParameters.programTypeId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary Updates a district catalog entry\'s own fields.
-     * @param {EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest} requestParameters Request parameters.
+     * @summary Updates a Program. The school a program runs at never changes; everything else, including  the program type and the requirement set, is replaced from the body.
+     * @param {EnrollmentAdminProgramsApiUpdateProgramRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public updateProgramCatalogEntry(requestParameters: EnrollmentAdminProgramsApiUpdateProgramCatalogEntryRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).updateProgramCatalogEntry(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Updates a school program\'s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.
-     * @param {EnrollmentAdminProgramsApiUpdateSchoolProgramRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public updateSchoolProgram(requestParameters: EnrollmentAdminProgramsApiUpdateSchoolProgramRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminProgramsApiFp(this.configuration).updateSchoolProgram(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateProgram(requestParameters: EnrollmentAdminProgramsApiUpdateProgramRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminProgramsApiFp(this.configuration).updateProgram(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

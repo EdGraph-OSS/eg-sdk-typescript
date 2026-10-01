@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **year** | **number** |  | [optional] [default to undefined]
 **selectedTierId** | **string** |  | [optional] [default to undefined]
 **odsBackupCode** | **string** |  | [optional] [default to undefined]
+**applicationIds** | **Array&lt;number&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -22,6 +23,7 @@ const instance: EdfiAdminApiEdfiAdminV1AddSchoolYearRequest = {
     year,
     selectedTierId,
     odsBackupCode,
+    applicationIds,
 };
 ```
 

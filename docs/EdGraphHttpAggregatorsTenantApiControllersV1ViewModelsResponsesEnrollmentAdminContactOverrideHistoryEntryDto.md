@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **overriddenAt** | **string** |  | [optional] [default to undefined]
 **actingStudentId** | **string** | The student whose screen the change was made from, when one was recorded. | [optional] [default to undefined]
 **studentIds** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**eventType** | **string** | The change log\&#39;s event type, e.g. EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.OverrideEventType  or one of the created/updated/deleted event types. Lets a client distinguish entries in a combined  changelog feed - only override entries carry EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryEntryDto.Detail/EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryEntryDto.Action and the  value fields; the others read null there. | [optional] [default to undefined]
 
 ## Example
 
@@ -33,6 +34,7 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     overriddenAt,
     actingStudentId,
     studentIds,
+    eventType,
 };
 ```
 

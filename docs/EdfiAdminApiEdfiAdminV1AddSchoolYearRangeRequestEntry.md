@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **year** | **number** |  | [optional] [default to undefined]
 **selectedTierId** | **string** |  | [optional] [default to undefined]
 **odsBackupCode** | **string** |  | [optional] [default to undefined]
+**applicationIds** | **Array&lt;number&gt;** | Per-year pending grants are applied only after this ODS finishes provisioning.  Keep field 4 aligned in every source and consumer copy to preserve the wire contract. | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: EdfiAdminApiEdfiAdminV1AddSchoolYearRangeRequestEntry = {
     year,
     selectedTierId,
     odsBackupCode,
+    applicationIds,
 };
 ```
 

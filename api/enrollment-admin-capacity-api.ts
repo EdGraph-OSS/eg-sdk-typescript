@@ -36,7 +36,7 @@ export const EnrollmentAdminCapacityApiAxiosParamCreator = function (configurati
          * 
          * @summary Searches Capacity for one school - one row per program x grade x school year.
          * @param {string} tenantId 
-         * @param {string} schoolCode Required - a seat count is meaningless without a school.
+         * @param {string} schoolLocalCode Required - a seat count is meaningless without a school.
          * @param {number} [pageSize] 
          * @param {number} [pageIndex] 
          * @param {string} [orderBy] 
@@ -46,14 +46,14 @@ export const EnrollmentAdminCapacityApiAxiosParamCreator = function (configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCapacity: async (tenantId: string, schoolCode: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, grade?: string, search?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCapacity: async (tenantId: string, schoolLocalCode: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, grade?: string, search?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('getCapacity', 'tenantId', tenantId)
-            // verify required parameter 'schoolCode' is not null or undefined
-            assertParamExists('getCapacity', 'schoolCode', schoolCode)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{schoolCode}/capacity`
+            // verify required parameter 'schoolLocalCode' is not null or undefined
+            assertParamExists('getCapacity', 'schoolLocalCode', schoolLocalCode)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{schoolLocalCode}/capacity`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
-                .replace('{schoolCode}', encodeURIComponent(String(schoolCode)));
+                .replace('{schoolLocalCode}', encodeURIComponent(String(schoolLocalCode)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -117,7 +117,7 @@ export const EnrollmentAdminCapacityApiFp = function(configuration?: Configurati
          * 
          * @summary Searches Capacity for one school - one row per program x grade x school year.
          * @param {string} tenantId 
-         * @param {string} schoolCode Required - a seat count is meaningless without a school.
+         * @param {string} schoolLocalCode Required - a seat count is meaningless without a school.
          * @param {number} [pageSize] 
          * @param {number} [pageIndex] 
          * @param {string} [orderBy] 
@@ -127,8 +127,8 @@ export const EnrollmentAdminCapacityApiFp = function(configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCapacity(tenantId: string, schoolCode: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, grade?: string, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCapacity(tenantId, schoolCode, pageSize, pageIndex, orderBy, filter, grade, search, options);
+        async getCapacity(tenantId: string, schoolLocalCode: string, pageSize?: number, pageIndex?: number, orderBy?: string, filter?: string, grade?: string, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCapacity(tenantId, schoolLocalCode, pageSize, pageIndex, orderBy, filter, grade, search, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminCapacityApi.getCapacity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -150,7 +150,7 @@ export const EnrollmentAdminCapacityApiFactory = function (configuration?: Confi
          * @throws {RequiredError}
          */
         getCapacity(requestParameters: EnrollmentAdminCapacityApiGetCapacityRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel> {
-            return localVarFp.getCapacity(requestParameters.tenantId, requestParameters.schoolCode, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.grade, requestParameters.search, options).then((request) => request(axios, basePath));
+            return localVarFp.getCapacity(requestParameters.tenantId, requestParameters.schoolLocalCode, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.grade, requestParameters.search, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -167,7 +167,7 @@ export interface EnrollmentAdminCapacityApiGetCapacityRequest {
     /**
      * Required - a seat count is meaningless without a school.
      */
-    readonly schoolCode: string
+    readonly schoolLocalCode: string
 
     /**
      * 
@@ -212,7 +212,7 @@ export class EnrollmentAdminCapacityApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public getCapacity(requestParameters: EnrollmentAdminCapacityApiGetCapacityRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminCapacityApiFp(this.configuration).getCapacity(requestParameters.tenantId, requestParameters.schoolCode, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.grade, requestParameters.search, options).then((request) => request(this.axios, this.basePath));
+        return EnrollmentAdminCapacityApiFp(this.configuration).getCapacity(requestParameters.tenantId, requestParameters.schoolLocalCode, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.grade, requestParameters.search, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

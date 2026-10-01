@@ -563,14 +563,12 @@ const apiInstance = new InstancesApplicationsApi(configuration);
 let tenantId: string; // (default to undefined)
 let instanceId: string; // (default to undefined)
 let applicationId: number; // (default to undefined)
-let year: number; // (optional) (default to undefined)
 let loadEducationOrganizations: boolean; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getApplicationByIdAsync(
     tenantId,
     instanceId,
     applicationId,
-    year,
     loadEducationOrganizations
 );
 ```
@@ -582,7 +580,6 @@ const { status, data } = await apiInstance.getApplicationByIdAsync(
 | **tenantId** | [**string**] |  | defaults to undefined|
 | **instanceId** | [**string**] |  | defaults to undefined|
 | **applicationId** | [**number**] |  | defaults to undefined|
-| **year** | [**number**] |  | (optional) defaults to undefined|
 | **loadEducationOrganizations** | [**boolean**] |  | (optional) defaults to undefined|
 
 

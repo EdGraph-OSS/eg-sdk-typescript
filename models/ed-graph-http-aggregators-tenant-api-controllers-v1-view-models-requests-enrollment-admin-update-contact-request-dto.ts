@@ -13,9 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-contact-student-request-dto';
 
 /**
  * The body of a contact update.
@@ -25,7 +22,6 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsE
     'tenantId'?: string;
     'firstName'?: string | null;
     'lastName'?: string | null;
-    'students'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto> | null;
     'email'?: string | null;
     'phone'?: string | null;
 }

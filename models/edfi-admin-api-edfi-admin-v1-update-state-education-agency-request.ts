@@ -21,5 +21,6 @@ export interface EdfiAdminApiEdfiAdminV1UpdateStateEducationAgencyRequest {
     'stateEducationAgencyId'?: number;
     'nameOfInstitution'?: string | null;
     'educationOrganizationCategoryDescriptors'?: Array<string> | null;
+    'year'?: number;
 }
 

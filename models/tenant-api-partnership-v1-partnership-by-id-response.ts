@@ -15,7 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { TenantApiPartnershipV1PartnershipScope } from './tenant-api-partnership-v1-partnership-scope';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { TenantApiPartnershipV1PartnershipSyncDTO } from './tenant-api-partnership-v1-partnership-sync-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantApiPartnershipV1RoleMappingDTO } from './tenant-api-partnership-v1-role-mapping-dto';
 
 export interface TenantApiPartnershipV1PartnershipByIdResponse {
     'id'?: string | null;
@@ -30,5 +36,10 @@ export interface TenantApiPartnershipV1PartnershipByIdResponse {
     'deletedBy'?: string | null;
     'deletedDateTime'?: string | null;
     'isDeleted'?: boolean | null;
+    'roleMappings'?: Array<TenantApiPartnershipV1RoleMappingDTO> | null;
+    'scope'?: TenantApiPartnershipV1PartnershipScope;
+    'optedOutTenantIds'?: Array<string> | null;
 }
+
+
 

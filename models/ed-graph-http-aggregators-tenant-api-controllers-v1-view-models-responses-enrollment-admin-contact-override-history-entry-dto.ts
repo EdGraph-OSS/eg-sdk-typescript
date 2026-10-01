@@ -40,5 +40,9 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
      */
     'actingStudentId'?: string | null;
     'studentIds'?: Array<string> | null;
+    /**
+     * The change log\'s event type, e.g. EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryExtensions.OverrideEventType  or one of the created/updated/deleted event types. Lets a client distinguish entries in a combined  changelog feed - only override entries carry EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryEntryDto.Detail/EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Responses.EnrollmentAdmin.ContactOverrideHistoryEntryDto.Action and the  value fields; the others read null there.
+     */
+    'eventType'?: string | null;
 }
 

@@ -19,5 +19,8 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'capacity'?: number | null;
     'enrolled'?: number | null;
     'seatStatus'?: string | null;
+    'seatsAvailable'?: number | null;
+    'lotteryEligible'?: boolean | null;
+    'schoolYear'?: string | null;
 }
 

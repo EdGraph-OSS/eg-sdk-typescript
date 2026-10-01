@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **relatedInstances** | [**Array&lt;EdfiAdminApiEdfiAdminV1RelatedInstance&gt;**](EdfiAdminApiEdfiAdminV1RelatedInstance.md) |  | [optional] [readonly] [default to undefined]
 **enableAdminApi** | **boolean** | Enable Admin API | [optional] [default to undefined]
 **state** | **string** |  | [optional] [default to undefined]
+**requiresSchoolYearSelection** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -64,6 +65,7 @@ const instance: EdfiAdminApiEdfiAdminV1InstanceListModel = {
     relatedInstances,
     enableAdminApi,
     state,
+    requiresSchoolYearSelection,
 };
 ```
 

@@ -20,5 +20,6 @@ export interface EdfiAdminApiEdfiAdminV1CreateEducationServiceCenterRequest {
     'educationServiceCenterId'?: number;
     'nameOfInstitution'?: string | null;
     'educationOrganizationCategoryDescriptors'?: Array<string> | null;
+    'year'?: number;
 }
 

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tenantId** | **string** |  | [optional] [default to undefined]
-**code** | **string** |  | [optional] [default to undefined]
+**id** | **string** |  | [optional] [default to undefined]
 **isEnabled** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
@@ -16,7 +16,7 @@ import { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollme
 
 const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto = {
     tenantId,
-    code,
+    id,
     isEnabled,
 };
 ```

@@ -24,11 +24,15 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { EdGraphCommonErrorsCoreProblemDetails } from '../models';
 // @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto } from '../models';
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolListItemResponseDtoPaginatedItemsViewModel } from '../models';
+// @ts-ignore
+import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolMutationResultDto } from '../models';
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolResponseDto } from '../models';
 // @ts-ignore
@@ -40,20 +44,20 @@ export const EnrollmentAdminSchoolsApiAxiosParamCreator = function (configuratio
     return {
         /**
          * 
-         * @summary Gets an Enrollment School by its school code, with the programs it runs.
+         * @summary Deletes an Enrollment School.
          * @param {string} tenantId 
-         * @param {string} code 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnrollmentSchool: async (tenantId: string, code: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteEnrollmentSchool: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('getEnrollmentSchool', 'tenantId', tenantId)
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('getEnrollmentSchool', 'code', code)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/code/{code}`
+            assertParamExists('deleteEnrollmentSchool', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteEnrollmentSchool', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{id}`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
-                .replace('{code}', encodeURIComponent(String(code)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -61,7 +65,91 @@ export const EnrollmentAdminSchoolsApiAxiosParamCreator = function (configuratio
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Disables an Enrollment School.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        disableEnrollmentSchool: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('disableEnrollmentSchool', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('disableEnrollmentSchool', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{id}/disable`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Enables an Enrollment School.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enableEnrollmentSchool: async (tenantId: string, id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('enableEnrollmentSchool', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('enableEnrollmentSchool', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{id}/enable`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)))
+                .replace('{id}', encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -186,22 +274,22 @@ export const EnrollmentAdminSchoolsApiAxiosParamCreator = function (configuratio
             };
         },
         /**
-         * 
-         * @summary Enables or disables an Enrollment School.
+         * Full replace, not keyed on `externalDataSourceSchoolId` - use the id in the route.  `isEnabled` is never moved by this call - use `PUT .../schools/{id}/enable` or  `.../disable` instead.
+         * @summary Replaces an Enrollment School by its record id.
          * @param {string} tenantId 
-         * @param {string} code 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto] 
+         * @param {string} id 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setEnrollmentSchoolEnabled: async (tenantId: string, code: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateEnrollmentSchool: async (tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
-            assertParamExists('setEnrollmentSchoolEnabled', 'tenantId', tenantId)
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('setEnrollmentSchoolEnabled', 'code', code)
-            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/code/{code}/enabled`
+            assertParamExists('updateEnrollmentSchool', 'tenantId', tenantId)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateEnrollmentSchool', 'id', id)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools/{id}`
                 .replace('{tenantId}', encodeURIComponent(String(tenantId)))
-                .replace('{code}', encodeURIComponent(String(code)));
+                .replace('{id}', encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -223,7 +311,48 @@ export const EnrollmentAdminSchoolsApiAxiosParamCreator = function (configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Upsert semantics: when `externalDataSourceSchoolId` is present and matches a live school  in the tenant, that school is updated - every field, including `schoolStateShortCode`, is  overwritten. A soft-deleted match is refused (recover it first). Otherwise a new school is  always inserted, keeping the external id if one was given; a `schoolStateShortCode`  collision on insert is rejected as AlreadyExists (409) rather than overwriting the existing  school - a POST with no external id no longer overwrites by code. `isEnabled` is never  moved by this call - use `PUT .../schools/{id}/enable` or `.../disable` instead.
+         * @summary Creates or updates an Enrollment School, keyed on `externalDataSourceSchoolId`.
+         * @param {string} tenantId 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        upsertEnrollmentSchool: async (tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tenantId' is not null or undefined
+            assertParamExists('upsertEnrollmentSchool', 'tenantId', tenantId)
+            const localVarPath = `/tenants/{tenantId}/enrollmentadmin/schools`
+                .replace('{tenantId}', encodeURIComponent(String(tenantId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oauth2", ["https://api.edgraph.com/auth/tenant"], configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json-patch+json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -241,16 +370,44 @@ export const EnrollmentAdminSchoolsApiFp = function(configuration?: Configuratio
     return {
         /**
          * 
-         * @summary Gets an Enrollment School by its school code, with the programs it runs.
+         * @summary Deletes an Enrollment School.
          * @param {string} tenantId 
-         * @param {string} code 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getEnrollmentSchool(tenantId: string, code: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEnrollmentSchool(tenantId, code, options);
+        async deleteEnrollmentSchool(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteEnrollmentSchool(tenantId, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.getEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.deleteEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Disables an Enrollment School.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async disableEnrollmentSchool(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.disableEnrollmentSchool(tenantId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.disableEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Enables an Enrollment School.
+         * @param {string} tenantId 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async enableEnrollmentSchool(tenantId: string, id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.enableEnrollmentSchool(tenantId, id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.enableEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -286,18 +443,32 @@ export const EnrollmentAdminSchoolsApiFp = function(configuration?: Configuratio
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Enables or disables an Enrollment School.
+         * Full replace, not keyed on `externalDataSourceSchoolId` - use the id in the route.  `isEnabled` is never moved by this call - use `PUT .../schools/{id}/enable` or  `.../disable` instead.
+         * @summary Replaces an Enrollment School by its record id.
          * @param {string} tenantId 
-         * @param {string} code 
-         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto] 
+         * @param {string} id 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async setEnrollmentSchoolEnabled(tenantId: string, code: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setEnrollmentSchoolEnabled(tenantId, code, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, options);
+        async updateEnrollmentSchool(tenantId: string, id: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolMutationResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEnrollmentSchool(tenantId, id, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.setEnrollmentSchoolEnabled']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.updateEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Upsert semantics: when `externalDataSourceSchoolId` is present and matches a live school  in the tenant, that school is updated - every field, including `schoolStateShortCode`, is  overwritten. A soft-deleted match is refused (recover it first). Otherwise a new school is  always inserted, keeping the external id if one was given; a `schoolStateShortCode`  collision on insert is rejected as AlreadyExists (409) rather than overwriting the existing  school - a POST with no external id no longer overwrites by code. `isEnabled` is never  moved by this call - use `PUT .../schools/{id}/enable` or `.../disable` instead.
+         * @summary Creates or updates an Enrollment School, keyed on `externalDataSourceSchoolId`.
+         * @param {string} tenantId 
+         * @param {EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto} [edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async upsertEnrollmentSchool(tenantId: string, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolMutationResultDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.upsertEnrollmentSchool(tenantId, edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['EnrollmentAdminSchoolsApi.upsertEnrollmentSchool']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -311,13 +482,33 @@ export const EnrollmentAdminSchoolsApiFactory = function (configuration?: Config
     return {
         /**
          * 
-         * @summary Gets an Enrollment School by its school code, with the programs it runs.
-         * @param {EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest} requestParameters Request parameters.
+         * @summary Deletes an Enrollment School.
+         * @param {EnrollmentAdminSchoolsApiDeleteEnrollmentSchoolRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolResponseDto> {
-            return localVarFp.getEnrollmentSchool(requestParameters.tenantId, requestParameters.code, options).then((request) => request(axios, basePath));
+        deleteEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiDeleteEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Disables an Enrollment School.
+         * @param {EnrollmentAdminSchoolsApiDisableEnrollmentSchoolRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        disableEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiDisableEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto> {
+            return localVarFp.disableEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Enables an Enrollment School.
+         * @param {EnrollmentAdminSchoolsApiEnableEnrollmentSchoolRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        enableEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiEnableEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto> {
+            return localVarFp.enableEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -340,22 +531,32 @@ export const EnrollmentAdminSchoolsApiFactory = function (configuration?: Config
             return localVarFp.getEnrollmentSchools(requestParameters.tenantId, requestParameters.pageSize, requestParameters.pageIndex, requestParameters.orderBy, requestParameters.filter, requestParameters.search, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Enables or disables an Enrollment School.
-         * @param {EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest} requestParameters Request parameters.
+         * Full replace, not keyed on `externalDataSourceSchoolId` - use the id in the route.  `isEnabled` is never moved by this call - use `PUT .../schools/{id}/enable` or  `.../disable` instead.
+         * @summary Replaces an Enrollment School by its record id.
+         * @param {EnrollmentAdminSchoolsApiUpdateEnrollmentSchoolRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        setEnrollmentSchoolEnabled(requestParameters: EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolEnabledResponseDto> {
-            return localVarFp.setEnrollmentSchoolEnabled(requestParameters.tenantId, requestParameters.code, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, options).then((request) => request(axios, basePath));
+        updateEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiUpdateEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolMutationResultDto> {
+            return localVarFp.updateEnrollmentSchool(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Upsert semantics: when `externalDataSourceSchoolId` is present and matches a live school  in the tenant, that school is updated - every field, including `schoolStateShortCode`, is  overwritten. A soft-deleted match is refused (recover it first). Otherwise a new school is  always inserted, keeping the external id if one was given; a `schoolStateShortCode`  collision on insert is rejected as AlreadyExists (409) rather than overwriting the existing  school - a POST with no external id no longer overwrites by code. `isEnabled` is never  moved by this call - use `PUT .../schools/{id}/enable` or `.../disable` instead.
+         * @summary Creates or updates an Enrollment School, keyed on `externalDataSourceSchoolId`.
+         * @param {EnrollmentAdminSchoolsApiUpsertEnrollmentSchoolRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        upsertEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiUpsertEnrollmentSchoolRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolMutationResultDto> {
+            return localVarFp.upsertEnrollmentSchool(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for getEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
+ * Request parameters for deleteEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
  */
-export interface EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest {
+export interface EnrollmentAdminSchoolsApiDeleteEnrollmentSchoolRequest {
     /**
      * 
      */
@@ -364,7 +565,37 @@ export interface EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest {
     /**
      * 
      */
-    readonly code: string
+    readonly id: string
+}
+
+/**
+ * Request parameters for disableEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
+ */
+export interface EnrollmentAdminSchoolsApiDisableEnrollmentSchoolRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for enableEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
+ */
+export interface EnrollmentAdminSchoolsApiEnableEnrollmentSchoolRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly id: string
 }
 
 /**
@@ -418,9 +649,9 @@ export interface EnrollmentAdminSchoolsApiGetEnrollmentSchoolsRequest {
 }
 
 /**
- * Request parameters for setEnrollmentSchoolEnabled operation in EnrollmentAdminSchoolsApi.
+ * Request parameters for updateEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
  */
-export interface EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest {
+export interface EnrollmentAdminSchoolsApiUpdateEnrollmentSchoolRequest {
     /**
      * 
      */
@@ -429,12 +660,27 @@ export interface EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest {
     /**
      * 
      */
-    readonly code: string
+    readonly id: string
 
     /**
      * 
      */
-    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto
+}
+
+/**
+ * Request parameters for upsertEnrollmentSchool operation in EnrollmentAdminSchoolsApi.
+ */
+export interface EnrollmentAdminSchoolsApiUpsertEnrollmentSchoolRequest {
+    /**
+     * 
+     */
+    readonly tenantId: string
+
+    /**
+     * 
+     */
+    readonly edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto?: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto
 }
 
 /**
@@ -443,13 +689,35 @@ export interface EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest {
 export class EnrollmentAdminSchoolsApi extends BaseAPI {
     /**
      * 
-     * @summary Gets an Enrollment School by its school code, with the programs it runs.
-     * @param {EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest} requestParameters Request parameters.
+     * @summary Deletes an Enrollment School.
+     * @param {EnrollmentAdminSchoolsApiDeleteEnrollmentSchoolRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiGetEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminSchoolsApiFp(this.configuration).getEnrollmentSchool(requestParameters.tenantId, requestParameters.code, options).then((request) => request(this.axios, this.basePath));
+    public deleteEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiDeleteEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminSchoolsApiFp(this.configuration).deleteEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Disables an Enrollment School.
+     * @param {EnrollmentAdminSchoolsApiDisableEnrollmentSchoolRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public disableEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiDisableEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminSchoolsApiFp(this.configuration).disableEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Enables an Enrollment School.
+     * @param {EnrollmentAdminSchoolsApiEnableEnrollmentSchoolRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public enableEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiEnableEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminSchoolsApiFp(this.configuration).enableEnrollmentSchool(requestParameters.tenantId, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -475,14 +743,25 @@ export class EnrollmentAdminSchoolsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Enables or disables an Enrollment School.
-     * @param {EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest} requestParameters Request parameters.
+     * Full replace, not keyed on `externalDataSourceSchoolId` - use the id in the route.  `isEnabled` is never moved by this call - use `PUT .../schools/{id}/enable` or  `.../disable` instead.
+     * @summary Replaces an Enrollment School by its record id.
+     * @param {EnrollmentAdminSchoolsApiUpdateEnrollmentSchoolRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public setEnrollmentSchoolEnabled(requestParameters: EnrollmentAdminSchoolsApiSetEnrollmentSchoolEnabledRequest, options?: RawAxiosRequestConfig) {
-        return EnrollmentAdminSchoolsApiFp(this.configuration).setEnrollmentSchoolEnabled(requestParameters.tenantId, requestParameters.code, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminSetSchoolEnabledRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public updateEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiUpdateEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminSchoolsApiFp(this.configuration).updateEnrollmentSchool(requestParameters.tenantId, requestParameters.id, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Upsert semantics: when `externalDataSourceSchoolId` is present and matches a live school  in the tenant, that school is updated - every field, including `schoolStateShortCode`, is  overwritten. A soft-deleted match is refused (recover it first). Otherwise a new school is  always inserted, keeping the external id if one was given; a `schoolStateShortCode`  collision on insert is rejected as AlreadyExists (409) rather than overwriting the existing  school - a POST with no external id no longer overwrites by code. `isEnabled` is never  moved by this call - use `PUT .../schools/{id}/enable` or `.../disable` instead.
+     * @summary Creates or updates an Enrollment School, keyed on `externalDataSourceSchoolId`.
+     * @param {EnrollmentAdminSchoolsApiUpsertEnrollmentSchoolRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public upsertEnrollmentSchool(requestParameters: EnrollmentAdminSchoolsApiUpsertEnrollmentSchoolRequest, options?: RawAxiosRequestConfig) {
+        return EnrollmentAdminSchoolsApiFp(this.configuration).upsertEnrollmentSchool(requestParameters.tenantId, requestParameters.edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

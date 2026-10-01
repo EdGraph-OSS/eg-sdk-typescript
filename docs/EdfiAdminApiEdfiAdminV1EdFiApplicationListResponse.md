@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **vendorName** | **string** |  | [optional] [default to undefined]
 **edOrgsCount** | **number** |  | [optional] [default to undefined]
 **operationalContextUri** | **string** |  | [optional] [default to undefined]
+**years** | **Array&lt;number&gt;** |  | [optional] [readonly] [default to undefined]
 
 ## Example
 
@@ -28,6 +29,7 @@ const instance: EdfiAdminApiEdfiAdminV1EdFiApplicationListResponse = {
     vendorName,
     edOrgsCount,
     operationalContextUri,
+    years,
 };
 ```
 

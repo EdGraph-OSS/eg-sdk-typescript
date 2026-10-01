@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **string** |  | [optional] [default to undefined]
-**studentId** | **string** |  | [optional] [default to undefined]
+**studentLocalCode** | **string** |  | [optional] [default to undefined]
 **expectedVersion** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -16,7 +16,7 @@ import { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollme
 
 const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactPhoneOverrideRequestDto = {
     value,
-    studentId,
+    studentLocalCode,
     expectedVersion,
 };
 ```

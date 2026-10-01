@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **capacity** | **number** |  | [optional] [default to undefined]
 **enrolled** | **number** |  | [optional] [default to undefined]
 **seatStatus** | **string** |  | [optional] [default to undefined]
+**seatsAvailable** | **number** |  | [optional] [default to undefined]
+**lotteryEligible** | **boolean** |  | [optional] [default to undefined]
+**schoolYear** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +23,9 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     capacity,
     enrolled,
     seatStatus,
+    seatsAvailable,
+    lotteryEligible,
+    schoolYear,
 };
 ```
 

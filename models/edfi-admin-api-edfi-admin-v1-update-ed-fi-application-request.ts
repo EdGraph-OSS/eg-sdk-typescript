@@ -26,5 +26,6 @@ export interface EdfiAdminApiEdfiAdminV1UpdateEdFiApplicationRequest {
     'vendorId'?: number;
     'educationOrganizations'?: Array<EdfiAdminApiEdfiAdminV1EducationOrganization> | null;
     'operationalContextUri'?: string | null;
+    'years'?: Array<number> | null;
 }
 

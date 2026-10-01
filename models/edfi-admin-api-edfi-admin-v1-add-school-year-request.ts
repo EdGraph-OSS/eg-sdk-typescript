@@ -20,5 +20,6 @@ export interface EdfiAdminApiEdfiAdminV1AddSchoolYearRequest {
     'year'?: number;
     'selectedTierId'?: string | null;
     'odsBackupCode'?: string | null;
+    'applicationIds'?: Array<number> | null;
 }
 

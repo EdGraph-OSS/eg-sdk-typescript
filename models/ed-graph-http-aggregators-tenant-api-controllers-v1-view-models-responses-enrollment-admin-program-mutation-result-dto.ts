@@ -15,7 +15,7 @@
 
 
 /**
- * What a program catalog entry or school program create/update/delete reports back - just the  identity, not the row. Compare ContactMutationResultDto: a client that needs the saved state  re-reads the program.
+ * What a program create/update/delete reports back - just the identity, not the row. Compare  ContactMutationResultDto: a client that needs the saved state re-reads the program.
  */
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto {
     'id'?: string | null;

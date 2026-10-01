@@ -16,7 +16,7 @@
 
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactPhoneOverrideRequestDto {
     'value'?: string | null;
-    'studentId'?: string | null;
+    'studentLocalCode'?: string | null;
     'expectedVersion'?: string | null;
 }
 

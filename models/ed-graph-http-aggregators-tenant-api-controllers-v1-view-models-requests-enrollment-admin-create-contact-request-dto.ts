@@ -13,9 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-contact-student-request-dto';
 
 /**
  * The body of a contact creation.
@@ -26,9 +23,9 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsE
      */
     'tenantId'?: string;
     /**
-     * The contact\'s identifier in the source system. Distinct from the record id, which the service  assigns and returns in the response.
+     * The contact\'s identifier in the source system (SIS). Distinct from the record id, which the  service assigns and returns in the response.
      */
-    'contactId'?: string | null;
+    'externalDataSourceContactId'?: string | null;
     /**
      * Required. Never overridable - only email and phone are.
      */
@@ -38,16 +35,12 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsE
      */
     'lastName'?: string | null;
     /**
-     * The SIS-sourced email. Correcting it later is an override and goes through the  `email-override` route instead - see EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Requests.EnrollmentAdmin.UpdateContactRequestDto.
+     * The SIS-sourced email. Correcting it later is an override and goes through the  `overrides/emails` route instead - see EdGraph.HttpAggregators.Tenant.Api.Controllers.v1.ViewModels.Requests.EnrollmentAdmin.UpdateContactRequestDto.
      */
     'email'?: string | null;
     /**
      * The SIS-sourced phone, on the same terms as Email.
      */
     'phone'?: string | null;
-    /**
-     * The students to link the contact to. Optional; omit or send an empty list for a contact with no  links yet.
-     */
-    'students'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminContactStudentRequestDto> | null;
 }
 

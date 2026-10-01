@@ -23,5 +23,6 @@ export interface EdfiAdminApiEdfiAdminV1EdFiApplicationListResponse {
     'vendorName'?: string | null;
     'edOrgsCount'?: number;
     'operationalContextUri'?: string | null;
+    'years'?: Array<number> | null;
 }
 

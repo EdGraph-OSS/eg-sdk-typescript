@@ -8,11 +8,15 @@ Name | Type | Description | Notes
 **programs** | [**Array&lt;EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolProgramResponseDto&gt;**](EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminSchoolProgramResponseDto.md) |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **tenantId** | **string** |  | [optional] [default to undefined]
-**code** | **string** |  | [optional] [default to undefined]
-**name** | **string** |  | [optional] [default to undefined]
-**district** | **string** |  | [optional] [default to undefined]
-**campusId** | **string** |  | [optional] [default to undefined]
-**teaIdNumber** | **string** |  | [optional] [default to undefined]
+**externalDataSourceSchoolId** | **string** |  | [optional] [default to undefined]
+**schoolStateShortCode** | **string** |  | [optional] [default to undefined]
+**schoolName** | **string** |  | [optional] [default to undefined]
+**districtStateShortCode** | **string** |  | [optional] [default to undefined]
+**schoolStateLongCode** | **string** |  | [optional] [default to undefined]
+**schoolLocalCode** | **string** |  | [optional] [default to undefined]
+**districtLocalCode** | **string** |  | [optional] [default to undefined]
+**districtStateCode** | **string** |  | [optional] [default to undefined]
+**districtName** | **string** |  | [optional] [default to undefined]
 **gradesServed** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **address** | **string** |  | [optional] [default to undefined]
 **lat** | **number** |  | [optional] [default to undefined]
@@ -24,7 +28,6 @@ Name | Type | Description | Notes
 **createdDateTime** | **string** |  | [optional] [default to undefined]
 **lastModifiedBy** | **string** |  | [optional] [default to undefined]
 **lastModifiedDateTime** | **string** |  | [optional] [default to undefined]
-**lastUpdatedDateTime** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -35,11 +38,15 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     programs,
     id,
     tenantId,
-    code,
-    name,
-    district,
-    campusId,
-    teaIdNumber,
+    externalDataSourceSchoolId,
+    schoolStateShortCode,
+    schoolName,
+    districtStateShortCode,
+    schoolStateLongCode,
+    schoolLocalCode,
+    districtLocalCode,
+    districtStateCode,
+    districtName,
     gradesServed,
     address,
     lat,
@@ -51,7 +58,6 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     createdDateTime,
     lastModifiedBy,
     lastModifiedDateTime,
-    lastUpdatedDateTime,
 };
 ```
 

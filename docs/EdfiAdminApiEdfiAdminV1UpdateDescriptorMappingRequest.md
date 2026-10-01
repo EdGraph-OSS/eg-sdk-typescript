@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **etag** | **string** |  | [optional] [default to undefined]
 **instanceId** | **string** |  | [optional] [default to undefined]
 **year** | **number** |  | [optional] [default to undefined]
+**tenantId** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -30,6 +31,7 @@ const instance: EdfiAdminApiEdfiAdminV1UpdateDescriptorMappingRequest = {
     etag,
     instanceId,
     year,
+    tenantId,
 };
 ```
 

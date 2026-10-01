@@ -20,7 +20,7 @@ import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnr
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactResponseDto {
     'id'?: string | null;
     'tenantId'?: string | null;
-    'contactId'?: string | null;
+    'externalDataSourceContactId'?: string | null;
     'firstName'?: string | null;
     'lastName'?: string | null;
     'email'?: string | null;
@@ -28,14 +28,15 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'students'?: Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto> | null;
     'relationship'?: string | null;
     'studentCount'?: number;
+    'studentLocalCodes'?: Array<string> | null;
     'isPhoneOverride'?: boolean | null;
     'isEmailOverride'?: boolean | null;
     'sisEmail'?: string | null;
     'sisPhone'?: string | null;
-    'emailOverriddenBy'?: string | null;
-    'emailOverriddenAt'?: string | null;
-    'phoneOverriddenBy'?: string | null;
-    'phoneOverriddenAt'?: string | null;
+    'emailLastOverriddenBy'?: string | null;
+    'emailLastOverriddenDateTime'?: string | null;
+    'phoneLastOverriddenBy'?: string | null;
+    'phoneLastOverriddenDateTime'?: string | null;
     'signInStatus'?: string | null;
     'isLocked'?: boolean;
     'createdBy'?: string | null;
@@ -43,6 +44,9 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'lastModifiedBy'?: string | null;
     'lastModifiedDateTime'?: string | null;
     'lastUpdatedDateTime'?: string | null;
+    'deletedBy'?: string | null;
+    'deletedDateTime'?: string | null;
     'isDeleted'?: boolean;
+    'verificationStatus'?: string | null;
 }
 

@@ -4,17 +4,15 @@ All URIs are relative to *https://api.dev.edgraph.com/tenant*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createProgramCatalogEntry**](#createprogramcatalogentry) | **POST** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries | Creates a district catalog entry - a program the district defines once, which schools may  then be offered at. No school-identifying field; use POST .../programs/school-programs to  offer it at a school.|
-|[**createSchoolProgram**](#createschoolprogram) | **POST** /tenants/{tenantId}/enrollmentadmin/programs/school-programs | Creates a school program - either adding an existing district catalog entry to a school  (a \&quot;school association\&quot;, when &#x60;programCatalogEntryId&#x60; is set) or creating a brand new  school-specific program (when it is not).|
-|[**deleteProgramCatalogEntry**](#deleteprogramcatalogentry) | **DELETE** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id} | Removes a district catalog entry.|
-|[**deleteSchoolProgram**](#deleteschoolprogram) | **DELETE** /tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id} | Removes a school program - the API equivalent of \&quot;remove a school association\&quot; when the  row is linked to a catalog entry, or a straightforward delete when it is school-specific.|
-|[**getProgramById**](#getprogrambyid) | **GET** /tenants/{tenantId}/enrollmentadmin/programs/{id} | Gets a Program by its record id - a district catalog entry or a school-specific program.|
-|[**getPrograms**](#getprograms) | **GET** /tenants/{tenantId}/enrollmentadmin/programs | Searches Programs - the union of district catalog entries and school-specific programs, in  one list distinguished by each row\&#39;s Scope.|
-|[**updateProgramCatalogEntry**](#updateprogramcatalogentry) | **PUT** /tenants/{tenantId}/enrollmentadmin/programs/catalog-entries/{id} | Updates a district catalog entry\&#39;s own fields.|
-|[**updateSchoolProgram**](#updateschoolprogram) | **PUT** /tenants/{tenantId}/enrollmentadmin/programs/school-programs/{id} | Updates a school program\&#39;s grades/capacity/zone/coordinates, and - only when it is  school-specific - its own Code/Name/ProgramType/EligibilityCriteria/RequiredDocuments.|
+|[**createProgram**](#createprogram) | **POST** /tenants/{tenantId}/enrollmentadmin/programs | Creates a Program at a school. The body names the school, the program type and the  requirements by id; the service copies their display fields onto the row.|
+|[**deleteProgram**](#deleteprogram) | **DELETE** /tenants/{tenantId}/enrollmentadmin/programs/{id} | Removes a Program (soft delete).|
+|[**getProgramApplications**](#getprogramapplications) | **GET** /tenants/{tenantId}/enrollmentadmin/programs/{id}/applications | Gets the Registration Applications referencing a Program.|
+|[**getProgramById**](#getprogrambyid) | **GET** /tenants/{tenantId}/enrollmentadmin/programs/{id} | Gets a Program by its record id.|
+|[**getPrograms**](#getprograms) | **GET** /tenants/{tenantId}/enrollmentadmin/programs | Searches Programs. Every row is one school\&#39;s offering of a program: the school, the program  type and the requirements are embedded on it, each with its own &#x60;_id&#x60; beside the id of  the row it was copied from.|
+|[**updateProgram**](#updateprogram) | **PUT** /tenants/{tenantId}/enrollmentadmin/programs/{id} | Updates a Program. The school a program runs at never changes; everything else, including  the program type and the requirement set, is replaced from the body.|
 
-# **createProgramCatalogEntry**
-> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto createProgramCatalogEntry()
+# **createProgram**
+> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto createProgram()
 
 
 ### Example
@@ -23,18 +21,18 @@ All URIs are relative to *https://api.dev.edgraph.com/tenant*
 import {
     EnrollmentAdminProgramsApi,
     Configuration,
-    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto
+    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto
 } from '@edgraph-oss/platform-client';
 
 const configuration = new Configuration();
 const apiInstance = new EnrollmentAdminProgramsApi(configuration);
 
 let tenantId: string; // (default to undefined)
-let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto; // (optional)
+let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto; // (optional)
 
-const { status, data } = await apiInstance.createProgramCatalogEntry(
+const { status, data } = await apiInstance.createProgram(
     tenantId,
-    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto
+    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto
 );
 ```
 
@@ -42,7 +40,7 @@ const { status, data } = await apiInstance.createProgramCatalogEntry(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramCatalogEntryRequestDto**|  | |
+| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto**|  | |
 | **tenantId** | [**string**] |  | defaults to undefined|
 
 
@@ -66,71 +64,13 @@ const { status, data } = await apiInstance.createProgramCatalogEntry(
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**500** | Server Error |  -  |
-|**201** | The catalog entry was created. |  -  |
-|**400** | Bad Request. The request was invalid and cannot be completed. |  -  |
+|**201** | The program was created. |  -  |
+|**400** | Bad Request. The request was invalid, or named a school, program type or requirement that does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createSchoolProgram**
-> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto createSchoolProgram()
-
-
-### Example
-
-```typescript
-import {
-    EnrollmentAdminProgramsApi,
-    Configuration,
-    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto
-} from '@edgraph-oss/platform-client';
-
-const configuration = new Configuration();
-const apiInstance = new EnrollmentAdminProgramsApi(configuration);
-
-let tenantId: string; // (default to undefined)
-let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto; // (optional)
-
-const { status, data } = await apiInstance.createSchoolProgram(
-    tenantId,
-    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateSchoolProgramRequestDto**|  | |
-| **tenantId** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-|**500** | Server Error |  -  |
-|**201** | The school program was created. |  -  |
-|**400** | Bad Request. The request was invalid and cannot be completed. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **deleteProgramCatalogEntry**
-> deleteProgramCatalogEntry()
+# **deleteProgram**
+> deleteProgram()
 
 
 ### Example
@@ -147,7 +87,7 @@ const apiInstance = new EnrollmentAdminProgramsApi(configuration);
 let tenantId: string; // (default to undefined)
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.deleteProgramCatalogEntry(
+const { status, data } = await apiInstance.deleteProgram(
     tenantId,
     id
 );
@@ -181,13 +121,13 @@ void (empty response body)
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**500** | Server Error |  -  |
-|**204** | The catalog entry was removed. |  -  |
+|**204** | The program was removed. |  -  |
 |**404** | The resource could not be found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteSchoolProgram**
-> deleteSchoolProgram()
+# **getProgramApplications**
+> Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramApplicationDto> getProgramApplications()
 
 
 ### Example
@@ -204,7 +144,7 @@ const apiInstance = new EnrollmentAdminProgramsApi(configuration);
 let tenantId: string; // (default to undefined)
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.deleteSchoolProgram(
+const { status, data } = await apiInstance.getProgramApplications(
     tenantId,
     id
 );
@@ -220,7 +160,7 @@ const { status, data } = await apiInstance.deleteSchoolProgram(
 
 ### Return type
 
-void (empty response body)
+**Array<EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramApplicationDto>**
 
 ### Authorization
 
@@ -238,7 +178,7 @@ void (empty response body)
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**500** | Server Error |  -  |
-|**204** | The school program was removed. |  -  |
+|**200** | The requested resource was successfully retrieved. |  -  |
 |**404** | The resource could not be found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -321,9 +261,8 @@ let pageIndex: number; // (optional) (default to 0)
 let orderBy: string; // (optional) (default to '')
 let filter: string; // (optional) (default to '')
 let search: string; //Free-text match on program name/code. (optional) (default to '')
-let scope: string; //\"DistrictCatalog\", \"SchoolSpecific\", or omitted for all. (optional) (default to '')
-let schoolCode: string; //Narrows to programs offered at this school. Not a security boundary. (optional) (default to '')
-let programType: string; // (optional) (default to '')
+let schoolLocalCode: string; //Narrows to programs offered at this school. Not a security boundary. (optional) (default to '')
+let programTypeId: string; //Narrows to programs of this program type (its record id). (optional) (default to '')
 
 const { status, data } = await apiInstance.getPrograms(
     tenantId,
@@ -332,9 +271,8 @@ const { status, data } = await apiInstance.getPrograms(
     orderBy,
     filter,
     search,
-    scope,
-    schoolCode,
-    programType
+    schoolLocalCode,
+    programTypeId
 );
 ```
 
@@ -348,9 +286,8 @@ const { status, data } = await apiInstance.getPrograms(
 | **orderBy** | [**string**] |  | (optional) defaults to ''|
 | **filter** | [**string**] |  | (optional) defaults to ''|
 | **search** | [**string**] | Free-text match on program name/code. | (optional) defaults to ''|
-| **scope** | [**string**] | \&quot;DistrictCatalog\&quot;, \&quot;SchoolSpecific\&quot;, or omitted for all. | (optional) defaults to ''|
-| **schoolCode** | [**string**] | Narrows to programs offered at this school. Not a security boundary. | (optional) defaults to ''|
-| **programType** | [**string**] |  | (optional) defaults to ''|
+| **schoolLocalCode** | [**string**] | Narrows to programs offered at this school. Not a security boundary. | (optional) defaults to ''|
+| **programTypeId** | [**string**] | Narrows to programs of this program type (its record id). | (optional) defaults to ''|
 
 
 ### Return type
@@ -378,8 +315,8 @@ const { status, data } = await apiInstance.getPrograms(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateProgramCatalogEntry**
-> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto updateProgramCatalogEntry()
+# **updateProgram**
+> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto updateProgram()
 
 
 ### Example
@@ -388,7 +325,7 @@ const { status, data } = await apiInstance.getPrograms(
 import {
     EnrollmentAdminProgramsApi,
     Configuration,
-    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto
+    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto
 } from '@edgraph-oss/platform-client';
 
 const configuration = new Configuration();
@@ -396,12 +333,12 @@ const apiInstance = new EnrollmentAdminProgramsApi(configuration);
 
 let tenantId: string; // (default to undefined)
 let id: string; // (default to undefined)
-let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto; // (optional)
+let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto; // (optional)
 
-const { status, data } = await apiInstance.updateProgramCatalogEntry(
+const { status, data } = await apiInstance.updateProgram(
     tenantId,
     id,
-    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto
+    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto
 );
 ```
 
@@ -409,7 +346,7 @@ const { status, data } = await apiInstance.updateProgramCatalogEntry(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramCatalogEntryRequestDto**|  | |
+| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateProgramRequestDto**|  | |
 | **tenantId** | [**string**] |  | defaults to undefined|
 | **id** | [**string**] |  | defaults to undefined|
 
@@ -434,69 +371,7 @@ const { status, data } = await apiInstance.updateProgramCatalogEntry(
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**500** | Server Error |  -  |
-|**200** | The catalog entry was updated. |  -  |
-|**400** | Bad Request. The request was invalid and cannot be completed. |  -  |
-|**404** | The resource could not be found. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **updateSchoolProgram**
-> EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto updateSchoolProgram()
-
-
-### Example
-
-```typescript
-import {
-    EnrollmentAdminProgramsApi,
-    Configuration,
-    EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto
-} from '@edgraph-oss/platform-client';
-
-const configuration = new Configuration();
-const apiInstance = new EnrollmentAdminProgramsApi(configuration);
-
-let tenantId: string; // (default to undefined)
-let id: string; // (default to undefined)
-let edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto; // (optional)
-
-const { status, data } = await apiInstance.updateSchoolProgram(
-    tenantId,
-    id,
-    edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **edGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto** | **EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateSchoolProgramRequestDto**|  | |
-| **tenantId** | [**string**] |  | defaults to undefined|
-| **id** | [**string**] |  | defaults to undefined|
-
-
-### Return type
-
-**EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminProgramMutationResultDto**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-|**500** | Server Error |  -  |
-|**200** | The school program was updated. |  -  |
+|**200** | The program was updated. |  -  |
 |**400** | Bad Request. The request was invalid and cannot be completed. |  -  |
 |**404** | The resource could not be found. |  -  |
 
