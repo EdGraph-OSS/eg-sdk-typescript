@@ -119,11 +119,14 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-contact-student-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-or-create-student-contact-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-registration-application-request-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-application-round-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-contact-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-feeder-pattern-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-program-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-registration-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-requirement-request-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-duplicate-application-round-request-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-enrollment-window-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-feeder-pattern-properties-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-geo-position-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-grade-capacity-request-dto';
@@ -133,6 +136,7 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-approve-contact-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-approve-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-contact-request-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-application-round-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-contact-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-contact-student-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-feeder-pattern-request-dto';
@@ -144,6 +148,7 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-student-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-upsert-school-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-upsert-student-request-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-window-dependency-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-create-question-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-create-question-validation-request-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-update-question-request-dto';
@@ -175,6 +180,10 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-domain-list-response-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-domain-list-response-dto-paginated-items-view-model';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-allowed-pathway-id-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-mutation-result-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-response-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-response-dto-paginated-items-view-model';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-window-mutation-result-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-capacity-list-item-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-capacity-list-item-dto-paginated-items-view-model';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-email-override-request-dto';
@@ -191,6 +200,7 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-student-removed-result-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-student-response-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-verified-result-dto';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-enrollment-window-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-dto-paginated-items-view-model';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-mutation-result-dto';
@@ -224,6 +234,7 @@ export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-mutation-result-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-response-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-response-dto-paginated-items-view-model';
+export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-window-dependency-dto';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response-get-paginated-items-response';
 export * from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-search-status';

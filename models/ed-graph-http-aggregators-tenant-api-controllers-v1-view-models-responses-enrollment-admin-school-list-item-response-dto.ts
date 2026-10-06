@@ -31,6 +31,8 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'lat'?: number | null;
     'lon'?: number | null;
     'phone'?: string | null;
+    'addressStateAbbreviation'?: string | null;
+    'addressState'?: string | null;
     'isEnabled'?: boolean;
     'programCount'?: number;
     'createdBy'?: string | null;

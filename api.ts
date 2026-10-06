@@ -37,6 +37,7 @@ export * from './api/connections-ed-fi-api';
 export * from './api/domains-api';
 export * from './api/ed-fi-instances-api';
 export * from './api/ed-fi-sync-api';
+export * from './api/enrollment-admin-application-rounds-api';
 export * from './api/enrollment-admin-capacity-api';
 export * from './api/enrollment-admin-contacts-api';
 export * from './api/enrollment-admin-feeder-patterns-api';

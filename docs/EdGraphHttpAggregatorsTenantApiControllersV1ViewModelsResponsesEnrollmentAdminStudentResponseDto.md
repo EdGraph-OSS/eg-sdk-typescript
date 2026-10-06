@@ -1,5 +1,6 @@
 # EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDto
 
+One Enrollment Student, from the list and the get-by-id route alike. `registrationId` is set only on  a list row that stands for a registration not yet linked to a student (a new student): that row\'s  `id` is the registration\'s id, which the get-by-id route cannot resolve, so a client must not open a  student profile from it. Absent on every real student.
 
 ## Properties
 
@@ -32,6 +33,7 @@ Name | Type | Description | Notes
 **deletedBy** | **string** |  | [optional] [default to undefined]
 **deletedDateTime** | **string** |  | [optional] [default to undefined]
 **isDeleted** | **boolean** |  | [optional] [default to undefined]
+**registrationId** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -66,6 +68,7 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     deletedBy,
     deletedDateTime,
     isDeleted,
+    registrationId,
 };
 ```
 

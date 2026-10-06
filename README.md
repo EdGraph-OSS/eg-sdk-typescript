@@ -1,4 +1,4 @@
-## @edgraph-oss/platform-client@0.0.57
+## @edgraph-oss/platform-client@0.0.58
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @edgraph-oss/platform-client@0.0.57 --save
+npm install @edgraph-oss/platform-client@0.0.58 --save
 ```
 
 _unPublished (not recommended):_
@@ -164,6 +164,17 @@ Class | Method | HTTP request | Description
 *EdFiSyncApi* | [**executeEdFiSyncJob**](docs/EdFiSyncApi.md#executeedfisyncjob) | **PUT** /tenants/{tenantId}/jobs/edfisync/execute | Executes an Ed-Fi Sync Job
 *EdFiSyncApi* | [**getEdFiSyncData**](docs/EdFiSyncApi.md#getedfisyncdata) | **GET** /tenants/{tenantId}/jobs/edfisync | Retrieves Ed-Fi Sync Connection Data for a given tenant
 *EdFiSyncApi* | [**updateEdFiSync**](docs/EdFiSyncApi.md#updateedfisync) | **PUT** /tenants/{tenantId}/jobs/edfisync | Updates an Ed-Fi Sync for a given tenant
+*EnrollmentAdminApplicationRoundsApi* | [**addApplicationRoundWindow**](docs/EnrollmentAdminApplicationRoundsApi.md#addapplicationroundwindow) | **POST** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/windows | Adds a window to the round. Windows may overlap, within the round and across rounds. A  dependency must name a window of a live round in the tenant.
+*EnrollmentAdminApplicationRoundsApi* | [**createApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#createapplicationround) | **POST** /tenants/{tenantId}/enrollmentadmin/applicationrounds | Creates a round. Add its windows afterwards.
+*EnrollmentAdminApplicationRoundsApi* | [**deleteApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#deleteapplicationround) | **DELETE** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id} | Soft-deletes a round. Refused once the round has opened, and while another round\&#39;s window  depends on one of its windows.
+*EnrollmentAdminApplicationRoundsApi* | [**duplicateApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#duplicateapplicationround) | **POST** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/duplicate | Copies the round\&#39;s code, label, grades and program types into another school year. Windows  are not copied - their dates belong to this round\&#39;s school year.
+*EnrollmentAdminApplicationRoundsApi* | [**getApplicationRoundById**](docs/EnrollmentAdminApplicationRoundsApi.md#getapplicationroundbyid) | **GET** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id} | Gets a round by id, with its windows and their states as of now.
+*EnrollmentAdminApplicationRoundsApi* | [**getApplicationRounds**](docs/EnrollmentAdminApplicationRoundsApi.md#getapplicationrounds) | **GET** /tenants/{tenantId}/enrollmentadmin/applicationrounds | Searches the tenant\&#39;s application rounds. Default order is school year descending, then code;  &#x60;orderBy&#x60; accepts &#x60;schoolYear&#x60; or &#x60;code&#x60;. Each round carries its windows and  the state of each, derived at the moment of the read.
+*EnrollmentAdminApplicationRoundsApi* | [**purgeApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#purgeapplicationround) | **DELETE** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/purge | Hard-deletes a round. Only a round that has been deleted first.
+*EnrollmentAdminApplicationRoundsApi* | [**recoverApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#recoverapplicationround) | **POST** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/recover | Brings back a soft-deleted round.
+*EnrollmentAdminApplicationRoundsApi* | [**removeApplicationRoundWindow**](docs/EnrollmentAdminApplicationRoundsApi.md#removeapplicationroundwindow) | **DELETE** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/windows/{windowId} | Removes one window of the round. Refused while another window depends on it, and when it is  the last window of a round that has opened.
+*EnrollmentAdminApplicationRoundsApi* | [**updateApplicationRound**](docs/EnrollmentAdminApplicationRoundsApi.md#updateapplicationround) | **PUT** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id} | Replaces a round\&#39;s label, grades and program types. Code and school year never change -  duplicate the round into another school year instead.
+*EnrollmentAdminApplicationRoundsApi* | [**updateApplicationRoundWindow**](docs/EnrollmentAdminApplicationRoundsApi.md#updateapplicationroundwindow) | **PUT** /tenants/{tenantId}/enrollmentadmin/applicationrounds/{id}/windows/{windowId} | Replaces one window of the round.
 *EnrollmentAdminCapacityApi* | [**getCapacity**](docs/EnrollmentAdminCapacityApi.md#getcapacity) | **GET** /tenants/{tenantId}/enrollmentadmin/schools/{schoolLocalCode}/capacity | Searches Capacity for one school - one row per program x grade x school year.
 *EnrollmentAdminContactsApi* | [**addEnrollmentContactStudent**](docs/EnrollmentAdminContactsApi.md#addenrollmentcontactstudent) | **POST** /tenants/{tenantId}/enrollmentadmin/contacts/{id}/students | Links a student to a contact.
 *EnrollmentAdminContactsApi* | [**createEnrollmentContact**](docs/EnrollmentAdminContactsApi.md#createenrollmentcontact) | **POST** /tenants/{tenantId}/enrollmentadmin/contacts | Creates or updates an Enrollment Contact by its source-system &#x60;contactId&#x60;.
@@ -499,11 +510,13 @@ Class | Method | HTTP request | Description
 *MyTenantsApi* | [**searchMyTenants**](docs/MyTenantsApi.md#searchmytenants) | **GET** /v2/me/tenants | Searches tenants associated to the user.
 *ObservationSettingsApi* | [**addAvailablePersona**](docs/ObservationSettingsApi.md#addavailablepersona) | **POST** /tenants/{tenantId}/observations/settings/personas | Adds a persona for a given Tenant
 *ObservationSettingsApi* | [**getApplicationSettings**](docs/ObservationSettingsApi.md#getapplicationsettings) | **GET** /tenants/{tenantId}/observations/settings/application | Gets the application settings for the tenant
+*ObservationSettingsApi* | [**getObservationStaffClassifications**](docs/ObservationSettingsApi.md#getobservationstaffclassifications) | **GET** /tenants/{tenantId}/observations/staffclassifications | Retrieves a list of StaffClassifications for a given tenant.
 *ObservationSettingsApi* | [**getPaginatedForms**](docs/ObservationSettingsApi.md#getpaginatedforms) | **GET** /tenants/{tenantId}/observations/forms | Get Paginated Forms
 *ObservationSettingsApi* | [**getPaginatedPersonas**](docs/ObservationSettingsApi.md#getpaginatedpersonas) | **GET** /tenants/{tenantId}/observations/settings/personas | Gets available personas
 *ObservationSettingsApi* | [**getPaginatedStaffClassifications**](docs/ObservationSettingsApi.md#getpaginatedstaffclassifications) | **GET** /tenants/{tenantId}/observations/settings/available-staffclassifications | Get Paginated Available StaffClassifications
 *ObservationSettingsApi* | [**getStaffClassificationsSettings**](docs/ObservationSettingsApi.md#getstaffclassificationssettings) | **GET** /tenants/{tenantId}/observations/settings/staffclassifications | Gets the staffClassification settings for the tenant
 *ObservationSettingsApi* | [**getTEATenantOrganizations**](docs/ObservationSettingsApi.md#getteatenantorganizations) | **GET** /tenants/{tenantId}/observations/tenantorganizations | Get TEA tenant organizations
+*ObservationSettingsApi* | [**getTenantOrganizations**](docs/ObservationSettingsApi.md#gettenantorganizations) | **GET** /tenants/{tenantId}/observations/organizations | Get tenant organizations
 *ObservationSettingsApi* | [**setApplicationSettings**](docs/ObservationSettingsApi.md#setapplicationsettings) | **POST** /tenants/{tenantId}/observations/settings/application | Sets the Application Settings of an Observation for a given Tenant
 *ObservationSettingsApi* | [**setRolePersonasSettings**](docs/ObservationSettingsApi.md#setrolepersonassettings) | **POST** /tenants/{tenantId}/observations/settings/rolepersonas | Updates personas assigned to a role configuration of the tenants setting
 *ObservationSettingsApi* | [**verifySysAdminCredentials**](docs/ObservationSettingsApi.md#verifysysadmincredentials) | **GET** /tenants/{tenantId}/observations/settings/verify-credentials | Gets the staffClassification settings for the tenant
@@ -865,11 +878,14 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddOrCreateStudentContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddOrCreateStudentContactRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddRegistrationApplicationRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddRegistrationApplicationRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateApplicationRoundRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateApplicationRoundRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateFeederPatternRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateFeederPatternRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRegistrationRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRegistrationRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRequirementRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRequirementRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminDuplicateApplicationRoundRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminDuplicateApplicationRoundRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminEnrollmentWindowRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminEnrollmentWindowRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminFeederPatternPropertiesRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminFeederPatternPropertiesRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGeoPositionRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGeoPositionRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto.md)
@@ -879,6 +895,7 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveContactDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveContactDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationContactRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateApplicationRoundRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateApplicationRoundRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateFeederPatternRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateFeederPatternRequestDto.md)
@@ -890,6 +907,7 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateStudentRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateStudentRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertStudentRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertStudentRequestDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminWindowDependencyRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminWindowDependencyRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionValidationRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionValidationRequestDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsUpdateQuestionRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsUpdateQuestionRequestDto.md)
@@ -921,6 +939,10 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDtoPaginatedItemsViewModel.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminAllowedPathwayIdDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminAllowedPathwayIdDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundMutationResultDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundWindowMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundWindowMutationResultDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto.md)
@@ -937,6 +959,7 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminEnrollmentWindowDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminEnrollmentWindowDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDtoPaginatedItemsViewModel.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternMutationResultDto.md)
@@ -970,6 +993,7 @@ Class | Method | HTTP request | Description
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentMutationResultDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentMutationResultDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDtoPaginatedItemsViewModel](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDtoPaginatedItemsViewModel.md)
+ - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminWindowDependencyDto](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminWindowDependencyDto.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponse.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse.md)
  - [EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserSearchStatus](docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserSearchStatus.md)

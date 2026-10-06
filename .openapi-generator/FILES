@@ -25,6 +25,7 @@ api/connections-ed-fi-api.ts
 api/domains-api.ts
 api/ed-fi-instances-api.ts
 api/ed-fi-sync-api.ts
+api/enrollment-admin-application-rounds-api.ts
 api/enrollment-admin-capacity-api.ts
 api/enrollment-admin-contacts-api.ts
 api/enrollment-admin-feeder-patterns-api.ts
@@ -263,11 +264,14 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEducationOrga
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddContactStudentRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddOrCreateStudentContactRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminAddRegistrationApplicationRequestDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateApplicationRoundRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateContactRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateFeederPatternRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateProgramRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRegistrationRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminCreateRequirementRequestDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminDuplicateApplicationRoundRequestDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminEnrollmentWindowRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminFeederPatternPropertiesRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGeoPositionRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminGradeCapacityRequestDto.md
@@ -277,6 +281,7 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdm
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveContactDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationApproveRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminRegistrationContactRequestDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateApplicationRoundRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateContactStudentRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateFeederPatternRequestDto.md
@@ -288,6 +293,7 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdm
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpdateStudentRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertSchoolRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminUpsertStudentRequestDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEnrollmentAdminWindowDependencyRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsCreateQuestionValidationRequestDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsFormsUpdateQuestionRequestDto.md
@@ -319,6 +325,10 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsValidationsCr
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesDomainListResponseDtoPaginatedItemsViewModel.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminAllowedPathwayIdDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundMutationResultDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundResponseDtoPaginatedItemsViewModel.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminApplicationRoundWindowMutationResultDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminCapacityListItemDtoPaginatedItemsViewModel.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactEmailOverrideRequestDto.md
@@ -335,6 +345,7 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAd
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentRemovedResultDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactStudentResponseDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminContactVerifiedResultDto.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminEnrollmentWindowDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternDtoPaginatedItemsViewModel.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminFeederPatternMutationResultDto.md
@@ -368,6 +379,7 @@ docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAd
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentMutationResultDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDtoPaginatedItemsViewModel.md
+docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminWindowDependencyDto.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponse.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserResponseGetPaginatedItemsResponse.md
 docs/EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEvaluationsAppraiserSearchStatus.md
@@ -742,6 +754,7 @@ docs/EdfiAdminApiEdfiAdminV1VendorListResponse.md
 docs/EdfiAdminApiEdfiAdminV1VendorListResponsePaginatedItemsViewModel.md
 docs/EdfiAdminApiEdfiAdminV1VendorProfileResponse.md
 docs/EdfiAdminApiEdfiAdminV1VendorUpdatedResponse.md
+docs/EnrollmentAdminApplicationRoundsApi.md
 docs/EnrollmentAdminCapacityApi.md
 docs/EnrollmentAdminContactsApi.md
 docs/EnrollmentAdminFeederPatternsApi.md
@@ -1448,11 +1461,14 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-contact-student-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-or-create-student-contact-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-add-registration-application-request-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-application-round-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-contact-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-feeder-pattern-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-program-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-registration-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-create-requirement-request-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-duplicate-application-round-request-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-enrollment-window-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-feeder-pattern-properties-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-geo-position-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-grade-capacity-request-dto.ts
@@ -1462,6 +1478,7 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-approve-contact-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-approve-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-registration-contact-request-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-application-round-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-contact-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-contact-student-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-feeder-pattern-request-dto.ts
@@ -1473,6 +1490,7 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-update-student-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-upsert-school-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-upsert-student-request-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-enrollment-admin-window-dependency-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-create-question-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-create-question-validation-request-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-forms-update-question-request-dto.ts
@@ -1504,6 +1522,10 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-requests-
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-domain-list-response-dto-paginated-items-view-model.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-domain-list-response-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-allowed-pathway-id-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-mutation-result-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-response-dto-paginated-items-view-model.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-response-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-application-round-window-mutation-result-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-capacity-list-item-dto-paginated-items-view-model.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-capacity-list-item-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-email-override-request-dto.ts
@@ -1520,6 +1542,7 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-student-removed-result-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-student-response-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-contact-verified-result-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-enrollment-window-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-dto-paginated-items-view-model.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-feeder-pattern-mutation-result-dto.ts
@@ -1553,6 +1576,7 @@ models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-mutation-result-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-response-dto-paginated-items-view-model.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-response-dto.ts
+models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-window-dependency-dto.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response-get-paginated-items-response.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-response.ts
 models/ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-evaluations-appraiser-search-status.ts

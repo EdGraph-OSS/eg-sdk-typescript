@@ -1272,10 +1272,16 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
          * @param {number} [pageSize] 
          * @param {string} [orderBy] 
          * @param {string} [filter] 
+         * @param {string} [firstName] 
+         * @param {string} [lastName] 
+         * @param {string} [email] 
+         * @param {string} [organization] 
+         * @param {string} [educationOrganizationRole] 
+         * @param {string} [persona] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaginatedObservationUsers: async (tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaginatedObservationUsers: async (tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, firstName?: string, lastName?: string, email?: string, organization?: string, educationOrganizationRole?: string, persona?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('getPaginatedObservationUsers', 'tenantId', tenantId)
             const localVarPath = `/tenants/{tenantId}/observations/users`
@@ -1309,6 +1315,30 @@ export const ObservationsApiAxiosParamCreator = function (configuration?: Config
 
             if (filter !== undefined) {
                 localVarQueryParameter['filter'] = filter;
+            }
+
+            if (firstName !== undefined) {
+                localVarQueryParameter['firstName'] = firstName;
+            }
+
+            if (lastName !== undefined) {
+                localVarQueryParameter['lastName'] = lastName;
+            }
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            if (organization !== undefined) {
+                localVarQueryParameter['organization'] = organization;
+            }
+
+            if (educationOrganizationRole !== undefined) {
+                localVarQueryParameter['educationOrganizationRole'] = educationOrganizationRole;
+            }
+
+            if (persona !== undefined) {
+                localVarQueryParameter['persona'] = persona;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -2456,11 +2486,17 @@ export const ObservationsApiFp = function(configuration?: Configuration) {
          * @param {number} [pageSize] 
          * @param {string} [orderBy] 
          * @param {string} [filter] 
+         * @param {string} [firstName] 
+         * @param {string} [lastName] 
+         * @param {string} [email] 
+         * @param {string} [organization] 
+         * @param {string} [educationOrganizationRole] 
+         * @param {string} [persona] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPaginatedObservationUsers(tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaginatedObservationUsers(tenantId, pageIndex, pageSize, orderBy, filter, options);
+        async getPaginatedObservationUsers(tenantId: string, pageIndex?: number, pageSize?: number, orderBy?: string, filter?: string, firstName?: string, lastName?: string, email?: string, organization?: string, educationOrganizationRole?: string, persona?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaginatedObservationUsers(tenantId, pageIndex, pageSize, orderBy, filter, firstName, lastName, email, organization, educationOrganizationRole, persona, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ObservationsApi.getPaginatedObservationUsers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2963,7 +2999,7 @@ export const ObservationsApiFactory = function (configuration?: Configuration, b
          * @throws {RequiredError}
          */
         getPaginatedObservationUsers(requestParameters: ObservationsApiGetPaginatedObservationUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<EdGraphHttpAggregatorsTenantApiServicesObservationsObservationUserResponseGetPaginatedItemsResponse> {
-            return localVarFp.getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(axios, basePath));
+            return localVarFp.getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, requestParameters.firstName, requestParameters.lastName, requestParameters.email, requestParameters.organization, requestParameters.educationOrganizationRole, requestParameters.persona, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3638,6 +3674,36 @@ export interface ObservationsApiGetPaginatedObservationUsersRequest {
      * 
      */
     readonly filter?: string
+
+    /**
+     * 
+     */
+    readonly firstName?: string
+
+    /**
+     * 
+     */
+    readonly lastName?: string
+
+    /**
+     * 
+     */
+    readonly email?: string
+
+    /**
+     * 
+     */
+    readonly organization?: string
+
+    /**
+     * 
+     */
+    readonly educationOrganizationRole?: string
+
+    /**
+     * 
+     */
+    readonly persona?: string
 }
 
 /**
@@ -4241,7 +4307,7 @@ export class ObservationsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public getPaginatedObservationUsers(requestParameters: ObservationsApiGetPaginatedObservationUsersRequest, options?: RawAxiosRequestConfig) {
-        return ObservationsApiFp(this.configuration).getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, options).then((request) => request(this.axios, this.basePath));
+        return ObservationsApiFp(this.configuration).getPaginatedObservationUsers(requestParameters.tenantId, requestParameters.pageIndex, requestParameters.pageSize, requestParameters.orderBy, requestParameters.filter, requestParameters.firstName, requestParameters.lastName, requestParameters.email, requestParameters.organization, requestParameters.educationOrganizationRole, requestParameters.persona, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

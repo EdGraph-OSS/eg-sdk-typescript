@@ -20,6 +20,9 @@ import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnr
 // @ts-ignore
 import type { EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentContactResponseDto } from './ed-graph-http-aggregators-tenant-api-controllers-v1-view-models-responses-enrollment-admin-student-contact-response-dto';
 
+/**
+ * One Enrollment Student, from the list and the get-by-id route alike. `registrationId` is set only on  a list row that stands for a registration not yet linked to a student (a new student): that row\'s  `id` is the registration\'s id, which the get-by-id route cannot resolve, so a client must not open a  student profile from it. Absent on every real student.
+ */
 export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesEnrollmentAdminStudentResponseDto {
     'id'?: string | null;
     'tenantId'?: string | null;
@@ -48,5 +51,6 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponses
     'deletedBy'?: string | null;
     'deletedDateTime'?: string | null;
     'isDeleted'?: boolean;
+    'registrationId'?: string | null;
 }
 

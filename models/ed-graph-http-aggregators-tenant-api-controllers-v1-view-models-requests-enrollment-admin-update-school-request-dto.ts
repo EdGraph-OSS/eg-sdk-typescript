@@ -82,5 +82,13 @@ export interface EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsE
      * 
      */
     'phone'?: string | null;
+    /**
+     * Two-letter US state code, e.g. `TX`. Required when AddressState is sent.
+     */
+    'addressStateAbbreviation'?: string | null;
+    /**
+     * Full name of the state in AddressStateAbbreviation, e.g. `Texas`.
+     */
+    'addressState'?: string | null;
 }
 

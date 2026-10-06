@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **lat** | **number** |  | [optional] [default to undefined]
 **lon** | **number** |  | [optional] [default to undefined]
 **phone** | **string** |  | [optional] [default to undefined]
+**addressStateAbbreviation** | **string** | Two-letter US state code, e.g. &#x60;TX&#x60;. Required when AddressState is sent. | [optional] [default to undefined]
+**addressState** | **string** | Full name of the state in AddressStateAbbreviation, e.g. &#x60;Texas&#x60;. | [optional] [default to undefined]
 
 ## Example
 
@@ -43,6 +45,8 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsRequestsEn
     lat,
     lon,
     phone,
+    addressStateAbbreviation,
+    addressState,
 };
 ```
 

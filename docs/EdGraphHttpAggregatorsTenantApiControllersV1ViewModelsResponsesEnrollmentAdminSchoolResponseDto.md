@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **lat** | **number** |  | [optional] [default to undefined]
 **lon** | **number** |  | [optional] [default to undefined]
 **phone** | **string** |  | [optional] [default to undefined]
+**addressStateAbbreviation** | **string** |  | [optional] [default to undefined]
+**addressState** | **string** |  | [optional] [default to undefined]
 **isEnabled** | **boolean** |  | [optional] [default to undefined]
 **programCount** | **number** |  | [optional] [default to undefined]
 **createdBy** | **string** |  | [optional] [default to undefined]
@@ -52,6 +54,8 @@ const instance: EdGraphHttpAggregatorsTenantApiControllersV1ViewModelsResponsesE
     lat,
     lon,
     phone,
+    addressStateAbbreviation,
+    addressState,
     isEnabled,
     programCount,
     createdBy,

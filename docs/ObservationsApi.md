@@ -1515,13 +1515,25 @@ let pageIndex: number; // (optional) (default to 0)
 let pageSize: number; // (optional) (default to 10)
 let orderBy: string; // (optional) (default to '')
 let filter: string; // (optional) (default to '')
+let firstName: string; // (optional) (default to '')
+let lastName: string; // (optional) (default to '')
+let email: string; // (optional) (default to '')
+let organization: string; // (optional) (default to '')
+let educationOrganizationRole: string; // (optional) (default to '')
+let persona: string; // (optional) (default to '')
 
 const { status, data } = await apiInstance.getPaginatedObservationUsers(
     tenantId,
     pageIndex,
     pageSize,
     orderBy,
-    filter
+    filter,
+    firstName,
+    lastName,
+    email,
+    organization,
+    educationOrganizationRole,
+    persona
 );
 ```
 
@@ -1534,6 +1546,12 @@ const { status, data } = await apiInstance.getPaginatedObservationUsers(
 | **pageSize** | [**number**] |  | (optional) defaults to 10|
 | **orderBy** | [**string**] |  | (optional) defaults to ''|
 | **filter** | [**string**] |  | (optional) defaults to ''|
+| **firstName** | [**string**] |  | (optional) defaults to ''|
+| **lastName** | [**string**] |  | (optional) defaults to ''|
+| **email** | [**string**] |  | (optional) defaults to ''|
+| **organization** | [**string**] |  | (optional) defaults to ''|
+| **educationOrganizationRole** | [**string**] |  | (optional) defaults to ''|
+| **persona** | [**string**] |  | (optional) defaults to ''|
 
 
 ### Return type
